@@ -9,9 +9,7 @@
 const STRIPE = 'https://api.stripe.com/v1';
 const CACHE_SECONDS = 60;
 
-export async function onRequestGet(context) {
-  const { env, request } = context;
-
+export async function handleArtworks(request, env, ctx) {
   if (!env.STRIPE_SECRET_KEY) {
     return json({ artworks: [], demo: true }, 0);
   }
@@ -24,7 +22,7 @@ export async function onRequestGet(context) {
   try {
     const artworks = await loadArtworks(env.STRIPE_SECRET_KEY);
     const res = json({ artworks }, CACHE_SECONDS);
-    context.waitUntil(cache.put(cacheKey, res.clone()));
+    ctx.waitUntil(cache.put(cacheKey, res.clone()));
     return res;
   } catch (err) {
     console.error(err);
