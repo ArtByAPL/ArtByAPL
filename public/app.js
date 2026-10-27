@@ -237,24 +237,17 @@ function fontSwitcher() {
   const isPreview = host.startsWith('preview-') || host === 'localhost' || location.protocol === 'file:';
   if (!isPreview) return;
   const options = [
-    ['instrument', 'Instrument Serif', "'Instrument Serif'"],
-    ['caprasimo', 'Caprasimo', "'Caprasimo'"],
-    ['fredoka', 'Fredoka', "'Fredoka'"],
-    ['fraunces', 'Fraunces', "'Fraunces'"],
     ['dmserif', 'DM Serif', "'DM Serif Display'"],
-    ['bricolage', 'Bricolage', "'Bricolage Grotesque'"],
-    ['bagel', 'Bagel Fat One', "'Bagel Fat One'"],
-    ['gluten', 'Gluten', "'Gluten'"],
+    ['fraunces', 'Fraunces', "'Fraunces'"],
   ];
-  let current = 'instrument';
-  try { current = localStorage.getItem('font') || 'instrument'; } catch (_) {}
+  let current = 'dmserif';
+  try { const f = localStorage.getItem('font'); if (f === 'dmserif' || f === 'fraunces') current = f; } catch (_) {}
   const box = document.createElement('div');
   box.className = 'palette-switcher';
-  box.innerHTML = '<p>Preview only · title font</p><div class="opts">' + options.map(([k, n, f]) =>
+  box.innerHTML = '<p>Preview only · title font (still deciding)</p><div class="opts">' + options.map(([k, n, f]) =>
     `<button type="button" data-key="${k}" style="font-family:${f};font-size:.95rem">${n}</button>`).join('') + '</div>';
   const apply = (key) => {
-    if (key === 'instrument') document.documentElement.removeAttribute('data-font');
-    else document.documentElement.setAttribute('data-font', key);
+    document.documentElement.setAttribute('data-font', key);
     try { localStorage.setItem('font', key); } catch (_) {}
     box.querySelectorAll('button').forEach((b) => b.classList.toggle('on', b.dataset.key === key));
   };
