@@ -231,29 +231,31 @@ $('.buy').addEventListener('click', (e) => {
   if (state.demo) { e.preventDefault(); alert(state.lang === 'fr' ? 'Aperçu : le paiement sera actif une fois Stripe branché.' : 'Preview: checkout goes live once Stripe is connected.'); }
 });
 
-// ── Preview-only accent switcher (never shown on the real site) ──
-function accentSwitcher() {
+// ── Preview-only font switcher (never shown on the real site) ──
+function fontSwitcher() {
   const host = location.hostname;
   const isPreview = host.startsWith('preview-') || host === 'localhost' || location.protocol === 'file:';
   if (!isPreview) return;
   const options = [
-    ['ochre', 'Ochre', ['#b07d24']],
-    ['berry', 'Berry', ['#a8355f']],
-    ['teal', 'Teal', ['#1f7a74']],
-    ['terracotta', 'Terracotta', ['#c0582f']],
-    ['confetti', 'Mix', ['#a8355f', '#1f7a74', '#c0582f', '#6b3f6e']],
+    ['instrument', 'Instrument Serif', "'Instrument Serif'"],
+    ['caprasimo', 'Caprasimo', "'Caprasimo'"],
+    ['fredoka', 'Fredoka', "'Fredoka'"],
+    ['fraunces', 'Fraunces', "'Fraunces'"],
+    ['dmserif', 'DM Serif', "'DM Serif Display'"],
+    ['bricolage', 'Bricolage', "'Bricolage Grotesque'"],
+    ['bagel', 'Bagel Fat One', "'Bagel Fat One'"],
+    ['gluten', 'Gluten', "'Gluten'"],
   ];
-  let current = 'ochre';
-  try { current = localStorage.getItem('accent') || 'ochre'; } catch (_) {}
+  let current = 'instrument';
+  try { current = localStorage.getItem('font') || 'instrument'; } catch (_) {}
   const box = document.createElement('div');
   box.className = 'palette-switcher';
-  const sw = (cols) => cols.length === 1 ? cols[0] : `conic-gradient(${cols.map((c, i) => `${c} ${i * 90}deg ${(i + 1) * 90}deg`).join(',')})`;
-  box.innerHTML = '<p>Preview only · accent colour on Ochre Paper</p><div class="opts">' + options.map(([k, n, cols]) =>
-    `<button type="button" data-key="${k}"><i style="background:${sw(cols)}"></i>${n}</button>`).join('') + '</div>';
+  box.innerHTML = '<p>Preview only · title font</p><div class="opts">' + options.map(([k, n, f]) =>
+    `<button type="button" data-key="${k}" style="font-family:${f};font-size:.95rem">${n}</button>`).join('') + '</div>';
   const apply = (key) => {
-    if (key === 'ochre') document.documentElement.removeAttribute('data-accent');
-    else document.documentElement.setAttribute('data-accent', key);
-    try { localStorage.setItem('accent', key); } catch (_) {}
+    if (key === 'instrument') document.documentElement.removeAttribute('data-font');
+    else document.documentElement.setAttribute('data-font', key);
+    try { localStorage.setItem('font', key); } catch (_) {}
     box.querySelectorAll('button').forEach((b) => b.classList.toggle('on', b.dataset.key === key));
   };
   box.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) apply(b.dataset.key); });
@@ -263,5 +265,5 @@ function accentSwitcher() {
 
 renderText();
 renderHero();
-accentSwitcher();
+fontSwitcher();
 load();
