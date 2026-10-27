@@ -92,14 +92,26 @@ function renderText() {
 }
 
 // ── Gallery ─────────────────────────────────────────────────
+// Show just the artwork from a styled photo. crop = { cx, cy, w, ratio } in photo widths.
+function croppedArt(src, crop, alt, frameRatio) {
+  const scale = 100 / crop.w;
+  const left = 50 - (crop.cx / crop.w) * 100;
+  const top = 50 - (crop.cy / crop.w) * crop.ratio * 100;
+  // Fit the piece inside its frame: tall pieces fill the height, wide ones the width
+  const size = frameRatio && crop.ratio > frameRatio ? 'width:100%;height:auto' : 'height:100%;width:auto';
+  return `<div class="art-crop" style="aspect-ratio:${crop.ratio};${frameRatio ? size : ''}"><img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" loading="lazy"
+    style="width:${scale}%;left:${left}%;top:${top}%"></div>`;
+}
+
 function renderGrid() {
   const list = state.filter === 'available' ? state.artworks.filter((a) => !a.sold) : state.artworks;
   $('.demo-note').hidden = !state.demo;
   $('.empty').hidden = list.length > 0;
   $('.grid').innerHTML = list.map((a) => `
     <button type="button" class="card${a.sold ? ' is-sold' : ''}" data-id="${escapeHtml(a.id)}">
-      <div class="card-frame">
-        ${a.image ? `<img src="${escapeHtml(a.image)}" alt="${escapeHtml(a.title)}" loading="lazy">` : ''}
+      <div class="card-frame${a.crop ? ' has-crop' : ''}">
+        ${a.image && a.crop ? croppedArt(a.cropImage || a.image, a.crop, a.title, 0.8)
+          : a.image ? `<img src="${escapeHtml(a.image)}" alt="${escapeHtml(a.title)}" loading="lazy">` : ''}
         ${a.sold ? `<span class="badge">${t('sold')}</span>` : ''}
       </div>
       <div class="card-text">
@@ -190,32 +202,37 @@ function watercolour(seed, palette, { round = true, w = 400, h = 500, paper = '#
 
 // Sample pieces shown until Stripe is connected: Allie's current Etsy listings (photos hosted by Etsy).
 function demoArtworks() {
-  const img = (path) => `https://i.etsystatic.com/65548102/r/il/${path.replace('il_800x800.', 'il_794xN.')}`;
+  const base = 'https://i.etsystatic.com/65548102/r/il/';
+  const photo = (p, size) => base + p.replace('/', `/`).replace(/\/(\d+_[a-z0-9]+\.jpg)$/, `/${size}.$1`);
   const small = { medium: 'Watercolour', dimensions: '5×7 in · matted 8×10', price: 3700 };
+  // [title, shape, cover photo (styled, for the detail view), straight-on photo, crop of the piece in that photo, extras]
   const list = [
-    ['Forest Walk', 'circular', 'c56794/8717752002/il_800x800.8717752002_rra8.jpg'],
-    ['Deep Blues', 'circular', 'd4186a/8717754902/il_800x800.8717754902_beay.jpg'],
-    ['Mystic Purple', 'circular', 'c2cdca/8765532701/il_800x800.8765532701_hiij.jpg'],
-    ['Autumn Hues', 'circular', 'c43ae7/8719639061/il_800x800.8719639061_c3mt.jpg'],
-    ['Mountain Landscape', 'landscape', 'fd846b/8719437285/il_800x800.8719437285_4d8t.jpg', { dimensions: '8×10 in', price: 4500 }],
-    ['Soft Pinks', 'circular', 'c42162/8649433058/il_800x800.8649433058_d07g.jpg'],
-    ['Violet Green', 'circular', 'e63de7/8692402585/il_800x800.8692402585_9mo4.jpg'],
-    ['Tidal Blues', 'rectangular', '4a1471/8680551141/il_800x800.8680551141_tpnm.jpg'],
-    ['Purple Hues', 'rectangular', '405d64/8680494853/il_800x800.8680494853_ba76.jpg'],
-    ['Blue Hues', 'rectangular', '296142/8632553924/il_800x800.8632553924_p4jh.jpg'],
-    ['Autumn Hues', 'rectangular', '8935ac/8632488298/il_800x800.8632488298_tlhv.jpg'],
-    ['Purple Hues', 'circular', '470ffa/8629130604/il_800x800.8629130604_czsn.jpg'],
-    ['Teal Hues', 'circular', 'd19715/8676739643/il_800x800.8676739643_k0ew.jpg'],
-    ['Violet Hues', 'circular', '96dd79/8628833042/il_800x800.8628833042_biqq.jpg'],
-    ['Pink Hues', 'circular', '79cc31/8676594837/il_800x800.8676594837_76am.jpg'],
-    ['Blue Hues', 'circular', '701bd2/8676812045/il_800x800.8676812045_jgzo.jpg'],
-    ['Blues Hues', 'watercolour & oil pastel', '4a159c/8133440957/il_800x800.8133440957_9aku.jpg', { medium: 'Watercolour & oil pastel', dimensions: '8×10 in', price: 4500 }],
+    ['Forest Walk', 'circular', 'c56794/8717752002/8717752002_rra8.jpg', '793628/8765580965/8765580965_lacq.jpg', [0.495, 0.6512, 0.536, 0.702]],
+    ['Deep Blues', 'circular', 'd4186a/8717754902/8717754902_beay.jpg', '3ef490/8765552793/8765552793_tdbl.jpg', [0.495, 0.6575, 0.506, 0.7067]],
+    ['Mystic Purple', 'circular', 'c2cdca/8765532701/8765532701_hiij.jpg', 'eddd01/8765533149/8765533149_bgj6.jpg', [0.495, 0.645, 0.531, 0.6978]],
+    ['Autumn Hues', 'circular', 'c43ae7/8719639061/8719639061_c3mt.jpg', 'eafb4b/8671807012/8671807012_ntv2.jpg', [0.4975, 0.6563, 0.541, 0.6994]],
+    ['Mountain Landscape', 'landscape', 'fd846b/8719437285/8719437285_4d8t.jpg', 'fd846b/8719437285/8719437285_4d8t.jpg', [0.4715, 0.668, 0.7, 1], { dimensions: '8×10 in', price: 4500 }],
+    ['Soft Pinks', 'circular', 'c42162/8649433058/8649433058_d07g.jpg', 'ce31bd/8697260145/8697260145_8zmk.jpg', [0.4987, 0.6425, 0.5135, 0.6883]],
+    ['Violet Green', 'circular', 'e63de7/8692402585/8692402585_9mo4.jpg', '93fd4c/8692402617/8692402617_3rjo.jpg', [0.4938, 0.66, 0.5285, 0.7084]],
+    ['Tidal Blues', 'rectangular', '4a1471/8680551141/8680551141_tpnm.jpg', 'cadacc/8680551971/8680551971_7p2y.jpg', [0.4912, 0.6663, 0.5185, 0.6927]],
+    ['Purple Hues', 'rectangular', '405d64/8680494853/8680494853_ba76.jpg', '16f49f/8680495685/8680495685_7xwl.jpg', [0.49, 0.6625, 0.511, 0.6943]],
+    ['Blue Hues', 'rectangular', '296142/8632553924/8632553924_p4jh.jpg', '1ff1bc/8680374357/8680374357_3dj6.jpg', [0.49, 0.6387, 0.516, 0.7083]],
+    ['Autumn Hues', 'rectangular', '8935ac/8632488298/8632488298_tlhv.jpg', '07b2de/8680346509/8680346509_4ppm.jpg', [0.5012, 0.6625, 0.4935, 0.699]],
+    ['Purple Hues', 'circular', '470ffa/8629130604/8629130604_czsn.jpg', 'a4e2e8/8629129736/8629129736_suc7.jpg', [0.51, 0.6762, 0.526, 0.6935]],
+    ['Teal Hues', 'circular', 'd19715/8676739643/8676739643_k0ew.jpg', '53e9bf/8628915072/8628915072_opaq.jpg', [0.5125, 0.66, 0.506, 0.727]],
+    ['Violet Hues', 'circular', '96dd79/8628833042/8628833042_biqq.jpg', 'fe03e1/8628853786/8628853786_gkzm.jpg', [0.5012, 0.6825, 0.5035, 0.6983]],
+    ['Pink Hues', 'circular', '79cc31/8676594837/8676594837_76am.jpg', '5011fd/8628797878/8628797878_b4x2.jpg', [0.49, 0.6587, 0.506, 0.7042]],
+    ['Blue Hues', 'circular', '701bd2/8676812045/8676812045_jgzo.jpg', 'ad167a/8628986810/8628986810_r68z.jpg', [0.4988, 0.645, 0.5385, 0.7076]],
+    ['Blues Hues', 'watercolour & oil pastel', '4a159c/8133440957/8133440957_9aku.jpg', '4a159c/8133440957/8133440957_9aku.jpg', [0.4233, 0.792, 0.6235, 0.7735], { medium: 'Watercolour & oil pastel', dimensions: '8×10 in', price: 4500 }],
   ];
-  return list.map(([title, shape, path, extra = {}], i) => {
+  return list.map(([title, shape, cover, straight, c, extra = {}], i) => {
     const d = { ...small, ...extra };
     const medium = extra.medium || (shape === 'landscape' ? 'Watercolour landscape' : `Watercolour · ${shape}`);
     return {
-      id: 'etsy' + i, title, image: img(path), currency: 'cad', sold: false, url: '#', year: '',
+      id: 'etsy' + i, title, currency: 'cad', sold: false, url: '#', year: '',
+      image: photo(cover, 'il_794xN'),
+      cropImage: photo(straight, 'il_1140xN'),
+      crop: { cx: c[0], cy: c[1], w: c[2], ratio: c[3] },
       medium, dimensions: d.dimensions, price: d.price,
       description: `Original ${medium.toLowerCase()} painting by Allie Paige, ${d.dimensions}.`,
     };
@@ -227,15 +244,9 @@ function renderHero() {
   const el = document.querySelector('.hero-art');
   if (!el) return;
   const h = CONFIG.hero;
-  if (!h || !h.image) {
-    el.innerHTML = `<img src="${watercolour(7, ['#d93a6a', '#1d8a85', '#f2a03d', '#5b2a86', '#2fb39e'], { w: 600, h: 600, paper: 'transparent' })}" alt="">`;
-    return;
-  }
-  const scale = 100 / h.w;                       // image width as % of the crop box
-  const left = 50 - (h.cx / h.w) * 100;          // % of box width
-  const top = 50 - (h.cy / h.w) * h.ratio * 100; // % of box height
-  el.innerHTML = `<div class="hero-crop" style="aspect-ratio:${h.ratio}"><img src="${escapeHtml(h.image)}" alt="${escapeHtml(h.title)}"
-    style="width:${scale}%;left:${left}%;top:${top}%"></div>`;
+  el.innerHTML = h && h.image
+    ? `<div class="hero-crop">${croppedArt(h.image, { cx: h.cx, cy: h.cy, w: h.w, ratio: h.ratio }, h.title)}</div>`
+    : `<img src="${watercolour(7, ['#d93a6a', '#1d8a85', '#f2a03d', '#5b2a86', '#2fb39e'], { w: 600, h: 600, paper: 'transparent' })}" alt="">`;
 }
 
 // ── Events ──────────────────────────────────────────────────
