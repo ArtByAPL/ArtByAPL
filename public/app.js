@@ -231,6 +231,36 @@ $('.buy').addEventListener('click', (e) => {
   if (state.demo) { e.preventDefault(); alert(state.lang === 'fr' ? 'Aperçu : le paiement sera actif une fois Stripe branché.' : 'Preview: checkout goes live once Stripe is connected.'); }
 });
 
+// ── Preview-only palette switcher (never shown on the real site) ──
+function paletteSwitcher() {
+  const host = location.hostname;
+  const isPreview = host.startsWith('preview-') || host === 'localhost' || location.protocol === 'file:';
+  if (!isPreview) return;
+  const options = [
+    ['ochre', 'Ochre Paper', '#b07d24', '#f7f2e7'],
+    ['clay', 'Blush Clay', '#b56d5f', '#fbf5f2'],
+    ['linen', 'Warm Linen', '#8a5a44', '#f5f0e8'],
+    ['sage', 'Studio Sage', '#4f6f5e', '#f3f4ef'],
+    ['plum', 'Ink & Plum', '#6b3f6e', '#faf8f7'],
+  ];
+  let current = 'ochre';
+  try { current = localStorage.getItem('palette') || 'ochre'; } catch (_) {}
+  const apply = (key) => {
+    if (key === 'ochre') document.documentElement.removeAttribute('data-palette');
+    else document.documentElement.setAttribute('data-palette', key);
+    try { localStorage.setItem('palette', key); } catch (_) {}
+    box.querySelectorAll('button').forEach((b) => b.classList.toggle('on', b.dataset.key === key));
+  };
+  const box = document.createElement('div');
+  box.className = 'palette-switcher';
+  box.innerHTML = '<p>Preview only · colour palette</p><div class="opts">' + options.map(([k, n, a, b]) =>
+    `<button type="button" data-key="${k}"><i style="background:linear-gradient(135deg, ${b} 50%, ${a} 50%)"></i>${n}</button>`).join('') + '</div>';
+  box.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) apply(b.dataset.key); });
+  document.body.appendChild(box);
+  apply(current);
+}
+
 renderText();
 renderHero();
+paletteSwitcher();
 load();
