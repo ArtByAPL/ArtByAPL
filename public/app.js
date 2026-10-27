@@ -8,6 +8,12 @@ const CONFIG = {
     fr: "Allie Paige est une artiste en aquarelle abstraite. [À compléter : sa démarche, ses matériaux, d’où elle peint.]",
     en: "Allie Paige is an abstract watercolour artist. [To fill in: her approach, her materials, where she paints.]",
   },
+  // Big image at the top: one painting, cropped to just the artwork (no frame or mat).
+  // cx / cy = centre of the painting in the photo (0–1), d = its diameter as a share of the photo width.
+  hero: {
+    image: 'https://i.etsystatic.com/65548102/r/il/c56794/8717752002/il_800x800.8717752002_rra8.jpg',
+    title: 'Forest Walk', cx: 0.476, cy: 0.461, d: 0.40,
+  },
   shipping: {
     fr: "[À compléter : livraison au Canada, ramassage à Montréal, délais, emballage…]",
     en: "[To fill in: shipping within Canada, local pickup in Montréal, timelines, packaging…]",
@@ -139,7 +145,6 @@ async function load() {
     state.demo = true;
   }
   renderGrid();
-  renderHero(state.artworks);
 }
 
 // Watercolour-style artwork, used for the hero and for sample pieces.
@@ -216,15 +221,18 @@ function demoArtworks() {
   });
 }
 
-// Hero image: her newest available piece once artworks are loaded, a painted placeholder until then
-function renderHero(artworks) {
+// Hero image: the painting chosen in CONFIG.hero, cropped to a clean circle
+function renderHero() {
   const el = document.querySelector('.hero-art');
   if (!el) return;
-  const pick = (artworks || []).find((a) => !a.sold && a.image);
-  el.classList.toggle('is-photo', Boolean(pick));
-  el.innerHTML = pick
-    ? `<img src="${escapeHtml(pick.image)}" alt="${escapeHtml(pick.title)}">`
-    : `<img src="${watercolour(7, ['#d93a6a', '#1d8a85', '#f2a03d', '#5b2a86', '#2fb39e'], { w: 600, h: 600, paper: 'transparent' })}" alt="">`;
+  const h = CONFIG.hero;
+  if (!h || !h.image) {
+    el.innerHTML = `<img src="${watercolour(7, ['#d93a6a', '#1d8a85', '#f2a03d', '#5b2a86', '#2fb39e'], { w: 600, h: 600, paper: 'transparent' })}" alt="">`;
+    return;
+  }
+  const scale = 100 / h.d;
+  el.innerHTML = `<div class="hero-crop"><img src="${escapeHtml(h.image)}" alt="${escapeHtml(h.title)}"
+    style="width:${scale}%;left:${50 - h.cx * scale}%;top:${50 - h.cy * scale}%"></div>`;
 }
 
 // ── Events ──────────────────────────────────────────────────
@@ -272,5 +280,6 @@ function fontSwitcher() {
 }
 
 renderText();
+renderHero();
 fontSwitcher();
 load();

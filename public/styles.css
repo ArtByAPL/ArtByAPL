@@ -237,3 +237,11 @@ dialog.piece { border-radius: 6px; overflow: hidden; }
 }
 .piece-media { padding: 0; }
 .piece-media img { width: 100%; max-height: 82vh; object-fit: contain; box-shadow: none; }
+
+/* Hero: painting cropped to a circle */
+.hero-crop {
+  position: relative; aspect-ratio: 1 / 1; width: 100%; max-width: 500px; margin-inline: auto;
+  border-radius: 50%; overflow: hidden; background: var(--wall);
+  box-shadow: 0 30px 60px -30px rgba(45, 42, 36, 0.45);
+}
+.hero-crop img { position: absolute; max-width: none; height: auto; }
