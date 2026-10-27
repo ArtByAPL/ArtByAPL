@@ -13,11 +13,12 @@
   --body: 'Instrument Sans', system-ui, -apple-system, sans-serif;
   --gutter: clamp(16px, 4vw, 48px);
 }
-/* Palettes being compared (preview switcher) */
-:root[data-palette="clay"]  { --paper:#fbf5f2; --wall:#f2e5df; --ink:#3a2a2a; --muted:#836e6a; --accent:#b56d5f; --btn:#3a2a2a; --btn-ink:#fbf5f2; --btn-hover:#5a4444; --line:#ecdcd5; }
-:root[data-palette="linen"] { --paper:#f5f0e8; --wall:#ebe3d6; --ink:#2b2622; --muted:#7a6e64; --accent:#8a5a44; --btn:#2b2622; --btn-ink:#f5f0e8; --btn-hover:#4a4039; --line:#e0d6c8; }
-:root[data-palette="sage"]  { --paper:#f3f4ef; --wall:#e5e8df; --ink:#26302b; --muted:#68736c; --accent:#4f6f5e; --btn:#4f6f5e; --btn-ink:#fff; --btn-hover:#3e5a4b; --line:#dde1d6; }
-:root[data-palette="plum"]  { --paper:#faf8f7; --wall:#efeaed; --ink:#2a2233; --muted:#736b78; --accent:#6b3f6e; --btn:#2a2233; --btn-ink:#fff; --btn-hover:#463b52; --line:#e7e0e5; }
+/* Accent options on Ochre Paper (preview switcher). --c1..--c3 colour the little section dots. */
+:root { --c1: var(--accent); --c2: var(--accent); --c3: var(--accent); }
+:root[data-accent="berry"]      { --accent:#a8355f; }
+:root[data-accent="teal"]       { --accent:#1f7a74; --btn:#1f7a74; --btn-ink:#fff; --btn-hover:#18625d; }
+:root[data-accent="terracotta"] { --accent:#c0582f; }
+:root[data-accent="confetti"]   { --accent:#a8355f; --c1:#1f7a74; --c2:#c0582f; --c3:#6b3f6e; --btn:#1f7a74; --btn-ink:#fff; --btn-hover:#18625d; }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -213,3 +214,13 @@ dialog.piece { border-radius: 6px; overflow: hidden; }
 }
 .palette-switcher button.on { border-color: #222; background: #222; color: #fff; }
 .palette-switcher i { width: 18px; height: 18px; border-radius: 50%; display: inline-block; border: 1px solid rgba(0,0,0,.15); }
+
+/* Painted dot before section titles */
+.works-bar h2, .about h2, .contact h2 { display: flex; align-items: center; gap: 12px; }
+.works-bar h2::before, .about h2::before, .contact h2::before {
+  content: ''; width: 16px; height: 16px; flex: none;
+  border-radius: 58% 42% 55% 45% / 45% 55% 45% 55%;
+  background: var(--c1); opacity: .9;
+}
+.about h2::before { background: var(--c2); border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%; }
+.contact h2::before { background: var(--c3); border-radius: 52% 48% 60% 40% / 40% 60% 45% 55%; }
