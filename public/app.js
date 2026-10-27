@@ -3,10 +3,10 @@
 // ────────────────────────────────────────────────────────────
 const CONFIG = {
   email: 'bonjour@artbyapl.com',
-  instagram: '', // e.g. 'https://instagram.com/artbyapl'
+  instagram: 'https://www.instagram.com/artby_apl/',
   about: {
-    fr: "[À compléter : quelques phrases sur l’artiste, sa démarche, ses matériaux, d’où elle peint.]",
-    en: "[To fill in: a few sentences about the artist, her approach, her materials, where she paints.]",
+    fr: "Allie Paige est une artiste en aquarelle abstraite. [À compléter : sa démarche, ses matériaux, d’où elle peint.]",
+    en: "Allie Paige is an abstract watercolour artist. [To fill in: her approach, her materials, where she paints.]",
   },
   shipping: {
     fr: "[À compléter : livraison au Canada, ramassage à Montréal, délais, emballage…]",
@@ -17,8 +17,8 @@ const CONFIG = {
 const TEXT = {
   fr: {
     navWorks: 'Œuvres', navAbout: 'À propos', navContact: 'Contact',
-    heroTitle: 'Œuvres originales.<br><em>Une seule de chaque.</em>',
-    heroSub: 'Chaque pièce est unique. Quand elle trouve sa maison, elle ne revient pas.',
+    heroTitle: 'Aquarelles abstraites.<br><em>Une seule de chaque.</em>',
+    heroSub: 'Des œuvres originales signées Allie Paige. Chaque pièce est unique : quand elle trouve sa maison, elle ne revient pas.',
     filterAvailable: 'Disponibles', filterAll: 'Toutes',
     demo: 'Aperçu — œuvres d’exemple',
     empty: 'Aucune œuvre disponible pour le moment. Revenez bientôt!',
@@ -27,12 +27,12 @@ const TEXT = {
     shippingTitle: 'Livraison',
     contactText: 'Une question sur une œuvre ou envie d’une commande personnalisée?',
     secure: 'Paiement sécurisé par Stripe',
-    close: 'Fermer', lang: 'EN',
+    seeWorks: 'Voir les œuvres', close: 'Fermer', lang: 'EN',
   },
   en: {
     navWorks: 'Works', navAbout: 'About', navContact: 'Contact',
-    heroTitle: 'Original artwork.<br><em>One of each.</em>',
-    heroSub: 'Every piece is unique. Once it finds its home, it’s gone.',
+    heroTitle: 'Abstract watercolours.<br><em>One of each.</em>',
+    heroSub: 'Original paintings by Allie Paige. Every piece is one of a kind: once it finds its home, it’s gone.',
     filterAvailable: 'Available', filterAll: 'All',
     demo: 'Preview — sample artworks',
     empty: 'No pieces available right now. Check back soon!',
@@ -41,7 +41,7 @@ const TEXT = {
     shippingTitle: 'Shipping',
     contactText: 'A question about a piece, or interested in a commission?',
     secure: 'Secure payment by Stripe',
-    close: 'Close', lang: 'FR',
+    seeWorks: 'See the work', close: 'Close', lang: 'FR',
   },
 };
 
@@ -141,30 +141,75 @@ async function load() {
   renderGrid();
 }
 
+// Watercolour-style artwork, used for the hero and for sample pieces.
+// Deterministic: the same seed always paints the same picture.
+function watercolour(seed, palette, { round = true, w = 400, h = 500, paper = '#fdfcf9' } = {}) {
+  let s = seed;
+  const rnd = () => ((s = (s * 16807) % 2147483647) - 1) / 2147483646;
+  const cx = w / 2, cy = h / 2, R = Math.min(w, h) * 0.38;
+  const blooms = [];
+  for (let i = 0; i < 9; i++) {
+    const a = rnd() * Math.PI * 2, d = Math.sqrt(rnd()) * R * 0.75;
+    const r = R * (0.22 + rnd() * 0.22);
+    const c = palette[i % palette.length];
+    blooms.push(`<ellipse cx="${(cx + Math.cos(a) * d).toFixed(1)}" cy="${(cy + Math.sin(a) * d).toFixed(1)}" rx="${r.toFixed(1)}" ry="${(r * (0.75 + rnd() * 0.4)).toFixed(1)}" fill="${c}" opacity="${(0.55 + rnd() * 0.3).toFixed(2)}" transform="rotate(${Math.round(rnd() * 180)} ${cx} ${cy})"/>`);
+  }
+  const marks = [];
+  for (let i = 0; i < 26; i++) {
+    const a = rnd() * Math.PI * 2, d = Math.sqrt(rnd()) * R * 0.92;
+    const x = cx + Math.cos(a) * d, y = cy + Math.sin(a) * d;
+    const c = palette[Math.floor(rnd() * palette.length)];
+    marks.push(`<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${(3 + rnd() * 4).toFixed(1)}" ry="${(8 + rnd() * 7).toFixed(1)}" fill="${c}" opacity=".9" transform="rotate(${Math.round(-30 + rnd() * 60)} ${x.toFixed(1)} ${y.toFixed(1)})"/>`);
+  }
+  const clip = round ? `<clipPath id="c"><circle cx="${cx}" cy="${cy}" r="${R}"/></clipPath>` : '';
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}">
+    <defs>${clip}
+      <filter id="wc" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" seed="${seed % 97}"/>
+        <feDisplacementMap in="SourceGraphic" scale="34"/>
+        <feGaussianBlur stdDeviation="1.2"/>
+      </filter>
+      <filter id="mk"><feTurbulence baseFrequency="0.06" numOctaves="2" seed="${seed % 89}"/><feDisplacementMap in="SourceGraphic" scale="5"/></filter>
+    </defs>
+    <rect width="${w}" height="${h}" fill="${paper}"/>
+    <g ${round ? 'clip-path="url(#c)"' : ''}>
+      <g filter="url(#wc)" style="mix-blend-mode:multiply">${blooms.join('')}</g>
+      <g filter="url(#mk)">${marks.join('')}</g>
+    </g>
+    ${round ? `<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#cfc9c0" stroke-width="0.8"/>` : ''}
+  </svg>`;
+  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+}
+
 // Sample pieces shown until Stripe is connected
 function demoArtworks() {
-  const art = (bg, shapes) => 'data:image/svg+xml;utf8,' + encodeURIComponent(
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500"><rect width="400" height="500" fill="${bg}"/>${shapes}</svg>`);
+  const P = {
+    sunset: ['#f2a03d', '#e8613c', '#d93a6a', '#f7c948'],
+    berry: ['#8e2d6e', '#1d8a85', '#5b2a86', '#2fb39e'],
+    ocean: ['#1f5fa8', '#3fa7c9', '#9fd3e6', '#173a7a'],
+    garden: ['#2f8f6b', '#a8c94f', '#e0c341', '#1e5e57'],
+    candy: ['#e65fa0', '#f6a6c8', '#7fc8e8', '#f5d36b'],
+    dusk: ['#3b3a8c', '#8a4fb5', '#d9669b', '#1d8a85'],
+  };
+  const sample = 'Exemple de description : ce qui a inspiré la pièce, les couleurs, le moment. / Sample description.';
   return [
-    { id: 'd1', title: 'Marée basse', medium: 'Acrylique sur toile', dimensions: '40 × 50 cm', year: '2026', price: 42000, currency: 'cad', sold: false, url: '#',
-      description: 'Exemple de description : ce qui a inspiré la pièce, les couleurs, le moment.',
-      image: art('#e9dcc6', '<circle cx="250" cy="170" r="90" fill="#c96a3b"/><rect y="300" width="400" height="200" fill="#2f4858"/><rect y="270" width="400" height="40" fill="#86a3a8"/>') },
-    { id: 'd2', title: 'Fenêtre sur janvier', medium: 'Huile sur panneau', dimensions: '30 × 30 cm', year: '2026', price: 28000, currency: 'cad', sold: false, url: '#',
-      description: 'Exemple de description.',
-      image: art('#dfe4e6', '<rect x="60" y="70" width="280" height="360" fill="#f7f5f0"/><rect x="60" y="250" width="280" height="8" fill="#37474f"/><rect x="196" y="70" width="8" height="360" fill="#37474f"/><circle cx="120" cy="140" r="26" fill="#b4532a"/>') },
-    { id: 'd3', title: 'Jardin, fin d’août', medium: 'Gouache sur papier', dimensions: '23 × 30 cm', year: '2025', price: 18000, currency: 'cad', sold: true,
-      description: 'Exemple de description.',
-      image: art('#f1e7d3', '<ellipse cx="130" cy="330" rx="110" ry="150" fill="#6b8f5e"/><ellipse cx="290" cy="300" rx="90" ry="170" fill="#3f6b4f"/><circle cx="200" cy="120" r="55" fill="#e2a33b"/>') },
-    { id: 'd4', title: 'Rouge Saint-Laurent', medium: 'Acrylique sur toile', dimensions: '60 × 75 cm', year: '2026', price: 75000, currency: 'cad', sold: false, url: '#',
-      description: 'Exemple de description.',
-      image: art('#2b2a33', '<path d="M0 340 Q200 260 400 340 L400 500 L0 500Z" fill="#8c2f1d"/><path d="M0 390 Q200 330 400 400 L400 500 L0 500Z" fill="#c45a2c"/><circle cx="110" cy="130" r="40" fill="#efe6d8"/>') },
-    { id: 'd5', title: 'Petite étude bleue', medium: 'Encre et aquarelle', dimensions: '18 × 24 cm', year: '2025', price: 12000, currency: 'cad', sold: false, url: '#',
-      description: 'Exemple de description.',
-      image: art('#f4f1ea', '<circle cx="200" cy="230" r="130" fill="#3d5a80" opacity=".85"/><circle cx="250" cy="290" r="90" fill="#98c1d9" opacity=".8"/>') },
-    { id: 'd6', title: 'Dimanche matin', medium: 'Huile sur toile', dimensions: '50 × 50 cm', year: '2025', price: 54000, currency: 'cad', sold: true,
-      description: 'Exemple de description.',
-      image: art('#e8d5c4', '<rect x="70" y="90" width="260" height="320" rx="130" fill="#d98f6a"/><rect x="140" y="160" width="120" height="180" rx="60" fill="#f6efe6"/>') },
-  ].sort((a, b) => Number(a.sold) - Number(b.sold));
+    { id: 'd1', title: 'Coucher de soleil', palette: P.sunset, seed: 11, price: 18000, sold: false },
+    { id: 'd2', title: 'Baies sauvages', palette: P.berry, seed: 23, price: 22000, sold: false },
+    { id: 'd3', title: 'Marée', palette: P.ocean, seed: 37, price: 15000, sold: true },
+    { id: 'd4', title: 'Jardin d’août', palette: P.garden, seed: 41, price: 24000, sold: false },
+    { id: 'd5', title: 'Bonbons', palette: P.candy, seed: 53, price: 12000, sold: false },
+    { id: 'd6', title: 'Crépuscule', palette: P.dusk, seed: 67, price: 26000, sold: true },
+  ].map((a) => ({
+    ...a, currency: 'cad', url: a.sold ? null : '#', year: '2026',
+    medium: 'Aquarelle / Watercolour', dimensions: '23 × 30 cm', description: sample,
+    image: watercolour(a.seed, a.palette),
+  })).sort((a, b) => Number(a.sold) - Number(b.sold));
+}
+
+// Hero painting
+function renderHero() {
+  const el = document.querySelector('.hero-art');
+  if (el) el.innerHTML = `<img src="${watercolour(7, ['#d93a6a', '#1d8a85', '#f2a03d', '#5b2a86', '#2fb39e'], { w: 600, h: 600, paper: 'transparent' })}" alt="">`;
 }
 
 // ── Events ──────────────────────────────────────────────────
@@ -187,4 +232,5 @@ $('.buy').addEventListener('click', (e) => {
 });
 
 renderText();
+renderHero();
 load();
