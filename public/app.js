@@ -9,10 +9,10 @@ const CONFIG = {
     en: "Allie Paige is an abstract watercolour artist. [To fill in: her approach, her materials, where she paints.]",
   },
   // Big image at the top: one painting, cropped to just the artwork (no frame or mat).
-  // cx / cy = centre of the painting in the photo (0–1), d = its diameter as a share of the photo width.
+  // cx / cy = centre of the painting and d = its diameter, all measured in photo widths (1 = full photo width).
   hero: {
-    image: 'https://i.etsystatic.com/65548102/r/il/c56794/8717752002/il_800x800.8717752002_rra8.jpg',
-    title: 'Forest Walk', cx: 0.48, cy: 0.478, d: 0.39,
+    image: 'https://i.etsystatic.com/65548102/r/il/c56794/8717752002/il_fullxfull.8717752002_rra8.jpg',
+    title: 'Forest Walk', cx: 0.48, cy: 0.645, d: 0.39,
   },
   shipping: {
     fr: "[À compléter : livraison au Canada, ramassage à Montréal, délais, emballage…]",
