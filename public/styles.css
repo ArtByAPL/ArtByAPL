@@ -8,8 +8,8 @@
   --accent-ink: #fff;
   --teal: #1d8a85;
   --line: #e4ded6;
-  --display: 'Fraunces', Georgia, serif;
-  --body: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+  --display: 'Fredoka', 'Nunito', system-ui, sans-serif;
+  --body: 'Nunito', system-ui, -apple-system, sans-serif;
   --gutter: clamp(16px, 4vw, 48px);
 }
 
@@ -38,11 +38,10 @@ a { color: inherit; }
 }
 .wordmark {
   display: inline-flex; align-items: center; gap: 10px;
-  font-family: var(--display); font-size: 1.4rem; font-weight: 400;
-  font-variation-settings: 'SOFT' 100;
+  font-family: var(--display); font-size: 1.45rem; font-weight: 500;
   text-decoration: none; letter-spacing: -0.01em; white-space: nowrap;
 }
-.wordmark strong { font-weight: 600; color: var(--accent); }
+.wordmark strong { font-weight: 700; color: var(--accent); }
 .wordmark .dot {
   width: 22px; height: 22px; border-radius: 50%;
   background:
@@ -82,12 +81,11 @@ a { color: inherit; }
 }
 .hero-cta:hover { background: var(--accent); }
 .hero h1 {
-  font-family: var(--display); font-weight: 350; font-variation-settings: 'SOFT' 100;
-  font-size: clamp(2.4rem, 7vw, 5.2rem); line-height: 1.02; letter-spacing: -0.025em;
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(2.4rem, 7vw, 5rem); line-height: 1.05; letter-spacing: -0.01em;
   margin: 0 0 24px;
 }
-.hero h1 em { font-style: italic; color: var(--accent); }
-h2, .card-title, .piece-title, .about-text { font-variation-settings: 'SOFT' 100; }
+.hero h1 em { font-style: normal; color: var(--accent); }
 .hero p { max-width: 34em; color: var(--muted); font-size: 1.1rem; margin: 0; }
 
 /* Works */
@@ -136,7 +134,7 @@ h2 { font-family: var(--display); font-weight: 500; font-size: 1.6rem; margin: 0
   background: var(--ink); color: var(--paper); padding: 4px 10px; border-radius: 999px;
 }
 .card-text { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
-.card-title { font-family: var(--display); font-size: 1.12rem; line-height: 1.25; }
+.card-title { font-family: var(--display); font-weight: 500; font-size: 1.15rem; line-height: 1.25; }
 .card-sub { color: var(--muted); font-size: 0.85rem; }
 .card-price { white-space: nowrap; font-size: 0.95rem; }
 .card.is-sold .card-price { color: var(--muted); text-decoration: line-through; }
@@ -148,7 +146,7 @@ h2 { font-family: var(--display); font-weight: 500; font-size: 1.6rem; margin: 0
 }
 .about h2, .contact h2 { border-top: 1px solid var(--ink); padding-top: 16px; margin-bottom: 20px; }
 .about h3 { font: 600 0.8rem var(--body); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 32px 0 8px; }
-.about-text { font-family: var(--display); font-weight: 300; font-size: clamp(1.25rem, 2.6vw, 1.6rem); line-height: 1.4; margin: 0; }
+.about-text { font-family: var(--display); font-weight: 400; font-size: clamp(1.25rem, 2.6vw, 1.6rem); line-height: 1.4; margin: 0; }
 .contact-links { display: flex; flex-wrap: wrap; gap: 12px 28px; font-size: 1.05rem; }
 .contact-links a { text-decoration-color: var(--accent); text-underline-offset: 4px; }
 
@@ -170,7 +168,7 @@ dialog.piece { border-radius: 6px; overflow: hidden; }
 .piece-media { background: var(--wall); display: grid; place-items: center; padding: 6%; min-height: 300px; }
 .piece-media img { max-height: 76vh; width: auto; box-shadow: 0 14px 32px -10px rgba(0,0,0,0.35); }
 .piece-info { padding: clamp(24px, 4vw, 44px); display: flex; flex-direction: column; gap: 10px; overflow: auto; }
-.piece-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; line-height: 1.1; }
+.piece-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 600; line-height: 1.1; }
 .piece-meta { color: var(--muted); font-size: 0.92rem; margin: 0; }
 .piece-desc { margin: 8px 0; white-space: pre-line; }
 .piece-price { font-size: 1.3rem; margin: 8px 0 4px; }
