@@ -12,7 +12,7 @@ const CONFIG = {
   // cx / cy = centre of the painting in the photo (0–1), d = its diameter as a share of the photo width.
   hero: {
     image: 'https://i.etsystatic.com/65548102/r/il/c56794/8717752002/il_800x800.8717752002_rra8.jpg',
-    title: 'Forest Walk', cx: 0.476, cy: 0.461, d: 0.40,
+    title: 'Forest Walk', cx: 0.48, cy: 0.478, d: 0.39,
   },
   shipping: {
     fr: "[À compléter : livraison au Canada, ramassage à Montréal, délais, emballage…]",
