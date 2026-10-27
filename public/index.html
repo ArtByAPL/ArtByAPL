@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Art by APL — Œuvres originales</title>
+  <meta name="description" content="Œuvres originales, pièces uniques. Original artwork, one of each.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23b4532a'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#top">art <em>by</em> apl</a>
+    <nav>
+      <a href="#oeuvres" data-i18n="navWorks"></a>
+      <a href="#apropos" data-i18n="navAbout"></a>
+      <a href="#contact" data-i18n="navContact"></a>
+      <button class="lang-toggle" type="button" aria-label="Language"></button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <h1 data-i18n="heroTitle"></h1>
+      <p data-i18n="heroSub"></p>
+    </section>
+
+    <section id="oeuvres" class="works">
+      <div class="works-bar">
+        <h2 data-i18n="navWorks"></h2>
+        <div class="filters" role="tablist">
+          <button type="button" data-filter="available" class="is-active" data-i18n="filterAvailable"></button>
+          <button type="button" data-filter="all" data-i18n="filterAll"></button>
+        </div>
+      </div>
+      <p class="demo-note" hidden data-i18n="demo"></p>
+      <div class="grid" aria-live="polite"></div>
+      <p class="empty" hidden data-i18n="empty"></p>
+    </section>
+
+    <section id="apropos" class="about">
+      <h2 data-i18n="navAbout"></h2>
+      <p class="about-text"></p>
+      <h3 data-i18n="shippingTitle"></h3>
+      <p class="shipping-text"></p>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2 data-i18n="navContact"></h2>
+      <p data-i18n="contactText"></p>
+      <p class="contact-links"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span class="year"></span> Art by APL</span>
+    <span data-i18n="secure"></span>
+  </footer>
+
+  <dialog class="piece">
+    <button class="piece-close" type="button" aria-label="Fermer">×</button>
+    <div class="piece-media"><img alt=""></div>
+    <div class="piece-info">
+      <h2 class="piece-title"></h2>
+      <p class="piece-meta"></p>
+      <p class="piece-desc"></p>
+      <p class="piece-price"></p>
+      <a class="buy" href="#"></a>
+      <p class="piece-sold-note"></p>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
