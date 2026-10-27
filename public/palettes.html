@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Colour palettes — ArtBy APL</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #ffffff; color: #222; font-family: 'Instrument Sans', system-ui, sans-serif; padding: 32px 16px 64px; }
+    .wrap { max-width: 1180px; margin: 0 auto; }
+    header h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 2.2rem; margin: 0 0 6px; }
+    header p { color: #666; margin: 0 0 28px; max-width: 46em; }
+    .grid { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr)); }
+    .opt { border-radius: 14px; overflow: hidden; border: 1px solid #e6e6e6; }
+    .site { background: var(--bg); color: var(--ink); padding: 0 0 22px; }
+    .bar { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; border-bottom: 1px solid var(--line); font-size: .8rem; color: var(--muted); }
+    .logo { font-family: 'Instrument Serif', serif; font-size: 1.35rem; color: var(--ink); }
+    .logo i { color: var(--accent); }
+    .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 14px; align-items: center; padding: 22px 20px 6px; }
+    .hero h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 2.1rem; line-height: 1.02; margin: 0 0 10px; }
+    .hero h2 i { color: var(--accent); }
+    .hero p { font-size: .82rem; color: var(--muted); margin: 0 0 14px; }
+    .btn { display: inline-block; background: var(--btn); color: var(--btnInk); font-size: .78rem; font-weight: 600; padding: 9px 16px; border-radius: 999px; }
+    .hero img { width: 100%; max-width: 190px; margin-left: auto; display: block; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 14px 20px 0; }
+    .frame { background: var(--wall); aspect-ratio: 4/5; display: grid; place-items: center; padding: 10%; border-radius: 3px; }
+    .frame img { max-height: 100%; box-shadow: 0 8px 18px -8px rgba(0,0,0,.35); }
+    .meta { display: flex; justify-content: space-between; font-size: .72rem; margin-top: 6px; }
+    .meta b { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: .95rem; }
+    .meta span { color: var(--muted); }
+    .info { background: #fff; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; border-top: 1px solid #eee; }
+    .info .t { display: flex; align-items: center; gap: 10px; }
+    .num { width: 30px; height: 30px; border-radius: 50%; background: #222; color: #fff; display: grid; place-items: center; font-weight: 600; font-size: .9rem; flex: none; }
+    .info strong { font-size: 1rem; }
+    .info em { display: block; font-style: normal; color: #777; font-size: .82rem; }
+    .sw { display: flex; gap: 4px; }
+    .sw span { width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(0,0,0,.12); }
+    @media (max-width: 520px) { .hero { grid-template-columns: 1fr; } .hero img { margin: 0 auto; } }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Colour palettes for ArtBy APL</h1>
+    <p>Each one is a mini version of the site, with sample paintings so you can see how her art sits on it. The idea for an artsier look: keep the site quiet and let the paintings bring the colour. Tell Claude the number you like (fonts are a separate choice, these all use the same neutral serif).</p>
+  </header>
+  <div class="grid" id="grid"></div>
+</div>
+<script>
+function watercolour(seed, palette, { round = true, w = 400, h = 500, paper = '#fdfcf9' } = {}) {
+  let s = seed;
+  const rnd = () => ((s = (s * 16807) % 2147483647) - 1) / 2147483646;
+  const cx = w / 2, cy = h / 2, R = Math.min(w, h) * 0.38;
+  const blooms = [];
+  for (let i = 0; i < 9; i++) {
+    const a = rnd() * Math.PI * 2, d = Math.sqrt(rnd()) * R * 0.75;
+    const r = R * (0.22 + rnd() * 0.22);
+    const c = palette[i % palette.length];
+    blooms.push(`<ellipse cx="${(cx + Math.cos(a) * d).toFixed(1)}" cy="${(cy + Math.sin(a) * d).toFixed(1)}" rx="${r.toFixed(1)}" ry="${(r * (0.75 + rnd() * 0.4)).toFixed(1)}" fill="${c}" opacity="${(0.55 + rnd() * 0.3).toFixed(2)}" transform="rotate(${Math.round(rnd() * 180)} ${cx} ${cy})"/>`);
+  }
+  const marks = [];
+  for (let i = 0; i < 26; i++) {
+    const a = rnd() * Math.PI * 2, d = Math.sqrt(rnd()) * R * 0.92;
+    const x = cx + Math.cos(a) * d, y = cy + Math.sin(a) * d;
+    const c = palette[Math.floor(rnd() * palette.length)];
+    marks.push(`<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${(3 + rnd() * 4).toFixed(1)}" ry="${(8 + rnd() * 7).toFixed(1)}" fill="${c}" opacity=".9" transform="rotate(${Math.round(-30 + rnd() * 60)} ${x.toFixed(1)} ${y.toFixed(1)})"/>`);
+  }
+  const clip = round ? `<clipPath id="c"><circle cx="${cx}" cy="${cy}" r="${R}"/></clipPath>` : '';
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}">
+    <defs>${clip}
+      <filter id="wc" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" seed="${seed % 97}"/>
+        <feDisplacementMap in="SourceGraphic" scale="34"/>
+        <feGaussianBlur stdDeviation="1.2"/>
+      </filter>
+      <filter id="mk"><feTurbulence baseFrequency="0.06" numOctaves="2" seed="${seed % 89}"/><feDisplacementMap in="SourceGraphic" scale="5"/></filter>
+    </defs>
+    <rect width="${w}" height="${h}" fill="${paper}"/>
+    <g ${round ? 'clip-path="url(#c)"' : ''}>
+      <g filter="url(#wc)" style="mix-blend-mode:multiply">${blooms.join('')}</g>
+      <g filter="url(#mk)">${marks.join('')}</g>
+    </g>
+    ${round ? `<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#cfc9c0" stroke-width="0.8"/>` : ''}
+  </svg>`;
+  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+}
+
+const PALETTES = [
+  { name: 'Gallery White', note: 'Pure white walls, black type. Like a contemporary gallery: the art does all the talking.',
+    bg: '#ffffff', ink: '#161616', muted: '#6b6b6b', accent: '#161616', btn: '#161616', btnInk: '#fff', wall: '#f3f3f1', line: '#e8e8e8' },
+  { name: 'Warm Linen', note: 'Off-white linen and warm brown. Calm, natural, a bit like a framing shop.',
+    bg: '#f5f0e8', ink: '#2b2622', muted: '#7a6e64', accent: '#8a5a44', btn: '#2b2622', btnInk: '#f5f0e8', wall: '#ebe3d6', line: '#e0d6c8' },
+  { name: 'Studio Sage', note: 'Soft grey-green, like a sunny studio with plants. Fresh and grounded.',
+    bg: '#f3f4ef', ink: '#26302b', muted: '#68736c', accent: '#4f6f5e', btn: '#4f6f5e', btnInk: '#fff', wall: '#e5e8df', line: '#dde1d6' },
+  { name: 'Ink & Plum', note: 'Near-white with deep plum. Elegant, a touch romantic, echoes her purples.',
+    bg: '#faf8f7', ink: '#2a2233', muted: '#736b78', accent: '#6b3f6e', btn: '#2a2233', btnInk: '#fff', wall: '#efeaed', line: '#e7e0e5' },
+  { name: 'Coastal Blue', note: 'Cool paper white and deep ink blue. Crisp, clean, a little nautical.',
+    bg: '#f6f8f9', ink: '#1f2d3a', muted: '#66727d', accent: '#2f5d7c', btn: '#2f5d7c', btnInk: '#fff', wall: '#e7edf1', line: '#dfe6eb' },
+  { name: 'Blush Clay', note: 'Very soft pink with dusty clay. Warm and feminine without being sweet.',
+    bg: '#fbf5f2', ink: '#3a2a2a', muted: '#836e6a', accent: '#b56d5f', btn: '#3a2a2a', btnInk: '#fbf5f2', wall: '#f2e5df', line: '#ecdcd5' },
+  { name: 'Ochre Paper', note: 'Cream watercolour-paper tone with golden ochre. Earthy and artisan.',
+    bg: '#f7f2e7', ink: '#2d2a24', muted: '#7a7263', accent: '#b07d24', btn: '#2d2a24', btnInk: '#f7f2e7', wall: '#ece4d2', line: '#e3dac6' },
+  { name: 'Night Gallery', note: 'Dark charcoal walls with warm gold. Dramatic, makes colours glow.',
+    bg: '#1d1c20', ink: '#f2efe9', muted: '#a8a3ad', accent: '#e2b56a', btn: '#e2b56a', btnInk: '#1d1c20', wall: '#29272d', line: '#34323a' },
+];
+const ART = [
+  [7, ['#d93a6a', '#1d8a85', '#f2a03d', '#5b2a86', '#2fb39e']],
+  [23, ['#8e2d6e', '#1d8a85', '#5b2a86', '#2fb39e']],
+  [11, ['#f2a03d', '#e8613c', '#d93a6a', '#f7c948']],
+  [37, ['#1f5fa8', '#3fa7c9', '#9fd3e6', '#173a7a']],
+];
+const titles = [['Wild Berries', '$220'], ['Sunset', '$180'], ['Tide', '$150']];
+document.getElementById('grid').innerHTML = PALETTES.map((p, i) => {
+  const vars = `--bg:${p.bg};--ink:${p.ink};--muted:${p.muted};--accent:${p.accent};--btn:${p.btn};--btnInk:${p.btnInk};--wall:${p.wall};--line:${p.line}`;
+  const paper = p.name === 'Night Gallery' ? '#f7f5f0' : '#fdfcf9';
+  return `<div class="opt">
+    <div class="site" style="${vars}">
+      <div class="bar"><span class="logo">ArtBy <i>APL</i></span><span>Works · About · Contact</span></div>
+      <div class="hero">
+        <div><h2>Abstract watercolours. <i>One of each.</i></h2><p>Original paintings by Allie Paige.</p><span class="btn">See the work</span></div>
+        <img src="${watercolour(ART[0][0] + i, ART[0][1], { w: 600, h: 600, paper: 'transparent' })}" alt="">
+      </div>
+      <div class="cards">${titles.map((t, k) => `<div><div class="frame"><img src="${watercolour(ART[k + 1][0], ART[k + 1][1], { paper })}" alt=""></div><div class="meta"><b>${t[0]}</b><span>${t[1]}</span></div></div>`).join('')}</div>
+    </div>
+    <div class="info"><div class="t"><div class="num">${i + 1}</div><div><strong>${p.name}</strong><em>${p.note}</em></div></div>
+      <div class="sw">${[p.bg, p.wall, p.ink, p.accent].map((c) => `<span style="background:${c}"></span>`).join('')}</div></div>
+  </div>`;
+}).join('');
+</script>
+</body>
+</html>
