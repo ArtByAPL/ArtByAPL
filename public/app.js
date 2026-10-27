@@ -8,11 +8,12 @@ const CONFIG = {
     fr: "Allie Paige est une artiste en aquarelle abstraite. [À compléter : sa démarche, ses matériaux, d’où elle peint.]",
     en: "Allie Paige is an abstract watercolour artist. [To fill in: her approach, her materials, where she paints.]",
   },
-  // Big image at the top: one painting, cropped to just the artwork (no frame or mat).
-  // cx / cy = centre of the painting and d = its diameter, all measured in photo widths (1 = full photo width).
+  // Big image at the top: one piece, cropped to the artwork itself (no frame, white mat or brushes).
+  // cx / cy = centre of the piece, w = its width, all measured in photo widths (1 = full photo width).
+  // ratio = the piece's width / height (5×7 = 5 / 7).
   hero: {
     image: 'https://i.etsystatic.com/65548102/r/il/c56794/8717752002/il_fullxfull.8717752002_rra8.jpg',
-    title: 'Forest Walk', cx: 0.48, cy: 0.645, d: 0.39,
+    title: 'Forest Walk', cx: 0.4815, cy: 0.668, w: 0.44, ratio: 5 / 7,
   },
   shipping: {
     fr: "[À compléter : livraison au Canada, ramassage à Montréal, délais, emballage…]",
@@ -189,7 +190,7 @@ function watercolour(seed, palette, { round = true, w = 400, h = 500, paper = '#
 
 // Sample pieces shown until Stripe is connected: Allie's current Etsy listings (photos hosted by Etsy).
 function demoArtworks() {
-  const img = (path) => `https://i.etsystatic.com/65548102/r/il/${path}`;
+  const img = (path) => `https://i.etsystatic.com/65548102/r/il/${path.replace('il_800x800.', 'il_794xN.')}`;
   const small = { medium: 'Watercolour', dimensions: '5×7 in · matted 8×10', price: 3700 };
   const list = [
     ['Forest Walk', 'circular', 'c56794/8717752002/il_800x800.8717752002_rra8.jpg'],
@@ -221,7 +222,7 @@ function demoArtworks() {
   });
 }
 
-// Hero image: the painting chosen in CONFIG.hero, cropped to a clean circle
+// Hero image: the piece chosen in CONFIG.hero, cropped to the artwork itself
 function renderHero() {
   const el = document.querySelector('.hero-art');
   if (!el) return;
@@ -230,9 +231,11 @@ function renderHero() {
     el.innerHTML = `<img src="${watercolour(7, ['#d93a6a', '#1d8a85', '#f2a03d', '#5b2a86', '#2fb39e'], { w: 600, h: 600, paper: 'transparent' })}" alt="">`;
     return;
   }
-  const scale = 100 / h.d;
-  el.innerHTML = `<div class="hero-crop"><img src="${escapeHtml(h.image)}" alt="${escapeHtml(h.title)}"
-    style="width:${scale}%;left:${50 - h.cx * scale}%;top:${50 - h.cy * scale}%"></div>`;
+  const scale = 100 / h.w;                       // image width as % of the crop box
+  const left = 50 - (h.cx / h.w) * 100;          // % of box width
+  const top = 50 - (h.cy / h.w) * h.ratio * 100; // % of box height
+  el.innerHTML = `<div class="hero-crop" style="aspect-ratio:${h.ratio}"><img src="${escapeHtml(h.image)}" alt="${escapeHtml(h.title)}"
+    style="width:${scale}%;left:${left}%;top:${top}%"></div>`;
 }
 
 // ── Events ──────────────────────────────────────────────────
