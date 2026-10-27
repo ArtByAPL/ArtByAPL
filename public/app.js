@@ -20,7 +20,7 @@ const TEXT = {
     heroTitle: 'Aquarelles abstraites.<br><em>Une seule de chaque.</em>',
     heroSub: 'Des œuvres originales signées Allie Paige. Chaque pièce est unique : quand elle trouve sa maison, elle ne revient pas.',
     filterAvailable: 'Disponibles', filterAll: 'Toutes',
-    demo: 'Aperçu — œuvres d’exemple',
+    demo: 'Aperçu — œuvres de la boutique Etsy, paiement pas encore actif',
     empty: 'Aucune œuvre disponible pour le moment. Revenez bientôt!',
     buy: 'Acheter cette œuvre', sold: 'Vendue',
     soldNote: 'Cette œuvre a trouvé sa maison. Écrivez-moi si ce style vous plaît.',
@@ -34,7 +34,7 @@ const TEXT = {
     heroTitle: 'Abstract watercolours.<br><em>One of each.</em>',
     heroSub: 'Original paintings by Allie Paige. Every piece is one of a kind: once it finds its home, it’s gone.',
     filterAvailable: 'Available', filterAll: 'All',
-    demo: 'Preview — sample artworks',
+    demo: 'Preview — pieces from the Etsy shop, checkout not live yet',
     empty: 'No pieces available right now. Check back soon!',
     buy: 'Buy this piece', sold: 'Sold',
     soldNote: 'This piece has found its home. Write to me if you like this style.',
@@ -139,6 +139,7 @@ async function load() {
     state.demo = true;
   }
   renderGrid();
+  renderHero(state.artworks);
 }
 
 // Watercolour-style artwork, used for the hero and for sample pieces.
@@ -181,35 +182,49 @@ function watercolour(seed, palette, { round = true, w = 400, h = 500, paper = '#
   return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
 }
 
-// Sample pieces shown until Stripe is connected
+// Sample pieces shown until Stripe is connected: Allie's current Etsy listings (photos hosted by Etsy).
 function demoArtworks() {
-  const P = {
-    sunset: ['#f2a03d', '#e8613c', '#d93a6a', '#f7c948'],
-    berry: ['#8e2d6e', '#1d8a85', '#5b2a86', '#2fb39e'],
-    ocean: ['#1f5fa8', '#3fa7c9', '#9fd3e6', '#173a7a'],
-    garden: ['#2f8f6b', '#a8c94f', '#e0c341', '#1e5e57'],
-    candy: ['#e65fa0', '#f6a6c8', '#7fc8e8', '#f5d36b'],
-    dusk: ['#3b3a8c', '#8a4fb5', '#d9669b', '#1d8a85'],
-  };
-  const sample = 'Exemple de description : ce qui a inspiré la pièce, les couleurs, le moment. / Sample description.';
-  return [
-    { id: 'd1', title: 'Coucher de soleil', palette: P.sunset, seed: 11, price: 18000, sold: false },
-    { id: 'd2', title: 'Baies sauvages', palette: P.berry, seed: 23, price: 22000, sold: false },
-    { id: 'd3', title: 'Marée', palette: P.ocean, seed: 37, price: 15000, sold: true },
-    { id: 'd4', title: 'Jardin d’août', palette: P.garden, seed: 41, price: 24000, sold: false },
-    { id: 'd5', title: 'Bonbons', palette: P.candy, seed: 53, price: 12000, sold: false },
-    { id: 'd6', title: 'Crépuscule', palette: P.dusk, seed: 67, price: 26000, sold: true },
-  ].map((a) => ({
-    ...a, currency: 'cad', url: a.sold ? null : '#', year: '2026',
-    medium: 'Aquarelle / Watercolour', dimensions: '23 × 30 cm', description: sample,
-    image: watercolour(a.seed, a.palette),
-  })).sort((a, b) => Number(a.sold) - Number(b.sold));
+  const img = (path) => `https://i.etsystatic.com/65548102/r/il/${path}`;
+  const small = { medium: 'Watercolour', dimensions: '5×7 in · matted 8×10', price: 3700 };
+  const list = [
+    ['Forest Walk', 'circular', 'c56794/8717752002/il_800x800.8717752002_rra8.jpg'],
+    ['Deep Blues', 'circular', 'd4186a/8717754902/il_800x800.8717754902_beay.jpg'],
+    ['Mystic Purple', 'circular', 'c2cdca/8765532701/il_800x800.8765532701_hiij.jpg'],
+    ['Autumn Hues', 'circular', 'c43ae7/8719639061/il_800x800.8719639061_c3mt.jpg'],
+    ['Mountain Landscape', 'landscape', 'fd846b/8719437285/il_800x800.8719437285_4d8t.jpg', { dimensions: '8×10 in', price: 4500 }],
+    ['Soft Pinks', 'circular', 'c42162/8649433058/il_800x800.8649433058_d07g.jpg'],
+    ['Violet Green', 'circular', 'e63de7/8692402585/il_800x800.8692402585_9mo4.jpg'],
+    ['Tidal Blues', 'rectangular', '4a1471/8680551141/il_800x800.8680551141_tpnm.jpg'],
+    ['Purple Hues', 'rectangular', '405d64/8680494853/il_800x800.8680494853_ba76.jpg'],
+    ['Blue Hues', 'rectangular', '296142/8632553924/il_800x800.8632553924_p4jh.jpg'],
+    ['Autumn Hues', 'rectangular', '8935ac/8632488298/il_800x800.8632488298_tlhv.jpg'],
+    ['Purple Hues', 'circular', '470ffa/8629130604/il_800x800.8629130604_czsn.jpg'],
+    ['Teal Hues', 'circular', 'd19715/8676739643/il_800x800.8676739643_k0ew.jpg'],
+    ['Violet Hues', 'circular', '96dd79/8628833042/il_800x800.8628833042_biqq.jpg'],
+    ['Pink Hues', 'circular', '79cc31/8676594837/il_800x800.8676594837_76am.jpg'],
+    ['Blue Hues', 'circular', '701bd2/8676812045/il_800x800.8676812045_jgzo.jpg'],
+    ['Blues Hues', 'watercolour & oil pastel', '4a159c/8133440957/il_800x800.8133440957_9aku.jpg', { medium: 'Watercolour & oil pastel', dimensions: '8×10 in', price: 4500 }],
+  ];
+  return list.map(([title, shape, path, extra = {}], i) => {
+    const d = { ...small, ...extra };
+    const medium = extra.medium || (shape === 'landscape' ? 'Watercolour landscape' : `Watercolour · ${shape}`);
+    return {
+      id: 'etsy' + i, title, image: img(path), currency: 'cad', sold: false, url: '#', year: '',
+      medium, dimensions: d.dimensions, price: d.price,
+      description: `Original ${medium.toLowerCase()} painting by Allie Paige, ${d.dimensions}.`,
+    };
+  });
 }
 
-// Hero painting
-function renderHero() {
+// Hero image: her newest available piece once artworks are loaded, a painted placeholder until then
+function renderHero(artworks) {
   const el = document.querySelector('.hero-art');
-  if (el) el.innerHTML = `<img src="${watercolour(7, ['#d93a6a', '#1d8a85', '#f2a03d', '#5b2a86', '#2fb39e'], { w: 600, h: 600, paper: 'transparent' })}" alt="">`;
+  if (!el) return;
+  const pick = (artworks || []).find((a) => !a.sold && a.image);
+  el.classList.toggle('is-photo', Boolean(pick));
+  el.innerHTML = pick
+    ? `<img src="${escapeHtml(pick.image)}" alt="${escapeHtml(pick.title)}">`
+    : `<img src="${watercolour(7, ['#d93a6a', '#1d8a85', '#f2a03d', '#5b2a86', '#2fb39e'], { w: 600, h: 600, paper: 'transparent' })}" alt="">`;
 }
 
 // ── Events ──────────────────────────────────────────────────
@@ -257,6 +272,5 @@ function fontSwitcher() {
 }
 
 renderText();
-renderHero();
 fontSwitcher();
 load();
