@@ -16,7 +16,7 @@ jobs:
         run: |
           mkdir -p originals
           while read -r url; do
-            [ -z "$url" ] && continue
+            case "$url" in ""|\#*) continue;; esac
             name=$(basename "$url" | sed 's/^il_fullxfull\.//')
             curl -fsSL --retry 3 -A "Mozilla/5.0" -o "originals/$name" "$url"
           done < tools/photo-urls.txt
