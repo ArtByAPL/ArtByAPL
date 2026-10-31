@@ -17,20 +17,14 @@ const CONFIG = {
   // About the artist page: Alexandra's bio. Edit freely.
   aboutPage: {
     photo: '',  // e.g. '/art/alexandra.jpg' once there's a portrait; until then a painting is shown
-    intro: {
-      fr: "Salut, moi c’est Alexandra, une artiste (presque) autodidacte, née et élevée à North Vancouver, en Colombie-Britannique.",
-      en: "Hi, I’m Alexandra, a (mostly) self-taught artist, born and raised in North Vancouver, British Columbia.",
-    },
-    sections: [
-      { title: { fr: 'Ma démarche', en: 'How I paint' },
-        text: { fr: "Je peins surtout à l’aquarelle, en ajoutant parfois de l’encre et des pastels. J’apprends en chemin, et ça me va : je peins de façon intuitive, en laissant la couleur et le mouvement guider. Chaque pièce part d’une humeur, d’un moment ou d’un souvenir, et finit souvent là où je ne l’attendais pas.",
-                en: "I paint mostly in watercolour, sometimes layering in ink and pastels. I’m learning as I go, and that suits the way I work: intuitively, letting colour and movement lead. Each piece starts with a mood, a moment or a memory, and usually ends up somewhere I didn’t expect." } },
-      { title: { fr: 'Dehors, surtout', en: 'Happiest outside' },
-        text: { fr: "Quand je ne peins pas, je cours en sentier dans le bois (beaucoup trop longtemps) ou je suis quelque part dans une montagne. Bien des couleurs et des formes de mon travail viennent de là, et des petits bonheurs du quotidien.",
-                en: "When I’m not painting, I’m trail running through the woods (for far too long) or somewhere on a mountain. A lot of the colours and shapes in my work come from out there, and from the small, joyful moments of everyday life." } },
-      { title: { fr: 'Deux chez-moi', en: 'Two homes' },
-        text: { fr: "Mon voyage solo en Colombie n’est pas resté solo bien longtemps : j’y ai rencontré un Québécois. Depuis, je partage ma vie entre Vancouver et Québec, et les deux sont chez moi.",
-                en: "My solo trip to Colombia didn’t stay solo for long: I met a Québécois along the way. Ever since, I’ve split my time between Vancouver and Québec City, and both feel like home." } },
+    // One short bio, a few paragraphs, no headings
+    bio: [
+      { fr: "Salut, moi c’est Alexandra, une artiste (presque) autodidacte, née et élevée à North Vancouver, en Colombie-Britannique. Je peins surtout à l’aquarelle, avec parfois de l’encre et des pastels, et j’apprends en chemin.",
+        en: "Hi, I’m Alexandra, a (mostly) self-taught artist, born and raised in North Vancouver, British Columbia. I paint mostly in watercolour, sometimes layering in ink and pastels, and I’m learning as I go." },
+      { fr: "Je peins de façon intuitive, en laissant la couleur et le mouvement guider. Chaque pièce part d’une humeur, d’un moment ou d’un souvenir, souvent vécu dehors : à courir en sentier dans le bois (beaucoup trop longtemps) ou quelque part dans une montagne.",
+        en: "I paint intuitively, letting colour and movement lead. Each piece starts with a mood, a moment or a memory, often from time outside: trail running through the woods (for far too long) or somewhere up a mountain." },
+      { fr: "Mon voyage solo en Colombie n’est pas resté solo bien longtemps : j’y ai rencontré un Québécois. Depuis, je partage ma vie entre Vancouver et Québec, et les deux sont chez moi.",
+        en: "My solo trip to Colombia didn’t stay solo for long: I met a Québécois along the way. I’ve split my time between Vancouver and Québec City ever since, and both feel like home." },
     ],
   },
   // Collections: every piece belongs to one. Add a new entry here to start a new collection.
@@ -252,18 +246,15 @@ function renderAboutPage() {
         <p class="collection-label">${t('aboutTitle')}</p>
         <h1>${escapeHtml(CONFIG.name)}</h1>
         <p class="about-tagline">${escapeHtml(localized(CONFIG.tagline))}</p>
-        <p class="about-lead">${escapeHtml(localized(p.intro))}</p>
+        <div class="about-bio">${p.bio.map((x) => `<p>${escapeHtml(localized(x))}</p>`).join('')}</div>
+        <p class="about-actions">
+          <a class="hero-cta" href="/#oeuvres">${t('aboutCta')}</a>
+          ${CONFIG.instagram ? `<a class="about-ig" href="${escapeHtml(CONFIG.instagram)}" target="_blank" rel="noopener">Instagram ↗</a>` : ''}
+        </p>
       </div>
     </div>
-    <div class="about-sections">
-      ${p.sections.map((x) => `<section><h2>${escapeHtml(localized(x.title))}</h2><p>${escapeHtml(localized(x.text))}</p></section>`).join('')}
-    </div>
     <div class="about-strip">${['forest-walk', 'soft-pinks', 'deep-blues', 'violet-green'].map((sl) =>
-      `<a href="/piece.html?p=${sl}"><img src="/art/${sl}-sm.jpg" alt="" loading="lazy"></a>`).join('')}</div>
-    <p class="about-actions">
-      <a class="hero-cta" href="/#oeuvres">${t('aboutCta')}</a>
-      ${CONFIG.instagram ? `<a class="about-ig" href="${escapeHtml(CONFIG.instagram)}" target="_blank" rel="noopener">Instagram ↗</a>` : ''}
-    </p>`;
+      `<a href="/piece.html?p=${sl}"><img src="/art/${sl}-sm.jpg" alt="" loading="lazy"></a>`).join('')}</div>`;
 }
 
 // ── Data ────────────────────────────────────────────────────
