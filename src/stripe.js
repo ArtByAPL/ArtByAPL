@@ -78,6 +78,7 @@ export async function loadArtworks(key, fetchImpl = fetch) {
         currency: price.currency,
         url: sold ? null : link.url,
         sold,
+        collection: meta.collection || '',
         medium: meta.medium || meta.technique || '',
         dimensions: meta.dimensions || meta.format || '',
         year: meta.year || meta.annee || '',

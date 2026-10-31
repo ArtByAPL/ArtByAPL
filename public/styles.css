@@ -298,3 +298,36 @@ a.card { text-decoration: none; color: inherit; }
   background: rgba(36, 33, 43, .6); color: #fff; font-size: .78rem; padding: 3px 9px; border-radius: 999px;
 }
 .listing-main.is-fill img, .listing-main img { pointer-events: none; }
+
+/* ── Collections on the home page ─────────────────────────── */
+.collection + .collection { margin-top: 72px; }
+.collection-head { margin: 0 0 26px; max-width: 40em; }
+.collection-label { font: 600 .75rem var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px; }
+.collection-head h3 { font-family: var(--display); font-weight: var(--dw, 400); font-size: clamp(1.7rem, 3.2vw, 2.3rem); margin: 0 0 8px; letter-spacing: -0.01em; }
+.collection-blurb { color: var(--muted); margin: 0; }
+.listing-collection { display: inline-block; font: 600 .75rem var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); text-decoration: none; margin-bottom: 4px; }
+.listing-collection:hover { text-decoration: underline; }
+.about-more { color: var(--accent); text-decoration: none; font-weight: 600; }
+.about-more:hover { text-decoration: underline; }
+
+/* ── About the artist page ────────────────────────────────── */
+.about-page { padding: clamp(28px, 5vw, 64px) var(--gutter) 90px; max-width: 1180px; margin: 0 auto; }
+.about-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.about-photo { aspect-ratio: 4 / 5; border-radius: 4px; overflow: hidden; background: var(--wall); }
+.about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.about-intro h1 { font-family: var(--display); font-weight: var(--dw, 400); font-size: clamp(2.8rem, 6.5vw, 5rem); line-height: 1; margin: 4px 0 20px; letter-spacing: -0.015em; }
+.about-lead { font-family: var(--display); font-size: clamp(1.35rem, 2.6vw, 1.85rem); line-height: 1.35; margin: 0; }
+.about-sections { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); margin: clamp(48px, 7vw, 88px) 0 clamp(36px, 5vw, 56px); border-top: 1px solid var(--line); padding-top: 32px; }
+.about-sections h2 { font-family: var(--display); font-weight: var(--dw, 400); font-size: 1.6rem; margin: 0 0 10px; }
+.about-sections p { margin: 0; font-size: 1.05rem; line-height: 1.7; }
+.about-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.about-strip a { display: block; aspect-ratio: 5 / 7; overflow: hidden; border-radius: 3px; background: var(--wall); }
+.about-strip img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.about-strip a:hover img { transform: scale(1.04); }
+.about-actions { display: flex; align-items: center; gap: 22px; margin-top: 34px; }
+.about-actions .hero-cta { margin-top: 0; }
+.about-ig { color: var(--ink); text-decoration: none; font-weight: 600; }
+@media (max-width: 820px) {
+  .about-hero, .about-sections { grid-template-columns: minmax(0, 1fr); }
+  .about-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

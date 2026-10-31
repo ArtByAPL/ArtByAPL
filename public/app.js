@@ -4,10 +4,35 @@
 const CONFIG = {
   email: 'bonjour@artbyapl.com',
   instagram: 'https://www.instagram.com/artby_apl/',
+  // Short intro shown on the home page (the full story is on about.html)
   about: {
-    fr: "Allie Paige est une artiste en aquarelle abstraite. [À compléter : sa démarche, ses matériaux, d’où elle peint.]",
-    en: "Allie Paige is an abstract watercolour artist. [To fill in: her approach, her materials, where she paints.]",
+    fr: "Allie Paige est une artiste canadienne en aquarelle abstraite. Son art joyeux est ancré dans la couleur, le mouvement et la curiosité.",
+    en: "Allie Paige is a Canadian abstract watercolour artist. Her joyful art is rooted in colour, movement and curiosity.",
   },
+  // About the artist page. Draft based on Allie's Etsy shop: edit freely.
+  aboutPage: {
+    photo: '',  // e.g. '/art/allie.jpg' once there's a portrait; until then a painting is shown
+    intro: {
+      fr: "Je m’appelle Allie Paige, l’artiste derrière ArtBy APL. Je crée un art joyeux, ancré dans la couleur, le mouvement et la curiosité.",
+      en: "I’m Allie Paige, the artist behind ArtBy APL. I make joyful art rooted in colour, movement and curiosity.",
+    },
+    sections: [
+      { title: { fr: 'Ma démarche', en: 'How I paint' },
+        text: { fr: "Inspirée par la couleur, le mouvement et le mouvement organique de l’eau, chaque peinture est créée de façon intuitive, à l’aquarelle et en techniques mixtes sur papier. Il en résulte une œuvre abstraite unique, qu’on ne pourra jamais refaire tout à fait pareille.",
+                en: "Inspired by colour, movement and the organic flow of water, each painting is created intuitively in watercolour and mixed media on paper. The result is a one-of-a-kind abstract that could never be painted quite the same way twice." } },
+      { title: { fr: 'D’où je peins', en: 'Where I paint' },
+        text: { fr: "Je suis Canadienne et je vis entre Vancouver et Québec. Je peins des pièces ludiques, pensées pour ajouter un peu de lumière aux espaces du quotidien.",
+                en: "I’m Canadian, and I live between Vancouver and Québec City. I paint playful pieces meant to bring a little brightness to everyday spaces." } },
+    ],
+  },
+  // Collections: every piece belongs to one. Add a new entry here to start a new collection.
+  collections: [
+    { id: 'intuitive-abstracts',
+      name: { fr: 'Abstractions intuitives', en: 'Intuitive Abstracts' },
+      blurb: { fr: 'Des aquarelles abstraites peintes de façon intuitive, souvent dans un cercle, pleines de couleur et de petits motifs.',
+               en: 'Abstract watercolours painted intuitively, often within a circle, full of colour and little marks.' } },
+  ],
+  defaultCollection: 'intuitive-abstracts',
   // Big image at the top: one piece, edited and hosted in /art
   hero: { image: '/art/forest-walk.jpg', title: 'Forest Walk' },
   shipping: {
@@ -28,6 +53,7 @@ const TEXT = {
     soldNote: 'Cette œuvre a trouvé sa maison. Écrivez-moi si ce style vous plaît.',
     shippingTitle: 'Livraison',
     prev: 'Photo précédente', next: 'Photo suivante',
+    collection: 'Collection', aboutRead: 'Lire mon histoire →', aboutTitle: 'À propos de l’artiste', aboutCta: 'Voir les œuvres',
     back: '← Toutes les œuvres', unique: 'Pièce unique, il n’y en a qu’une.', details: 'Détails',
     mediumLabel: 'Technique', sizeLabel: 'Format', mockNote: 'Encadrement montré à titre d’illustration.',
     demoBuy: 'Aperçu : le paiement sera actif une fois Stripe branché.', notFound: 'Œuvre introuvable.',
@@ -46,6 +72,7 @@ const TEXT = {
     soldNote: 'This piece has found its home. Write to me if you like this style.',
     shippingTitle: 'Shipping',
     prev: 'Previous photo', next: 'Next photo',
+    collection: 'Collection', aboutRead: 'Read my story →', aboutTitle: 'About the artist', aboutCta: 'See the work',
     back: '← All works', unique: 'One of a kind: there is only one.', details: 'Details',
     mediumLabel: 'Medium', sizeLabel: 'Size', mockNote: 'Shown framed for illustration.',
     demoBuy: 'Preview: checkout goes live once Stripe is connected.', notFound: 'Piece not found.',
@@ -99,7 +126,7 @@ function renderGrid() {
   const list = state.filter === 'available' ? state.artworks.filter((a) => !a.sold) : state.artworks;
   $('.demo-note').hidden = !state.demo;
   $('.empty').hidden = list.length > 0;
-  $('.grid').innerHTML = list.map((a) => `
+  const card = (a) => `
     <a class="card${a.sold ? ' is-sold' : ''}" href="/piece.html?p=${encodeURIComponent(a.id)}">
       <div class="card-frame${a.thumb ? ' has-print' : ''}">
         ${a.thumb ? `<img class="print" src="${escapeHtml(a.thumb)}" alt="${escapeHtml(a.title)}" loading="lazy">`
@@ -113,7 +140,19 @@ function renderGrid() {
         </div>
         <div class="card-price">${money(a.price, a.currency)}</div>
       </div>
-    </a>`).join('');
+    </a>`;
+  const groups = CONFIG.collections
+    .map((c) => ({ c, items: list.filter((a) => (a.collection || CONFIG.defaultCollection) === c.id) }))
+    .filter((g) => g.items.length);
+  $('.collections').innerHTML = groups.map(({ c, items }) => `
+    <section class="collection" id="${escapeHtml(c.id)}">
+      <div class="collection-head">
+        <p class="collection-label">${t('collection')}</p>
+        <h3>${escapeHtml(localized(c.name))}</h3>
+        <p class="collection-blurb">${escapeHtml(localized(c.blurb))}</p>
+      </div>
+      <div class="grid">${items.map(card).join('')}</div>
+    </section>`).join('');
   document.querySelectorAll('.filters button').forEach((b) => b.classList.toggle('is-active', b.dataset.filter === state.filter));
 }
 
@@ -146,6 +185,8 @@ function renderListing() {
             <img src="${escapeHtml(x.src)}" alt="" loading="lazy"></button>`).join('')}</div>` : ''}
       </div>
       <div class="listing-info">
+        ${(() => { const c = CONFIG.collections.find((x) => x.id === (a.collection || CONFIG.defaultCollection));
+          return c ? `<a class="listing-collection" href="/#${escapeHtml(c.id)}">${escapeHtml(localized(c.name))}</a>` : ''; })()}
         <h1>${escapeHtml(a.title)}</h1>
         <p class="listing-price">${a.sold ? t('sold') : money(a.price, a.currency)}</p>
         <p class="listing-unique">${a.sold ? t('soldNote') : t('unique')}</p>
@@ -190,6 +231,32 @@ function renderListing() {
   if (buy && state.demo) buy.addEventListener('click', (e) => { e.preventDefault(); $('.demo-buy', root).hidden = false; });
 }
 
+// ── About page ──────────────────────────────────────────────
+function renderAboutPage() {
+  const root = $('.about-page');
+  const p = CONFIG.aboutPage;
+  const img = p.photo || '/art/forest-walk-matted.jpg';
+  document.title = `${t('aboutTitle')} · ArtBy APL`;
+  root.innerHTML = `
+    <div class="about-hero">
+      <div class="about-photo${p.photo ? ' is-portrait' : ''}"><img src="${escapeHtml(img)}" alt="${p.photo ? 'Allie Paige' : ''}"></div>
+      <div class="about-intro">
+        <p class="collection-label">${t('aboutTitle')}</p>
+        <h1>Allie Paige</h1>
+        <p class="about-lead">${escapeHtml(localized(p.intro))}</p>
+      </div>
+    </div>
+    <div class="about-sections">
+      ${p.sections.map((x) => `<section><h2>${escapeHtml(localized(x.title))}</h2><p>${escapeHtml(localized(x.text))}</p></section>`).join('')}
+    </div>
+    <div class="about-strip">${['forest-walk', 'soft-pinks', 'deep-blues', 'violet-green'].map((sl) =>
+      `<a href="/piece.html?p=${sl}"><img src="/art/${sl}-sm.jpg" alt="" loading="lazy"></a>`).join('')}</div>
+    <p class="about-actions">
+      <a class="hero-cta" href="/#oeuvres">${t('aboutCta')}</a>
+      ${CONFIG.instagram ? `<a class="about-ig" href="${escapeHtml(CONFIG.instagram)}" target="_blank" rel="noopener">Instagram ↗</a>` : ''}
+    </p>`;
+}
+
 // ── Data ────────────────────────────────────────────────────
 async function load() {
   try {
@@ -203,7 +270,7 @@ async function load() {
     state.artworks = demoArtworks();
     state.demo = true;
   }
-  if ($('.grid')) renderGrid();
+  if ($('.collections')) renderGrid();
   if ($('.listing')) renderListing();
 }
 
@@ -291,7 +358,7 @@ function demoArtworks() {
     const d = { ...small, ...extra };
     const medium = extra.medium || (shape === 'landscape' ? 'Watercolour landscape' : `Watercolour · ${shape}`);
     return {
-      id: slug, title, currency: 'cad', sold: false, url: '#', year: '',
+      id: slug, title, collection: 'intuitive-abstracts', currency: 'cad', sold: false, url: '#', year: '',
       thumb: `/art/${slug}-sm.jpg`, art: `/art/${slug}.jpg`, image: `/art/${slug}-styled.jpg`,
       gallery: listingGallery(slug),
       medium, dimensions: d.dimensions, price: d.price,
@@ -325,8 +392,9 @@ $('.lang-toggle')?.addEventListener('click', () => {
   state.lang = state.lang === 'fr' ? 'en' : 'fr';
   try { localStorage.setItem('lang', state.lang); } catch (_) {}
   renderText();
-  if ($('.grid')) renderGrid();
+  if ($('.collections')) renderGrid();
   if ($('.listing')) renderListing();
+  if ($('.about-page')) renderAboutPage();
 });
 
 // ── Preview-only font switcher (never shown on the real site) ──
@@ -356,5 +424,6 @@ function fontSwitcher() {
 
 renderText();
 renderHero();
+if ($('.about-page')) renderAboutPage();
 fontSwitcher();
 load();
