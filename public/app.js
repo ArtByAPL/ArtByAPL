@@ -27,6 +27,7 @@ const TEXT = {
     buy: 'Acheter cette œuvre', sold: 'Vendue',
     soldNote: 'Cette œuvre a trouvé sa maison. Écrivez-moi si ce style vous plaît.',
     shippingTitle: 'Livraison',
+    prev: 'Photo précédente', next: 'Photo suivante',
     back: '← Toutes les œuvres', unique: 'Pièce unique, il n’y en a qu’une.', details: 'Détails',
     mediumLabel: 'Technique', sizeLabel: 'Format', mockNote: 'Encadrement montré à titre d’illustration.',
     demoBuy: 'Aperçu : le paiement sera actif une fois Stripe branché.', notFound: 'Œuvre introuvable.',
@@ -44,6 +45,7 @@ const TEXT = {
     buy: 'Buy this piece', sold: 'Sold',
     soldNote: 'This piece has found its home. Write to me if you like this style.',
     shippingTitle: 'Shipping',
+    prev: 'Previous photo', next: 'Next photo',
     back: '← All works', unique: 'One of a kind: there is only one.', details: 'Details',
     mediumLabel: 'Medium', sizeLabel: 'Size', mockNote: 'Shown framed for illustration.',
     demoBuy: 'Preview: checkout goes live once Stripe is connected.', notFound: 'Piece not found.',
@@ -131,7 +133,13 @@ function renderListing() {
     <a class="back" href="/#oeuvres">${t('back')}</a>
     <div class="listing-grid">
       <div class="listing-gallery">
-        <div class="listing-main${g.fill ? ' is-fill' : ''}"><img src="${escapeHtml(g.src)}" alt="${escapeHtml(a.title)}"></div>
+        <div class="listing-main${g.fill ? ' is-fill' : ''}">
+          <img src="${escapeHtml(g.src)}" alt="${escapeHtml(a.title)}">
+          ${gallery.length > 1 ? `
+          <button type="button" class="nav prev" aria-label="${t('prev')}">‹</button>
+          <button type="button" class="nav next" aria-label="${t('next')}">›</button>
+          <span class="counter">${current + 1} / ${gallery.length}</span>` : ''}
+        </div>
         <p class="mock-note"${g.mock ? '' : ' hidden'}>${t('mockNote')}</p>
         ${gallery.length > 1 ? `<div class="thumbs">${gallery.map((x, i) => `
           <button type="button" class="thumb${i === current ? ' on' : ''}" data-i="${i}" aria-label="${i + 1}/${gallery.length}">
@@ -153,7 +161,31 @@ function renderListing() {
         <p class="listing-secure">${t('secure')}</p>
       </div>
     </div>`;
-  root.querySelectorAll('.thumb').forEach((b) => b.addEventListener('click', () => { state.slide = +b.dataset.i; renderListing(); }));
+  // Photo carousel: arrows, thumbnails, swipe and keyboard all go through show()
+  const main = $('.listing-main', root);
+  const show = (i) => {
+    const n = gallery.length;
+    state.slide = ((i % n) + n) % n;
+    const x = gallery[state.slide];
+    $('img', main).src = x.src;
+    main.classList.toggle('is-fill', Boolean(x.fill));
+    $('.mock-note', root).hidden = !x.mock;
+    const counter = $('.counter', main); if (counter) counter.textContent = `${state.slide + 1} / ${n}`;
+    root.querySelectorAll('.thumb').forEach((b, k) => b.classList.toggle('on', k === state.slide));
+    [state.slide + 1, state.slide - 1].forEach((k) => { const im = new Image(); im.src = gallery[((k % n) + n) % n].src; });
+  };
+  state.showSlide = show;
+  root.querySelectorAll('.thumb').forEach((b) => b.addEventListener('click', () => show(+b.dataset.i)));
+  $('.prev', root)?.addEventListener('click', () => show(state.slide - 1));
+  $('.next', root)?.addEventListener('click', () => show(state.slide + 1));
+  let x0 = null;
+  main.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  main.addEventListener('touchend', (e) => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 40) show(state.slide + (dx < 0 ? 1 : -1));
+  });
+  show(current);
   const buy = $('.buy', root);
   if (buy && state.demo) buy.addEventListener('click', (e) => { e.preventDefault(); $('.demo-buy', root).hidden = false; });
 }
@@ -283,6 +315,11 @@ function renderHero() {
 }
 
 // ── Events ──────────────────────────────────────────────────
+document.addEventListener('keydown', (e) => {
+  if (!$('.listing') || !state.showSlide || e.target.closest('input, textarea')) return;
+  if (e.key === 'ArrowRight') state.showSlide(state.slide + 1);
+  if (e.key === 'ArrowLeft') state.showSlide(state.slide - 1);
+});
 document.querySelectorAll('.filters button').forEach((b) =>
   b.addEventListener('click', () => { state.filter = b.dataset.filter; renderGrid(); }));
 $('.lang-toggle')?.addEventListener('click', () => {
