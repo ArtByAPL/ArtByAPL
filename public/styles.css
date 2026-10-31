@@ -331,3 +331,6 @@ a.card { text-decoration: none; color: inherit; }
   .about-hero, .about-sections { grid-template-columns: minmax(0, 1fr); }
   .about-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+.about-tagline { font-family: var(--display); font-style: italic; color: var(--accent); font-size: clamp(1.15rem, 2vw, 1.4rem); margin: -8px 0 22px; }
+.about-sections { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 980px) { .about-sections { grid-template-columns: minmax(0, 1fr); } }

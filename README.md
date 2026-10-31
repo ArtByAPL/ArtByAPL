@@ -69,7 +69,7 @@ Cloudflare → artbyapl.com → **Email → Email Routing** → create `bonjour@
 forwarding to her usual inbox.
 
 ## Photo credits
-The listing mock-ups (`public/art/<piece>-sideboard.jpg`) place Allie's
+The listing mock-ups (`public/art/<piece>-sideboard.jpg`) place Alexandra's
 painting into frames in free Unsplash photos (Unsplash License: free for commercial use, no attribution required):
 unsplash.com/photos/ZIUPl9ASefg (sideboard)
 Gallery wall (`public/art/<piece>-gallery-wall.jpg`): unsplash.com/photos/jbDOyAd-lMc

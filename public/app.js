@@ -4,25 +4,33 @@
 const CONFIG = {
   email: 'bonjour@artbyapl.com',
   instagram: 'https://www.instagram.com/artby_apl/',
+  name: 'Alexandra Paige',
+  tagline: {
+    fr: 'Explorer les humeurs, les moments et les souvenirs par la couleur et le mouvement.',
+    en: 'Exploring moods, moments and memories through colour and movement.',
+  },
   // Short intro shown on the home page (the full story is on about.html)
   about: {
-    fr: "Allie Paige est une artiste canadienne en aquarelle abstraite. Son art joyeux est ancré dans la couleur, le mouvement et la curiosité.",
-    en: "Allie Paige is a Canadian abstract watercolour artist. Her joyful art is rooted in colour, movement and curiosity.",
+    fr: "Alexandra Paige est une artiste (presque) autodidacte, née et élevée à North Vancouver. Elle peint à l’aquarelle, avec parfois de l’encre et des pastels, en explorant les humeurs, les moments et les souvenirs par la couleur et le mouvement.",
+    en: "Alexandra Paige is a (mostly) self-taught artist, born and raised in North Vancouver. She paints in watercolour, sometimes with ink and pastels, exploring moods, moments and memories through colour and movement.",
   },
-  // About the artist page. Draft based on Allie's Etsy shop: edit freely.
+  // About the artist page: Alexandra's bio. Edit freely.
   aboutPage: {
-    photo: '',  // e.g. '/art/allie.jpg' once there's a portrait; until then a painting is shown
+    photo: '',  // e.g. '/art/alexandra.jpg' once there's a portrait; until then a painting is shown
     intro: {
-      fr: "Je m’appelle Allie Paige, l’artiste derrière ArtBy APL. Je crée un art joyeux, ancré dans la couleur, le mouvement et la curiosité.",
-      en: "I’m Allie Paige, the artist behind ArtBy APL. I make joyful art rooted in colour, movement and curiosity.",
+      fr: "Salut, moi c’est Alexandra, une artiste (presque) autodidacte, née et élevée à North Vancouver, en Colombie-Britannique.",
+      en: "Hi, I’m Alexandra, a (mostly) self-taught artist, born and raised in North Vancouver, British Columbia.",
     },
     sections: [
       { title: { fr: 'Ma démarche', en: 'How I paint' },
-        text: { fr: "Inspirée par la couleur, le mouvement et le mouvement organique de l’eau, chaque peinture est créée de façon intuitive, à l’aquarelle et en techniques mixtes sur papier. Il en résulte une œuvre abstraite unique, qu’on ne pourra jamais refaire tout à fait pareille.",
-                en: "Inspired by colour, movement and the organic flow of water, each painting is created intuitively in watercolour and mixed media on paper. The result is a one-of-a-kind abstract that could never be painted quite the same way twice." } },
-      { title: { fr: 'D’où je peins', en: 'Where I paint' },
-        text: { fr: "Je suis Canadienne et je vis entre Vancouver et Québec. Je peins des pièces ludiques, pensées pour ajouter un peu de lumière aux espaces du quotidien.",
-                en: "I’m Canadian, and I live between Vancouver and Québec City. I paint playful pieces meant to bring a little brightness to everyday spaces." } },
+        text: { fr: "Je peins surtout à l’aquarelle, en ajoutant parfois de l’encre et des pastels. J’apprends en chemin, et ça me va : je peins de façon intuitive, en laissant la couleur et le mouvement guider. Chaque pièce part d’une humeur, d’un moment ou d’un souvenir, et finit souvent là où je ne l’attendais pas.",
+                en: "I paint mostly in watercolour, sometimes layering in ink and pastels. I’m learning as I go, and that suits the way I work: intuitively, letting colour and movement lead. Each piece starts with a mood, a moment or a memory, and usually ends up somewhere I didn’t expect." } },
+      { title: { fr: 'Dehors, surtout', en: 'Happiest outside' },
+        text: { fr: "Quand je ne peins pas, je cours en sentier dans le bois (beaucoup trop longtemps) ou je suis quelque part dans une montagne. Bien des couleurs et des formes de mon travail viennent de là, et des petits bonheurs du quotidien.",
+                en: "When I’m not painting, I’m trail running through the woods (for far too long) or somewhere on a mountain. A lot of the colours and shapes in my work come from out there, and from the small, joyful moments of everyday life." } },
+      { title: { fr: 'Deux chez-moi', en: 'Two homes' },
+        text: { fr: "Mon voyage solo en Colombie n’est pas resté solo bien longtemps : j’y ai rencontré un Québécois. Depuis, je partage ma vie entre Vancouver et Québec, et les deux sont chez moi.",
+                en: "My solo trip to Colombia didn’t stay solo for long: I met a Québécois along the way. Ever since, I’ve split my time between Vancouver and Québec City, and both feel like home." } },
     ],
   },
   // Collections: every piece belongs to one. Add a new entry here to start a new collection.
@@ -45,7 +53,7 @@ const TEXT = {
   fr: {
     navWorks: 'Œuvres', navAbout: 'À propos', navContact: 'Contact',
     heroTitle: 'Aquarelles abstraites.<br><em>Une seule de chaque.</em>',
-    heroSub: 'Des œuvres originales signées Allie Paige. Chaque pièce est unique : quand elle trouve sa maison, elle ne revient pas.',
+    heroSub: 'Des œuvres originales signées Alexandra Paige. Chaque pièce est unique : quand elle trouve sa maison, elle ne revient pas.',
     filterAvailable: 'Disponibles', filterAll: 'Toutes',
     demo: 'Aperçu — œuvres de la boutique Etsy, paiement pas encore actif',
     empty: 'Aucune œuvre disponible pour le moment. Revenez bientôt!',
@@ -64,7 +72,7 @@ const TEXT = {
   en: {
     navWorks: 'Works', navAbout: 'About', navContact: 'Contact',
     heroTitle: 'Abstract watercolours.<br><em>One of each.</em>',
-    heroSub: 'Original paintings by Allie Paige. Every piece is one of a kind: once it finds its home, it’s gone.',
+    heroSub: 'Original paintings by Alexandra Paige. Every piece is one of a kind: once it finds its home, it’s gone.',
     filterAvailable: 'Available', filterAll: 'All',
     demo: 'Preview — pieces from the Etsy shop, checkout not live yet',
     empty: 'No pieces available right now. Check back soon!',
@@ -239,10 +247,11 @@ function renderAboutPage() {
   document.title = `${t('aboutTitle')} · ArtBy APL`;
   root.innerHTML = `
     <div class="about-hero">
-      <div class="about-photo${p.photo ? ' is-portrait' : ''}"><img src="${escapeHtml(img)}" alt="${p.photo ? 'Allie Paige' : ''}"></div>
+      <div class="about-photo${p.photo ? ' is-portrait' : ''}"><img src="${escapeHtml(img)}" alt="${p.photo ? escapeHtml(CONFIG.name) : ''}"></div>
       <div class="about-intro">
         <p class="collection-label">${t('aboutTitle')}</p>
-        <h1>Allie Paige</h1>
+        <h1>${escapeHtml(CONFIG.name)}</h1>
+        <p class="about-tagline">${escapeHtml(localized(CONFIG.tagline))}</p>
         <p class="about-lead">${escapeHtml(localized(p.intro))}</p>
       </div>
     </div>
@@ -314,9 +323,9 @@ function watercolour(seed, palette, { round = true, w = 400, h = 500, paper = '#
   return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
 }
 
-// Sample pieces shown until Stripe is connected: Allie's current Etsy listings (photos hosted by Etsy).
+// Sample pieces shown until Stripe is connected: Alexandra's current Etsy listings (photos hosted by Etsy).
 function demoArtworks() {
-  // Allie's current Etsy pieces. Photos edited for the web and hosted on the site, in /art:
+  // Alexandra's current Etsy pieces. Photos edited for the web and hosted on the site, in /art:
   //   <slug>-sm.jpg = the piece alone (cards) · <slug>.jpg = large · <slug>-styled.jpg = framed shot (detail view)
   const small = { medium: 'Watercolour', dimensions: '5×7 in · matted 8×10', price: 3700 };
   const list = [
@@ -339,7 +348,7 @@ function demoArtworks() {
     ['blues-hues', 'Blues Hues', 'watercolour & oil pastel', { medium: 'Watercolour & oil pastel', dimensions: '8×10 in', price: 4500 }],
   ];
   // Listing photo set for every piece: the piece, in its mat, on the sideboard, on the gallery wall,
-  // the collection grid, and Allie's own framed photo. Room photos are free Unsplash photos.
+  // the collection grid, and Alexandra's own framed photo. Room photos are free Unsplash photos.
   const listingGallery = (slug) => [
     { src: `/art/${slug}.jpg` },
     { src: `/art/${slug}-matted.jpg`, fill: true },
@@ -363,8 +372,8 @@ function demoArtworks() {
       gallery: listingGallery(slug),
       medium, dimensions: d.dimensions, price: d.price,
       description: descriptions[slug] || {
-        en: `Original ${medium.toLowerCase()} painting by Allie Paige, ${d.dimensions}.`,
-        fr: `Aquarelle originale d’Allie Paige, ${d.dimensions}.`,
+        en: `Original ${medium.toLowerCase()} painting by Alexandra Paige, ${d.dimensions}.`,
+        fr: `Aquarelle originale d’Alexandra Paige, ${d.dimensions}.`,
       },
     };
   });
