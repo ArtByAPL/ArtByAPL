@@ -1,0 +1,2 @@
+bedside 200
+nightstand 200
