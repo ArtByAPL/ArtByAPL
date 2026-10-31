@@ -16,17 +16,18 @@ jobs:
         run: |
           mkdir -p stock
           : > stock/log.txt
+          W=700
           while read -r name url; do
             case "$name" in ""|\#*) continue;; esac
-            code=$(curl -sSL -o "stock/$name.jpg" -w '%{http_code}' "$url?w=2400&q=88&fm=jpg")
+            code=$(curl -sSL -o "stock/$name.jpg" -w '%{http_code}' "$url?w=${W:-2400}&q=85&fm=jpg")
             echo "$name $code" >> stock/log.txt
           done < tools/photo-urls.txt
           cat stock/log.txt
       - name: Commit to this temporary branch
         run: |
-          mkdir -p tools/stock && mv stock/* tools/stock/
+          mkdir -p tools/cands && mv stock/* tools/cands/
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
-          git add tools/stock
+          git add tools/cands
           git commit -m "Stock room photos (temporary, for mock-ups)"
           git push
