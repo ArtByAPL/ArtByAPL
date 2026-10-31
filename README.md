@@ -69,7 +69,8 @@ Cloudflare → artbyapl.com → **Email → Email Routing** → create `bonjour@
 forwarding to her usual inbox.
 
 ## Photo credits
-The Forest Walk mock-ups (`public/art/forest-walk-sideboard.jpg`, `-bedside.jpg`) place Allie's
+The Forest Walk mock-ups (`public/art/forest-walk-sideboard.jpg`) place Allie's
 painting into frames in free Unsplash photos (Unsplash License: free for commercial use, no attribution required):
-unsplash.com/photos/ZIUPl9ASefg (sideboard), unsplash.com/photos/FcP_Aa33wxo (bedside)
+unsplash.com/photos/ZIUPl9ASefg (sideboard)
 Gallery wall (`public/art/forest-walk-gallery-wall.jpg`): unsplash.com/photos/jbDOyAd-lMc
+Eclectic gallery wall (`public/art/forest-walk-gallery-wall-eclectic.jpg`): unsplash.com/photos/yu9_c1mt_c4
