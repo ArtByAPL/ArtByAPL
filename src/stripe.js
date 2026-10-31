@@ -73,6 +73,7 @@ export async function loadArtworks(key, fetchImpl = fetch) {
         title: product.name,
         description: product.description || '',
         image: (product.images || [])[0] || null,
+        gallery: (product.images || []).map((src) => ({ src, fill: true })),
         price: price.unit_amount,
         currency: price.currency,
         url: sold ? null : link.url,

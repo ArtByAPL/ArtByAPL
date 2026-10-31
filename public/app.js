@@ -27,6 +27,9 @@ const TEXT = {
     buy: 'Acheter cette œuvre', sold: 'Vendue',
     soldNote: 'Cette œuvre a trouvé sa maison. Écrivez-moi si ce style vous plaît.',
     shippingTitle: 'Livraison',
+    back: '← Toutes les œuvres', unique: 'Pièce unique, il n’y en a qu’une.', details: 'Détails',
+    mediumLabel: 'Technique', sizeLabel: 'Format', mockNote: 'Encadrement montré à titre d’illustration.',
+    demoBuy: 'Aperçu : le paiement sera actif une fois Stripe branché.', notFound: 'Œuvre introuvable.',
     contactText: 'Une question sur une œuvre ou envie d’une commande personnalisée?',
     secure: 'Paiement sécurisé par Stripe',
     seeWorks: 'Voir les œuvres', close: 'Fermer', lang: 'EN',
@@ -41,6 +44,9 @@ const TEXT = {
     buy: 'Buy this piece', sold: 'Sold',
     soldNote: 'This piece has found its home. Write to me if you like this style.',
     shippingTitle: 'Shipping',
+    back: '← All works', unique: 'One of a kind: there is only one.', details: 'Details',
+    mediumLabel: 'Medium', sizeLabel: 'Size', mockNote: 'Shown framed for illustration.',
+    demoBuy: 'Preview: checkout goes live once Stripe is connected.', notFound: 'Piece not found.',
     contactText: 'A question about a piece, or interested in a commission?',
     secure: 'Secure payment by Stripe',
     seeWorks: 'See the work', close: 'Close', lang: 'FR',
@@ -76,14 +82,14 @@ function escapeHtml(s) {
 function renderText() {
   document.documentElement.lang = state.lang;
   document.querySelectorAll('[data-i18n]').forEach((el) => { el.innerHTML = t(el.dataset.i18n); });
-  $('.lang-toggle').textContent = t('lang');
-  $('.piece-close').setAttribute('aria-label', t('close'));
-  $('.about-text').textContent = CONFIG.about[state.lang];
-  $('.shipping-text').textContent = CONFIG.shipping[state.lang];
+  const set = (sel, prop, val) => { const el = $(sel); if (el) el[prop] = val; };
+  set('.lang-toggle', 'textContent', t('lang'));
+  set('.about-text', 'textContent', CONFIG.about[state.lang]);
+  set('.shipping-text', 'textContent', CONFIG.shipping[state.lang]);
   const links = [`<a href="mailto:${escapeHtml(CONFIG.email)}">${escapeHtml(CONFIG.email)}</a>`];
   if (CONFIG.instagram) links.push(`<a href="${escapeHtml(CONFIG.instagram)}" target="_blank" rel="noopener">Instagram</a>`);
-  $('.contact-links').innerHTML = links.join('');
-  $('.year').textContent = new Date().getFullYear();
+  set('.contact-links', 'innerHTML', links.join(''));
+  set('.year', 'textContent', new Date().getFullYear());
 }
 
 // ── Gallery ─────────────────────────────────────────────────
@@ -92,7 +98,7 @@ function renderGrid() {
   $('.demo-note').hidden = !state.demo;
   $('.empty').hidden = list.length > 0;
   $('.grid').innerHTML = list.map((a) => `
-    <button type="button" class="card${a.sold ? ' is-sold' : ''}" data-id="${escapeHtml(a.id)}">
+    <a class="card${a.sold ? ' is-sold' : ''}" href="/piece.html?p=${encodeURIComponent(a.id)}">
       <div class="card-frame${a.thumb ? ' has-print' : ''}">
         ${a.thumb ? `<img class="print" src="${escapeHtml(a.thumb)}" alt="${escapeHtml(a.title)}" loading="lazy">`
           : a.image ? `<img src="${escapeHtml(a.image)}" alt="${escapeHtml(a.title)}" loading="lazy">` : ''}
@@ -105,27 +111,51 @@ function renderGrid() {
         </div>
         <div class="card-price">${money(a.price, a.currency)}</div>
       </div>
-    </button>`).join('');
+    </a>`).join('');
   document.querySelectorAll('.filters button').forEach((b) => b.classList.toggle('is-active', b.dataset.filter === state.filter));
 }
 
-// ── Piece detail ────────────────────────────────────────────
-function openPiece(id) {
+// ── Listing page (piece.html?p=…) ───────────────────────────
+function localized(v) { return v && typeof v === 'object' ? (v[state.lang] || v.en || '') : (v || ''); }
+
+function renderListing() {
+  const root = $('.listing');
+  const id = new URLSearchParams(location.search).get('p');
   const a = state.artworks.find((x) => x.id === id);
-  if (!a) return;
-  const d = $('dialog.piece');
-  $('.piece-media img', d).src = a.image || '';
-  $('.piece-media img', d).alt = a.title;
-  $('.piece-title', d).textContent = a.title;
-  $('.piece-meta', d).textContent = [a.medium, a.dimensions, a.year].filter(Boolean).join(' · ');
-  $('.piece-desc', d).textContent = a.description;
-  $('.piece-price', d).textContent = a.sold ? t('sold') : money(a.price, a.currency);
-  const buy = $('.buy', d);
-  buy.hidden = a.sold || !a.url;
-  buy.textContent = t('buy');
-  buy.href = a.url || '#';
-  $('.piece-sold-note', d).textContent = a.sold ? t('soldNote') : '';
-  d.showModal();
+  if (!a) { root.innerHTML = `<p class="empty">${t('notFound')}</p>`; return; }
+  document.title = `${a.title} · ArtBy APL`;
+  const gallery = a.gallery || [a.art || a.image, a.image].filter(Boolean).map((src) => ({ src }));
+  const current = Math.min(state.slide || 0, gallery.length - 1);
+  const g = gallery[current];
+  root.innerHTML = `
+    <a class="back" href="/#oeuvres">${t('back')}</a>
+    <div class="listing-grid">
+      <div class="listing-gallery">
+        <div class="listing-main${g.fill ? ' is-fill' : ''}"><img src="${escapeHtml(g.src)}" alt="${escapeHtml(a.title)}"></div>
+        <p class="mock-note"${g.mock ? '' : ' hidden'}>${t('mockNote')}</p>
+        ${gallery.length > 1 ? `<div class="thumbs">${gallery.map((x, i) => `
+          <button type="button" class="thumb${i === current ? ' on' : ''}" data-i="${i}" aria-label="${i + 1}/${gallery.length}">
+            <img src="${escapeHtml(x.src)}" alt="" loading="lazy"></button>`).join('')}</div>` : ''}
+      </div>
+      <div class="listing-info">
+        <h1>${escapeHtml(a.title)}</h1>
+        <p class="listing-price">${a.sold ? t('sold') : money(a.price, a.currency)}</p>
+        <p class="listing-unique">${a.sold ? t('soldNote') : t('unique')}</p>
+        ${a.sold || !a.url ? '' : `<a class="buy" href="${escapeHtml(a.url)}">${t('buy')}</a>`}
+        <p class="demo-buy" hidden>${t('demoBuy')}</p>
+        <p class="listing-desc">${escapeHtml(localized(a.description))}</p>
+        <h2>${t('details')}</h2>
+        <dl class="listing-details">
+          ${a.medium ? `<dt>${t('mediumLabel')}</dt><dd>${escapeHtml(localized(a.medium))}</dd>` : ''}
+          ${a.dimensions ? `<dt>${t('sizeLabel')}</dt><dd>${escapeHtml(localized(a.dimensions))}</dd>` : ''}
+          <dt>${t('shippingTitle')}</dt><dd>${escapeHtml(CONFIG.shipping[state.lang])}</dd>
+        </dl>
+        <p class="listing-secure">${t('secure')}</p>
+      </div>
+    </div>`;
+  root.querySelectorAll('.thumb').forEach((b) => b.addEventListener('click', () => { state.slide = +b.dataset.i; renderListing(); }));
+  const buy = $('.buy', root);
+  if (buy && state.demo) buy.addEventListener('click', (e) => { e.preventDefault(); $('.demo-buy', root).hidden = false; });
 }
 
 // ── Data ────────────────────────────────────────────────────
@@ -141,7 +171,8 @@ async function load() {
     state.artworks = demoArtworks();
     state.demo = true;
   }
-  renderGrid();
+  if ($('.grid')) renderGrid();
+  if ($('.listing')) renderListing();
 }
 
 // Watercolour-style artwork, used for the hero and for sample pieces.
@@ -208,14 +239,35 @@ function demoArtworks() {
     ['blue-hues-circular', 'Blue Hues', 'circular'],
     ['blues-hues', 'Blues Hues', 'watercolour & oil pastel', { medium: 'Watercolour & oil pastel', dimensions: '8×10 in', price: 4500 }],
   ];
+  // Example of a full listing photo set: the piece, framed, two room mock-ups, a close-up, her own photo
+  const extraGallery = {
+    'forest-walk': [
+      { src: '/art/forest-walk.jpg' },
+      { src: '/art/forest-walk-framed.jpg', mock: true, fill: true },
+      { src: '/art/forest-walk-wall.jpg', mock: true, fill: true },
+      { src: '/art/forest-walk-shelf.jpg', mock: true, fill: true },
+      { src: '/art/forest-walk-detail.jpg', fill: true },
+      { src: '/art/forest-walk-styled.jpg', fill: true },
+    ],
+  };
+  const descriptions = {
+    'forest-walk': {
+      en: 'Deep teals, forest greens and earthy browns, with touches of gold and pencil detail, painted in a circle and set on a deep plum backdrop. Painted intuitively in watercolour and mixed media on paper.',
+      fr: 'Des sarcelles profonds, des verts forêt et des bruns terreux, avec des touches d’or et des détails au crayon, peints dans un cercle sur un fond prune foncé. Peinte de façon intuitive à l’aquarelle et en techniques mixtes sur papier.',
+    },
+  };
   return list.map(([slug, title, shape, extra = {}]) => {
     const d = { ...small, ...extra };
     const medium = extra.medium || (shape === 'landscape' ? 'Watercolour landscape' : `Watercolour · ${shape}`);
     return {
       id: slug, title, currency: 'cad', sold: false, url: '#', year: '',
       thumb: `/art/${slug}-sm.jpg`, art: `/art/${slug}.jpg`, image: `/art/${slug}-styled.jpg`,
+      gallery: extraGallery[slug] || [{ src: `/art/${slug}.jpg` }, { src: `/art/${slug}-styled.jpg`, fill: true }],
       medium, dimensions: d.dimensions, price: d.price,
-      description: `Original ${medium.toLowerCase()} painting by Allie Paige, ${d.dimensions}.`,
+      description: descriptions[slug] || {
+        en: `Original ${medium.toLowerCase()} painting by Allie Paige, ${d.dimensions}.`,
+        fr: `Aquarelle originale d’Allie Paige, ${d.dimensions}.`,
+      },
     };
   });
 }
@@ -231,22 +283,14 @@ function renderHero() {
 }
 
 // ── Events ──────────────────────────────────────────────────
-$('.grid').addEventListener('click', (e) => {
-  const card = e.target.closest('.card');
-  if (card) openPiece(card.dataset.id);
-});
 document.querySelectorAll('.filters button').forEach((b) =>
   b.addEventListener('click', () => { state.filter = b.dataset.filter; renderGrid(); }));
-$('.lang-toggle').addEventListener('click', () => {
+$('.lang-toggle')?.addEventListener('click', () => {
   state.lang = state.lang === 'fr' ? 'en' : 'fr';
   try { localStorage.setItem('lang', state.lang); } catch (_) {}
-  renderText(); renderGrid();
-});
-const dialog = $('dialog.piece');
-$('.piece-close').addEventListener('click', () => dialog.close());
-dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
-$('.buy').addEventListener('click', (e) => {
-  if (state.demo) { e.preventDefault(); alert(state.lang === 'fr' ? 'Aperçu : le paiement sera actif une fois Stripe branché.' : 'Preview: checkout goes live once Stripe is connected.'); }
+  renderText();
+  if ($('.grid')) renderGrid();
+  if ($('.listing')) renderListing();
 });
 
 // ── Preview-only font switcher (never shown on the real site) ──
