@@ -1,4 +1,2 @@
-kitchen 200
-sideboard 200
-shelves 200
-dresser 200
+gallerywall 200
+gallerywall2 200
