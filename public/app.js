@@ -271,17 +271,16 @@ function demoArtworks() {
     ['blue-hues-circular', 'Blue Hues', 'circular'],
     ['blues-hues', 'Blues Hues', 'watercolour & oil pastel', { medium: 'Watercolour & oil pastel', dimensions: '8×10 in', price: 4500 }],
   ];
-  // Example of a full listing photo set: the piece, three mock-ups in real room photos (free Unsplash photos), her own photo
-  const extraGallery = {
-    'forest-walk': [
-      { src: '/art/forest-walk.jpg' },
-      { src: '/art/forest-walk-matted.jpg', fill: true },
-      { src: '/art/forest-walk-sideboard.jpg', mock: true, fill: true },
-      { src: '/art/forest-walk-gallery-wall.jpg', mock: true, fill: true },
-      { src: '/art/collection-grid.jpg', fill: true },
-      { src: '/art/forest-walk-styled.jpg', fill: true },
-    ],
-  };
+  // Listing photo set for every piece: the piece, in its mat, on the sideboard, on the gallery wall,
+  // the collection grid, and Allie's own framed photo. Room photos are free Unsplash photos.
+  const listingGallery = (slug) => [
+    { src: `/art/${slug}.jpg` },
+    { src: `/art/${slug}-matted.jpg`, fill: true },
+    { src: `/art/${slug}-sideboard.jpg`, mock: true, fill: true },
+    { src: `/art/${slug}-gallery-wall.jpg`, mock: true, fill: true },
+    { src: '/art/collection-grid.jpg', fill: true },
+    { src: `/art/${slug}-styled.jpg`, fill: true },
+  ];
   const descriptions = {
     'forest-walk': {
       en: 'Deep teals, forest greens and earthy browns, with touches of gold and pencil detail, painted in a circle and set on a deep plum backdrop. Painted intuitively in watercolour and mixed media on paper.',
@@ -294,7 +293,7 @@ function demoArtworks() {
     return {
       id: slug, title, currency: 'cad', sold: false, url: '#', year: '',
       thumb: `/art/${slug}-sm.jpg`, art: `/art/${slug}.jpg`, image: `/art/${slug}-styled.jpg`,
-      gallery: extraGallery[slug] || [{ src: `/art/${slug}.jpg` }, { src: `/art/${slug}-styled.jpg`, fill: true }],
+      gallery: listingGallery(slug),
       medium, dimensions: d.dimensions, price: d.price,
       description: descriptions[slug] || {
         en: `Original ${medium.toLowerCase()} painting by Allie Paige, ${d.dimensions}.`,
