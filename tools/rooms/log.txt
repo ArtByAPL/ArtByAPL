@@ -1,0 +1,4 @@
+kitchen 200
+sideboard 200
+shelves 200
+dresser 200
