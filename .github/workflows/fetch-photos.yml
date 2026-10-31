@@ -15,11 +15,20 @@ jobs:
       - name: Download
         run: |
           mkdir -p stock
+          : > stock/log.txt
           while read -r name url; do
             case "$name" in ""|\#*) continue;; esac
-            curl -fsSL --retry 3 -A "Mozilla/5.0" -o "stock/$name.jpg" "$url" || echo "FAILED $name"
+            id=$(echo "$url" | sed -E 's#.*/photos/([^/]+)/.*#\1#')
+            page=$(curl -fsSL -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36" "https://unsplash.com/photos/$id" || true)
+            img=$(echo "$page" | grep -oE 'https://images\.unsplash\.com/photo-[A-Za-z0-9_-]+' | head -1)
+            if [ -n "$img" ]; then
+              code=$(curl -sSL -o "stock/$name.jpg" -w '%{http_code}' "$img?w=2400&q=88&fm=jpg")
+              echo "$name $id $img $code" >> stock/log.txt
+            else
+              echo "$name $id NO-IMAGE-FOUND page_bytes=${#page}" >> stock/log.txt
+            fi
           done < tools/photo-urls.txt
-          ls -la stock
+          cat stock/log.txt
       - name: Commit to this temporary branch
         run: |
           mkdir -p tools/stock && mv stock/* tools/stock/
