@@ -73,4 +73,3 @@ The Forest Walk mock-ups (`public/art/forest-walk-sideboard.jpg`) place Allie's
 painting into frames in free Unsplash photos (Unsplash License: free for commercial use, no attribution required):
 unsplash.com/photos/ZIUPl9ASefg (sideboard)
 Gallery wall (`public/art/forest-walk-gallery-wall.jpg`): unsplash.com/photos/jbDOyAd-lMc
-Eclectic gallery wall (`public/art/forest-walk-gallery-wall-eclectic.jpg`): unsplash.com/photos/yu9_c1mt_c4

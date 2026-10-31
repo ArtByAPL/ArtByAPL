@@ -246,7 +246,6 @@ function demoArtworks() {
       { src: '/art/forest-walk-matted.jpg', fill: true },
       { src: '/art/forest-walk-sideboard.jpg', mock: true, fill: true },
       { src: '/art/forest-walk-gallery-wall.jpg', mock: true, fill: true },
-      { src: '/art/forest-walk-gallery-wall-eclectic.jpg', mock: true, fill: true },
       { src: '/art/collection-grid.jpg', fill: true },
       { src: '/art/forest-walk-styled.jpg', fill: true },
     ],
