@@ -21,10 +21,12 @@ const CONFIG = {
     bio: [
       { fr: "Salut, moi c’est Alexandra, une artiste (presque) autodidacte, née et élevée à North Vancouver, en Colombie-Britannique. Je peins surtout à l’aquarelle, avec parfois de l’encre et des pastels, et j’apprends en chemin.",
         en: "Hi, I’m Alexandra, a (mostly) self-taught artist, born and raised in North Vancouver, British Columbia. I paint mostly in watercolour, sometimes layering in ink and pastels, and I’m learning as I go." },
-      { fr: "Je peins de façon intuitive, en laissant la couleur et le mouvement guider. Chaque pièce part d’une humeur, d’un moment ou d’un souvenir, souvent vécu dehors : à courir en sentier dans le bois (beaucoup trop longtemps) ou quelque part dans une montagne.",
-        en: "I paint intuitively, letting colour and movement lead. Each piece starts with a mood, a moment or a memory, often from time outside: trail running through the woods (for far too long) or somewhere up a mountain." },
-      { fr: "Mon voyage solo en Colombie n’est pas resté solo bien longtemps : j’y ai rencontré un Québécois. Depuis, je partage ma vie entre Vancouver et Québec, et les deux sont chez moi.",
-        en: "My solo trip to Colombia didn’t stay solo for long: I met a Québécois along the way. I’ve split my time between Vancouver and Québec City ever since, and both feel like home." },
+      { fr: "Aujourd’hui, j’ai la chance d’avoir deux chez-moi, dans deux provinces. Mon voyage solo en Colombie n’est pas resté solo bien longtemps (j’y ai rencontré un Québécois), et depuis, je partage ma vie entre Vancouver et Québec.",
+        en: "These days, I’m lucky to call two provinces home. My solo trip to Colombia didn’t stay solo for long (I met a Québécois), and I’ve been splitting my life between Vancouver and Québec City ever since." },
+      { fr: "Chaque endroit a sa propre palette. Sur la côte Ouest, ce sont les sentiers moussus de la forêt pluviale, l’océan gris-bleu et les montagnes qui disparaissent dans les nuages. À Québec, ce sont des saisons franches et intenses : des automnes en feu, des hivers tout blancs et les vieilles rues de pierre qui s’allument à l’heure dorée. Mon travail vit quelque part entre les deux.",
+        en: "Each place has its own palette. On the West Coast, it’s mossy rainforest trails, grey-blue ocean and mountains that disappear into the clouds. In Québec, it’s bold, dramatic seasons: fiery autumns, snow-white winters and old stone streets glowing at golden hour. My work lives somewhere in between." },
+      { fr: "Je peins de façon intuitive, en laissant la couleur et le mouvement guider. Chaque pièce part d’une humeur, d’un moment ou d’un souvenir, souvent ramassé dehors, à courir en sentier dans le bois (beaucoup trop longtemps) ou quelque part dans une montagne.",
+        en: "I paint intuitively, letting colour and movement lead. Each piece starts with a mood, a moment or a memory, often collected outside, trail running through the woods (for far too long) or somewhere up a mountain." },
     ],
   },
   // Collections: every piece belongs to one. Add a new entry here to start a new collection.
