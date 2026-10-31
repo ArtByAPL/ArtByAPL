@@ -239,14 +239,13 @@ function demoArtworks() {
     ['blue-hues-circular', 'Blue Hues', 'circular'],
     ['blues-hues', 'Blues Hues', 'watercolour & oil pastel', { medium: 'Watercolour & oil pastel', dimensions: '8×10 in', price: 4500 }],
   ];
-  // Example of a full listing photo set: the piece, framed, two room mock-ups, a close-up, her own photo
+  // Example of a full listing photo set: the piece, three mock-ups in real room photos (free Unsplash photos), her own photo
   const extraGallery = {
     'forest-walk': [
       { src: '/art/forest-walk.jpg' },
-      { src: '/art/forest-walk-framed.jpg', mock: true, fill: true },
-      { src: '/art/forest-walk-wall.jpg', mock: true, fill: true },
-      { src: '/art/forest-walk-shelf.jpg', mock: true, fill: true },
-      { src: '/art/forest-walk-detail.jpg', fill: true },
+      { src: '/art/forest-walk-table.jpg', mock: true, fill: true },
+      { src: '/art/forest-walk-flatlay.jpg', mock: true, fill: true },
+      { src: '/art/forest-walk-leaning.jpg', mock: true, fill: true },
       { src: '/art/forest-walk-styled.jpg', fill: true },
     ],
   };

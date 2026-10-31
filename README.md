@@ -67,3 +67,8 @@ Until the key is set, the site shows sample artworks with a "Preview" note.
 ### Email (free)
 Cloudflare → artbyapl.com → **Email → Email Routing** → create `bonjour@artbyapl.com`
 forwarding to her usual inbox.
+
+## Photo credits
+The Forest Walk mock-ups (`public/art/forest-walk-table.jpg`, `-flatlay.jpg`, `-leaning.jpg`) place Allie's
+painting into free photos from Unsplash (Unsplash License: free for commercial use, no attribution required):
+unsplash.com/photos/h_BlgQTu_F8, unsplash.com/photos/bDuh4oK_MCU, unsplash.com/photos/a5F6Z7Yi1Jk
