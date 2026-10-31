@@ -72,3 +72,4 @@ forwarding to her usual inbox.
 The Forest Walk mock-ups (`public/art/forest-walk-sideboard.jpg`, `-kitchen.jpg`, `-shelf.jpg`) place Allie's
 painting into frames in free Unsplash photos (Unsplash License: free for commercial use, no attribution required):
 unsplash.com/photos/ZIUPl9ASefg (sideboard), unsplash.com/photos/DaApeRy-TOg (kitchen), unsplash.com/photos/nVw8006eWsw (shelf)
+Gallery wall (`public/art/forest-walk-gallery-wall.jpg`): unsplash.com/photos/jbDOyAd-lMc
