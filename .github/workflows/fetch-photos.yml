@@ -16,7 +16,7 @@ jobs:
         run: |
           mkdir -p stock
           : > stock/log.txt
-          W=2400
+          W=700
           while read -r name url; do
             case "$name" in ""|\#*) continue;; esac
             code=$(curl -sSL -o "stock/$name.jpg" -w '%{http_code}' "$url?w=${W:-2400}&q=85&fm=jpg")
@@ -25,9 +25,9 @@ jobs:
           cat stock/log.txt
       - name: Commit to this temporary branch
         run: |
-          mkdir -p tools/rooms && mv stock/* tools/rooms/
+          mkdir -p tools/cands2 && mv stock/* tools/cands2/
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
-          git add tools/rooms
+          git add tools/cands2
           git commit -m "Stock room photos (temporary, for mock-ups)"
           git push

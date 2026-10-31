@@ -1,3 +1,19 @@
-# name url — gallery-wall room photo, full size (Unsplash free licence)
-gallerywall https://images.unsplash.com/photo-1771287490586-356754be24dc
-gallerywall2 https://images.unsplash.com/photo-1550243595-4cb7dd708a89
+# name url — side-table / kids-room candidates, small previews (Unsplash free licence)
+s00 https://images.unsplash.com/photo-1784907532882-2ca003e2fefa
+s01 https://images.unsplash.com/photo-1790683969771-9fd9a3d27180
+s02 https://images.unsplash.com/photo-1790683969790-c1d6fcd3d301
+s03 https://images.unsplash.com/photo-1771287490579-afd6e8d3c09a
+s04 https://images.unsplash.com/photo-1600210491369-e753d80a41f3
+s05 https://images.unsplash.com/photo-1628592102751-ba83b0314276
+s06 https://images.unsplash.com/photo-1769117549887-d7ab37279060
+s07 https://images.unsplash.com/photo-1505692795793-20f543407193
+s08 https://images.unsplash.com/photo-1573297663823-b4d453566b32
+s14 https://images.unsplash.com/photo-1640231026037-ffef7d41a14e
+s16 https://images.unsplash.com/photo-1560132103-ff44e9dc1f1c
+s17 https://images.unsplash.com/photo-1669975654746-8a909e150915
+s19 https://images.unsplash.com/photo-1609879938030-31acdeded104
+s20 https://images.unsplash.com/photo-1788863513194-a453f833ef2b
+s24 https://images.unsplash.com/photo-1595105579635-662c74f88f05
+s26 https://images.unsplash.com/photo-1595981235830-8f54193a692f
+s27 https://images.unsplash.com/photo-1776059656104-8aa11528fcbf
+s28 https://images.unsplash.com/photo-1596959393202-53fcfe359b51
