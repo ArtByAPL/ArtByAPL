@@ -1,0 +1,2 @@
+DMSerifDisplay-Regular.ttf 200
+DMSerifDisplay-Italic.ttf 200
