@@ -346,10 +346,10 @@ function demoArtworks() {
   const customGallery = {
     'purple-hues-circular': [
       { src: '/art/purple-hues-circular-photo1.jpg', fill: true },
-      { src: '/art/purple-hues-circular-photo2.jpg', fill: true },
       { src: '/art/purple-hues-circular-photo3.jpg', fill: true },
-      { src: '/art/purple-hues-circular-photo4.jpg', fill: true },
       { src: '/art/purple-hues-circular.jpg' },
+      { src: '/art/purple-hues-circular-matted.jpg', fill: true },
+      { src: '/art/purple-hues-circular-sideboard.jpg', mock: true, fill: true },
       { src: '/art/purple-hues-circular-gallery-wall.jpg', mock: true, fill: true },
       { src: '/art/collection-grid.jpg', fill: true },
     ],
