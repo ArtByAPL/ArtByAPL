@@ -2,7 +2,7 @@
 // Site settings — the easy things to change live here.
 // ────────────────────────────────────────────────────────────
 const CONFIG = {
-  email: 'bonjour@artbyapl.com',
+  email: 'hello@artbyapl.com',
   instagram: 'https://www.instagram.com/artby_apl/',
   name: 'Alexandra Paige',
   tagline: {

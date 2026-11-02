@@ -65,7 +65,7 @@ Custom domain** → `artbyapl.com` (and `www.artbyapl.com`).
 Until the key is set, the site shows sample artworks with a "Preview" note.
 
 ### Email (free)
-Cloudflare → artbyapl.com → **Email → Email Routing** → create `bonjour@artbyapl.com`
+Cloudflare → artbyapl.com → **Email → Email Routing** → create `hello@artbyapl.com`
 forwarding to her usual inbox.
 
 ## Photo credits
