@@ -70,6 +70,7 @@ export async function loadArtworks(key, fetchImpl = fetch) {
 
       return {
         id: link.id,
+        slug: meta.slug || (link.metadata && link.metadata.slug) || '',
         title: product.name,
         description: product.description || '',
         image: (product.images || [])[0] || null,

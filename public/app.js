@@ -40,8 +40,8 @@ const CONFIG = {
   // Big image at the top: one piece, edited and hosted in /art
   hero: { image: '/art/forest-walk.jpg', title: 'Forest Walk' },
   shipping: {
-    fr: "[À compléter : livraison au Canada, ramassage à Montréal, délais, emballage…]",
-    en: "[To fill in: shipping within Canada, local pickup in Montréal, timelines, packaging…]",
+    fr: "Livraison gratuite au Canada et aux États-Unis. Expédiée sous 3 à 5 jours ouvrables, bien protégée.",
+    en: "Free shipping within Canada and the US. Ships within 3–5 business days, carefully packaged.",
   },
 };
 
@@ -260,18 +260,46 @@ function renderAboutPage() {
 }
 
 // ── Data ────────────────────────────────────────────────────
+// Stripe Payment Link for each piece (one sale each). Created in Allie's Stripe account.
+const BUY = {
+  'forest-walk': 'https://buy.stripe.com/cNibJ3gumf72ezg8oo8g000',
+  'deep-blues': 'https://buy.stripe.com/bJe4gB4LEaQMaj0fQQ8g001',
+  'mystic-purple': 'https://buy.stripe.com/9B66oJ91U1gc3UCcEE8g002',
+  'autumn-hues-circular': 'https://buy.stripe.com/eVq00lba22kg1Mu3448g003',
+  'mountain-landscape': 'https://buy.stripe.com/4gM6oJgume2Ycr8dII8g004',
+  'soft-pinks': 'https://buy.stripe.com/bJe00l1zsgb676O8oo8g005',
+  'violet-green': 'https://buy.stripe.com/8x23cxba2f72aj08oo8g006',
+  'tidal-blues': 'https://buy.stripe.com/00weVffqigb6aj0dII8g007',
+  'purple-hues-rectangular': 'https://buy.stripe.com/fZuaEZfqi4so8aSeMM8g008',
+  'blue-hues-rectangular': 'https://buy.stripe.com/14AaEZ6TM4so62K9ss8g009',
+  'autumn-hues-rectangular': 'https://buy.stripe.com/8x24gBeme9MIfDkfQQ8g00a',
+  'purple-hues-circular': 'https://buy.stripe.com/eVq5kF5PI5wsaj03448g00b',
+  'teal-hues': 'https://buy.stripe.com/28E8wR91U5ws0Iq4888g00c',
+  'violet-hues': 'https://buy.stripe.com/6oUdRbce66Aw4YG2008g00d',
+  'pink-hues': 'https://buy.stripe.com/fZu9AV6TMaQMdvc9ss8g00e',
+  'blue-hues-circular': 'https://buy.stripe.com/bJe9AV4LE4so8aS9ss8g00f',
+  'warm-hues': 'https://buy.stripe.com/7sY14p7XQaQMezg4888g00g',
+  'orange-hues': 'https://buy.stripe.com/28E6oJ4LEbUQdvcbAA8g00h',
+  'purple-blues': 'https://buy.stripe.com/6oU4gB3HA0c84YG0VW8g00i',
+  'blues-hues': 'https://buy.stripe.com/00w14pemee2Y9eWdII8g00j',
+};
+
 async function load() {
+  // The catalogue (photos, text, buy links) lives in this file.
+  // If the Stripe key is set in Cloudflare, /api/artworks also tells us which pieces have sold.
+  state.artworks = demoArtworks();
+  state.demo = false;
   try {
     const res = await fetch('/api/artworks', { headers: { accept: 'application/json' } });
-    if (!res.ok) throw new Error(res.status);
-    const data = await res.json();
-    if (data.demo) throw new Error('demo');
-    state.artworks = data.artworks || [];
-    state.demo = false;
-  } catch (_) {
-    state.artworks = demoArtworks();
-    state.demo = true;
-  }
+    const data = res.ok ? await res.json() : null;
+    if (data && !data.demo && Array.isArray(data.artworks)) {
+      const live = Object.fromEntries(data.artworks.filter((a) => a.slug).map((a) => [a.slug, a]));
+      state.artworks = state.artworks
+        .filter((a) => !Object.keys(live).length || live[a.id])   // archived in Stripe = hidden
+        .map((a) => (live[a.id] ? { ...a, sold: live[a.id].sold, url: live[a.id].sold ? null : a.url } : a));
+      state.artworks.sort((a, b) => Number(a.sold) - Number(b.sold));
+    }
+  } catch (_) { /* keep the catalogue as is */ }
   if ($('.collections')) renderGrid();
   if ($('.listing')) renderListing();
 }
@@ -376,7 +404,7 @@ function demoArtworks() {
     const d = { ...small, ...extra };
     const medium = extra.medium || (shape === 'landscape' ? 'Watercolour landscape' : `Watercolour · ${shape}`);
     return {
-      id: slug, title, collection: 'intuitive-abstracts', currency: 'cad', sold: false, url: '#', year: '',
+      id: slug, title, collection: 'intuitive-abstracts', currency: 'cad', sold: false, url: BUY[slug] || null, year: '',
       thumb: `/art/${slug}-sm.jpg`, art: `/art/${slug}.jpg`, image: customGallery[slug] ? customGallery[slug][0].src : `/art/${slug}-styled.jpg`,
       gallery: listingGallery(slug),
       medium, dimensions: d.dimensions, price: d.price,
