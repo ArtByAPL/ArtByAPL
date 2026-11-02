@@ -342,7 +342,19 @@ function demoArtworks() {
   ];
   // Listing photo set for every piece: the piece, in its mat, on the sideboard, on the gallery wall,
   // the collection grid, and Alexandra's own framed photo. Room photos are free Unsplash photos.
-  const listingGallery = (slug) => [
+  // Pieces with Alexandra's own new photos (colour-corrected, light oak dresser)
+  const customGallery = {
+    'purple-hues-circular': [
+      { src: '/art/purple-hues-circular-photo1.jpg', fill: true },
+      { src: '/art/purple-hues-circular-photo2.jpg', fill: true },
+      { src: '/art/purple-hues-circular-photo3.jpg', fill: true },
+      { src: '/art/purple-hues-circular-photo4.jpg', fill: true },
+      { src: '/art/purple-hues-circular.jpg' },
+      { src: '/art/purple-hues-circular-gallery-wall.jpg', mock: true, fill: true },
+      { src: '/art/collection-grid.jpg', fill: true },
+    ],
+  };
+  const listingGallery = (slug) => customGallery[slug] || [
     { src: `/art/${slug}.jpg` },
     { src: `/art/${slug}-matted.jpg`, fill: true },
     { src: `/art/${slug}-sideboard.jpg`, mock: true, fill: true },
@@ -361,7 +373,7 @@ function demoArtworks() {
     const medium = extra.medium || (shape === 'landscape' ? 'Watercolour landscape' : `Watercolour · ${shape}`);
     return {
       id: slug, title, collection: 'intuitive-abstracts', currency: 'cad', sold: false, url: '#', year: '',
-      thumb: `/art/${slug}-sm.jpg`, art: `/art/${slug}.jpg`, image: `/art/${slug}-styled.jpg`,
+      thumb: `/art/${slug}-sm.jpg`, art: `/art/${slug}.jpg`, image: customGallery[slug] ? customGallery[slug][0].src : `/art/${slug}-styled.jpg`,
       gallery: listingGallery(slug),
       medium, dimensions: d.dimensions, price: d.price,
       description: descriptions[slug] || {
