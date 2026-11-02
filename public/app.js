@@ -339,12 +339,14 @@ function demoArtworks() {
     ['pink-hues', 'Pink Hues', 'circular'],
     ['blue-hues-circular', 'Blue Hues', 'circular'],
     ['warm-hues', 'Warm Hues', 'circular'],
+    ['orange-hues', 'Orange Hues', 'circular'],
+    ['purple-blues', 'Purple Blues', 'circular'],
     ['blues-hues', 'Blues Hues', 'watercolour & oil pastel', { medium: 'Watercolour & oil pastel', dimensions: '8×10 in', price: 4500 }],
   ];
   // Listing photo set for every piece: the piece, in its mat, on the sideboard, on the gallery wall,
   // the collection grid, and Alexandra's own framed photo. Room photos are free Unsplash photos.
   // Pieces with Alexandra's own new photos (colour-corrected, light oak dresser)
-  const updated = ['purple-hues-circular', 'mountain-landscape', 'warm-hues'];
+  const updated = ['purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues'];
   const setFor = (slug) => [
     { src: `/art/${slug}-photo1.jpg`, fill: true },
     { src: `/art/${slug}-photo3.jpg`, fill: true },
