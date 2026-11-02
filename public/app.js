@@ -338,22 +338,23 @@ function demoArtworks() {
     ['violet-hues', 'Violet Hues', 'circular'],
     ['pink-hues', 'Pink Hues', 'circular'],
     ['blue-hues-circular', 'Blue Hues', 'circular'],
+    ['warm-hues', 'Warm Hues', 'circular'],
     ['blues-hues', 'Blues Hues', 'watercolour & oil pastel', { medium: 'Watercolour & oil pastel', dimensions: '8×10 in', price: 4500 }],
   ];
   // Listing photo set for every piece: the piece, in its mat, on the sideboard, on the gallery wall,
   // the collection grid, and Alexandra's own framed photo. Room photos are free Unsplash photos.
   // Pieces with Alexandra's own new photos (colour-corrected, light oak dresser)
-  const customGallery = {
-    'purple-hues-circular': [
-      { src: '/art/purple-hues-circular-photo1.jpg', fill: true },
-      { src: '/art/purple-hues-circular-photo3.jpg', fill: true },
-      { src: '/art/purple-hues-circular.jpg' },
-      { src: '/art/purple-hues-circular-matted.jpg', fill: true },
-      { src: '/art/purple-hues-circular-sideboard.jpg', mock: true, fill: true },
-      { src: '/art/purple-hues-circular-gallery-wall.jpg', mock: true, fill: true },
-      { src: '/art/collection-grid.jpg', fill: true },
-    ],
-  };
+  const updated = ['purple-hues-circular', 'mountain-landscape', 'warm-hues'];
+  const setFor = (slug) => [
+    { src: `/art/${slug}-photo1.jpg`, fill: true },
+    { src: `/art/${slug}-photo3.jpg`, fill: true },
+    { src: `/art/${slug}.jpg` },
+    { src: `/art/${slug}-matted.jpg`, fill: true },
+    { src: `/art/${slug}-sideboard.jpg`, mock: true, fill: true },
+    { src: `/art/${slug}-gallery-wall.jpg`, mock: true, fill: true },
+    { src: '/art/collection-grid.jpg', fill: true },
+  ];
+  const customGallery = Object.fromEntries(updated.map((slug) => [slug, setFor(slug)]));
   const listingGallery = (slug) => customGallery[slug] || [
     { src: `/art/${slug}.jpg` },
     { src: `/art/${slug}-matted.jpg`, fill: true },
