@@ -16,7 +16,7 @@ const CONFIG = {
   },
   // About the artist page: Alexandra's bio. Edit freely.
   aboutPage: {
-    photo: '',  // e.g. '/art/alexandra.jpg' once there's a portrait; until then a painting is shown
+    photo: '/art/alexandra.jpg',
     // One short bio, a few paragraphs, no headings
     bio: [
       { fr: "Salut, moi c’est Alexandra, une artiste (presque) autodidacte, née et élevée à North Vancouver, en Colombie-Britannique. Je peins surtout à l’aquarelle, avec parfois de l’encre et des pastels, et j’apprends en chemin.",
