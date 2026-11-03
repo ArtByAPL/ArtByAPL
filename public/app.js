@@ -262,26 +262,26 @@ function renderAboutPage() {
 // ── Data ────────────────────────────────────────────────────
 // Stripe Payment Link for each piece (one sale each). Created in Allie's Stripe account.
 const BUY = {
-  'forest-walk': 'https://buy.stripe.com/cNibJ3gumf72ezg8oo8g000',
-  'deep-blues': 'https://buy.stripe.com/bJe4gB4LEaQMaj0fQQ8g001',
-  'mystic-purple': 'https://buy.stripe.com/9B66oJ91U1gc3UCcEE8g002',
-  'autumn-hues-circular': 'https://buy.stripe.com/eVq00lba22kg1Mu3448g003',
-  'mountain-landscape': 'https://buy.stripe.com/4gM6oJgume2Ycr8dII8g004',
-  'soft-pinks': 'https://buy.stripe.com/bJe00l1zsgb676O8oo8g005',
-  'violet-green': 'https://buy.stripe.com/8x23cxba2f72aj08oo8g006',
-  'tidal-blues': 'https://buy.stripe.com/00weVffqigb6aj0dII8g007',
-  'purple-hues-rectangular': 'https://buy.stripe.com/fZuaEZfqi4so8aSeMM8g008',
-  'blue-hues-rectangular': 'https://buy.stripe.com/14AaEZ6TM4so62K9ss8g009',
-  'autumn-hues-rectangular': 'https://buy.stripe.com/8x24gBeme9MIfDkfQQ8g00a',
-  'purple-hues-circular': 'https://buy.stripe.com/eVq5kF5PI5wsaj03448g00b',
-  'teal-hues': 'https://buy.stripe.com/28E8wR91U5ws0Iq4888g00c',
-  'violet-hues': 'https://buy.stripe.com/6oUdRbce66Aw4YG2008g00d',
-  'pink-hues': 'https://buy.stripe.com/fZu9AV6TMaQMdvc9ss8g00e',
-  'blue-hues-circular': 'https://buy.stripe.com/bJe9AV4LE4so8aS9ss8g00f',
-  'warm-hues': 'https://buy.stripe.com/7sY14p7XQaQMezg4888g00g',
-  'orange-hues': 'https://buy.stripe.com/28E6oJ4LEbUQdvcbAA8g00h',
-  'purple-blues': 'https://buy.stripe.com/6oU4gB3HA0c84YG0VW8g00i',
-  'blues-hues': 'https://buy.stripe.com/00w14pemee2Y9eWdII8g00j',
+  'forest-walk': 'https://buy.stripe.com/aFa3cxa5Y6Aw9eWaww8g00k',
+  'deep-blues': 'https://buy.stripe.com/3cI14pfqi0c8cr80VW8g00l',
+  'mystic-purple': 'https://buy.stripe.com/00weVf3HAgb6bn49ss8g00m',
+  'autumn-hues-circular': 'https://buy.stripe.com/eVqaEZ6TM7EAfDk8oo8g00n',
+  'mountain-landscape': 'https://buy.stripe.com/cNi6oJgumgb6dvc5cc8g00o',
+  'soft-pinks': 'https://buy.stripe.com/4gM7sNa5Y5ws62K5cc8g00p',
+  'violet-green': 'https://buy.stripe.com/14A00la5Y0c89eW8oo8g00q',
+  'tidal-blues': 'https://buy.stripe.com/eVq6oJba28IE2Qy5cc8g00r',
+  'purple-hues-rectangular': 'https://buy.stripe.com/6oUcN7ce6gb6cr86gg8g00s',
+  'blue-hues-rectangular': 'https://buy.stripe.com/eVqbJ36TMe2Y0IqfQQ8g00t',
+  'autumn-hues-rectangular': 'https://buy.stripe.com/14A00la5YcYU2QybAA8g00u',
+  'purple-hues-circular': 'https://buy.stripe.com/5kQ7sN7XQ6Aw2QydII8g00v',
+  'teal-hues': 'https://buy.stripe.com/14AcN7a5Y6Aw2Qyaww8g00w',
+  'violet-hues': 'https://buy.stripe.com/00wcN77XQaQM1Muaww8g00x',
+  'pink-hues': 'https://buy.stripe.com/fZu14p7XQ9MIfDk8oo8g00y',
+  'blue-hues-circular': 'https://buy.stripe.com/dRm28tgum7EAbn49ss8g00z',
+  'warm-hues': 'https://buy.stripe.com/28E4gBfqiaQM4YGdII8g00A',
+  'orange-hues': 'https://buy.stripe.com/9B6eVf3HA6Awezg0VW8g00B',
+  'purple-blues': 'https://buy.stripe.com/cNi6oJ6TM1gc8aS0VW8g00C',
+  'blues-hues': 'https://buy.stripe.com/dRm3cxba27EA1Mu6gg8g00D',
 };
 
 async function load() {
@@ -293,7 +293,8 @@ async function load() {
     const res = await fetch('/api/artworks', { headers: { accept: 'application/json' } });
     const data = res.ok ? await res.json() : null;
     if (data && !data.demo && Array.isArray(data.artworks)) {
-      const live = Object.fromEntries(data.artworks.filter((a) => a.slug).map((a) => [a.slug, a]));
+      const live = {};
+      for (const a of data.artworks) { if (a.slug && (!live[a.slug] || live[a.slug].sold)) live[a.slug] = a; }
       state.artworks = state.artworks
         .filter((a) => !Object.keys(live).length || live[a.id])   // archived in Stripe = hidden
         .map((a) => (live[a.id] ? { ...a, sold: live[a.id].sold, url: live[a.id].sold ? null : a.url } : a));
@@ -348,13 +349,13 @@ function watercolour(seed, palette, { round = true, w = 400, h = 500, paper = '#
 function demoArtworks() {
   // Alexandra's current Etsy pieces. Photos edited for the web and hosted on the site, in /art:
   //   <slug>-sm.jpg = the piece alone (cards) · <slug>.jpg = large · <slug>-styled.jpg = framed shot (detail view)
-  const small = { medium: 'Watercolour', dimensions: '5×7 in · matted 8×10', price: 3700 };
+  const small = { medium: 'Watercolour', dimensions: '5×7 in · matted 8×10', price: 5200 };
   const list = [
     ['forest-walk', 'Forest Walk', 'circular'],
     ['deep-blues', 'Deep Blues', 'circular'],
     ['mystic-purple', 'Mystic Purple', 'circular'],
     ['autumn-hues-circular', 'Autumn Hues', 'circular'],
-    ['mountain-landscape', 'Mountain Landscape', 'landscape', { dimensions: '8×10 in', price: 4500 }],
+    ['mountain-landscape', 'Mountain Landscape', 'landscape', { dimensions: '8×10 in', price: 6700 }],
     ['soft-pinks', 'Soft Pinks', 'circular'],
     ['violet-green', 'Violet Green', 'circular'],
     ['tidal-blues', 'Tidal Blues', 'rectangular'],
@@ -369,7 +370,7 @@ function demoArtworks() {
     ['warm-hues', 'Warm Hues', 'circular'],
     ['orange-hues', 'Orange Hues', 'circular'],
     ['purple-blues', 'Purple Blues', 'circular'],
-    ['blues-hues', 'Blues Hues', 'watercolour & oil pastel', { medium: 'Watercolour & oil pastel', dimensions: '8×10 in', price: 4500 }],
+    ['blues-hues', 'Blues Hues', 'watercolour & oil pastel', { medium: 'Watercolour & oil pastel', dimensions: '8×10 in', price: 6700 }],
   ];
   // Listing photo set for every piece: the piece, in its mat, on the sideboard, on the gallery wall,
   // the collection grid, and Alexandra's own framed photo. Room photos are free Unsplash photos.
