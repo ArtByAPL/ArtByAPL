@@ -134,8 +134,8 @@ function renderGrid() {
   $('.empty').hidden = list.length > 0;
   const card = (a) => `
     <a class="card${a.sold ? ' is-sold' : ''}" href="/piece.html?p=${encodeURIComponent(a.id)}">
-      <div class="card-frame${a.thumb ? ' has-print' : ''}">
-        ${a.thumb ? `<img class="print" src="${escapeHtml(a.thumb)}" alt="${escapeHtml(a.title)}" loading="lazy">`
+      <div class="card-frame${a.cardPhoto ? ' is-photo' : a.thumb ? ' has-print' : ''}">
+        ${a.cardPhoto ? `<img src="${escapeHtml(a.cardPhoto)}" alt="${escapeHtml(a.title)}" loading="lazy">` : a.thumb ? `<img class="print" src="${escapeHtml(a.thumb)}" alt="${escapeHtml(a.title)}" loading="lazy">`
           : a.image ? `<img src="${escapeHtml(a.image)}" alt="${escapeHtml(a.title)}" loading="lazy">` : ''}
         ${a.sold ? `<span class="badge">${t('soldOut')}</span>` : ''}
       </div>
@@ -585,10 +585,11 @@ function demoArtworks() {
   // Pieces with Alexandra's own new photos (colour-corrected, light oak dresser)
   const updated = ['sky-ochre', 'moss-rain', 'pink-s', 'sage-clay', 'blue-gold', 'moss-cobalt', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
   const largeSet = (slug) => [
-    { src: `/art/${slug}-photo1.jpg?v=4`, fill: true },
-    { src: `/art/${slug}-photo3.jpg?v=4`, fill: true },
-    { src: `/art/${slug}.jpg` },
-    { src: `/art/${slug}-matted.jpg`, fill: true },
+    { src: `/art/${slug}-photo1.jpg?v=5`, fill: true },
+    { src: `/art/${slug}-room.jpg?v=5`, mock: true, fill: true },
+    { src: `/art/${slug}-photo3.jpg?v=5`, fill: true },
+    { src: `/art/${slug}.jpg?v=5` },
+    { src: `/art/${slug}-matted.jpg?v=5`, fill: true },
   ];
   const isLarge = (slug) => ['sky-ochre', 'moss-rain'].includes(slug);
   const setFor = (slug) => isLarge(slug) ? largeSet(slug) : [
@@ -689,7 +690,7 @@ function demoArtworks() {
       id: slug, title, collection: 'intuitive-abstracts', currency: 'cad', sold: Boolean(extra.sold), url: extra.sold ? null : (BUY[slug] || null), year: '',
       thumb: `/art/${slug}-sm.jpg`, art: `/art/${slug}.jpg`, image: customGallery[slug] ? customGallery[slug][0].src : `/art/${slug}-styled.jpg`,
       gallery: listingGallery(slug),
-      price: d.price, matted, large: Boolean(extra.large),
+      price: d.price, matted, large: Boolean(extra.large), cardPhoto: extra.large ? `/art/${slug}-card.jpg?v=5` : null,
       // Short line under each card in the grid
       cardSub: extra.large
         ? { en: 'Watercolour · circle · 40 × 50 cm', fr: 'Aquarelle · cercle · 40 × 50 cm' }

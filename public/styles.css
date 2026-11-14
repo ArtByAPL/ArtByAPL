@@ -374,3 +374,4 @@ a.card { text-decoration: none; color: inherit; }
 .listing-more[open] summary::after { content: '–'; }
 .listing-more ul { margin: 12px 0 0; padding-left: 18px; line-height: 1.6; font-size: .95rem; }
 .listing-more p { margin: 12px 0 0; line-height: 1.6; font-size: .95rem; }
+.card-frame.is-photo { aspect-ratio: 4 / 5; }
