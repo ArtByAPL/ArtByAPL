@@ -59,7 +59,7 @@ const TEXT = {
     prev: 'Photo précédente', next: 'Photo suivante',
     collection: 'Collection', aboutRead: 'Lire mon histoire →', aboutTitle: 'À propos de l’artiste', aboutCta: 'Voir les œuvres',
     back: '← Toutes les œuvres', unique: 'Pièce unique, il n’y en a qu’une.', details: 'Détails',
-    mediumLabel: 'Technique', sizeLabel: 'Format', mockNote: 'Encadrement montré à titre d’illustration.', arBtn: 'Voir chez moi', arTitle: 'Voir l’œuvre sur votre mur', arGo: 'Ouvrir la caméra', arHelp: 'Pointez votre téléphone vers un mur : l’œuvre apparaît à sa vraie grandeur. Glissez-la pour la déplacer.', arDesktop: 'Ouvrez cette page sur votre téléphone pour voir l’œuvre sur votre mur, à sa vraie grandeur.', arNote: 'Cadre montré à titre d’illustration.', close: 'Fermer',
+    mediumLabel: 'Technique', sizeLabel: 'Format', mockNote: 'Encadrement montré à titre d’illustration.', arBtn: 'Voir chez moi', arTitle: 'Voir l’œuvre sur votre mur', arGo: 'Ouvrir la caméra', arHelp: 'Pointez un mur et bougez lentement le téléphone jusqu’à ce que l’œuvre s’y accroche. Elle apparaît à sa vraie grandeur : glissez pour la déplacer, pincez pour l’agrandir. Astuce : un mur avec un peu de texture ou un cadre déjà accroché aide la caméra.', arDesktop: 'Ouvrez cette page sur votre téléphone pour voir l’œuvre sur votre mur, à sa vraie grandeur.', arNote: 'Cadre montré à titre d’illustration.', close: 'Fermer',
     demoBuy: 'Aperçu : le paiement sera actif une fois Stripe branché.', notFound: 'Œuvre introuvable.',
     contactText: 'Une question sur une œuvre ou envie d’une commande personnalisée?',
     secure: 'Paiement sécurisé par Stripe',
@@ -78,7 +78,7 @@ const TEXT = {
     prev: 'Previous photo', next: 'Next photo',
     collection: 'Collection', aboutRead: 'Read my story →', aboutTitle: 'About the artist', aboutCta: 'See the work',
     back: '← All works', unique: 'One of a kind: there is only one.', details: 'Details',
-    mediumLabel: 'Medium', sizeLabel: 'Size', mockNote: 'Shown framed for illustration.', arBtn: 'View in your space', arTitle: 'See it on your wall', arGo: 'Open camera', arHelp: 'Point your phone at a wall: the piece appears at its true size. Drag it to move it.', arDesktop: 'Open this page on your phone to see the piece on your wall, at its true size.', arNote: 'Frame shown for illustration.', close: 'Close',
+    mediumLabel: 'Medium', sizeLabel: 'Size', mockNote: 'Shown framed for illustration.', arBtn: 'View in your space', arTitle: 'See it on your wall', arGo: 'Open camera', arHelp: 'Point at a wall and move the phone slowly until the piece snaps onto it. It starts at its true size: drag to move it, pinch to resize. Tip: a wall with some texture or a frame already hanging helps the camera.', arDesktop: 'Open this page on your phone to see the piece on your wall, at its true size.', arNote: 'Frame shown for illustration.', close: 'Close',
     demoBuy: 'Preview: checkout goes live once Stripe is connected.', notFound: 'Piece not found.',
     contactText: 'A question about a piece, or interested in a commission?',
     secure: 'Secure payment by Stripe',
@@ -300,7 +300,7 @@ function setupAR(root, a) {
     dlg.innerHTML = `
       <div class="ar-head"><h2>${t('arTitle')}</h2><button type="button" class="ar-close" aria-label="${t('close')}">×</button></div>
       <model-viewer src="/art/3d/${escapeHtml(a.id)}.glb" alt="${escapeHtml(a.title)}"
-        ar ar-modes="webxr scene-viewer quick-look" ar-placement="wall" ar-scale="fixed"
+        ar ar-modes="scene-viewer webxr quick-look" ar-placement="wall" ar-scale="auto"
         camera-controls touch-action="pan-y" camera-orbit="-18deg 82deg auto" shadow-intensity="0.8"
         exposure="1.15" environment-image="neutral" interaction-prompt="none">
         <button slot="ar-button" class="ar-go">${t('arGo')}</button>
