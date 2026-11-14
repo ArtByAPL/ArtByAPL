@@ -357,3 +357,15 @@ a.card { text-decoration: none; color: inherit; }
   box-shadow: 0 4px 14px rgba(0,0,0,.18); }
 .ar-help, .ar-desktop { margin: 12px 2px 4px; font-size: .95rem; }
 .ar-note { margin: 0 2px; font-size: .8rem; opacity: .65; }
+.wall-pick { display: block; margin: 12px 0 4px; padding: .75em 1em; text-align: center; font-weight: 600;
+  color: var(--accent); border: 1.5px solid var(--accent); border-radius: 999px; cursor: pointer; }
+.wall-pick:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.wall { text-align: center; }
+.wall-canvas { display: block; margin: 0 auto; border-radius: 12px; touch-action: none; cursor: grab; background: #ece4d2; }
+.wall-size { display: flex; align-items: center; gap: 10px; margin: 12px 4px 4px; font-size: .9rem; }
+.wall-size input { flex: 1; accent-color: var(--accent); }
+.wall-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 8px; }
+.wall-actions button { font: inherit; font-size: .9rem; padding: .55em 1em; border-radius: 999px; cursor: pointer;
+  border: 1.5px solid var(--accent); color: var(--accent); background: transparent; }
+.wall-actions .wall-save { background: var(--btn, #1f7a74); color: #fff; border-color: transparent; }
+.ar-dialog [hidden] { display: none !important; }
