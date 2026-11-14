@@ -58,7 +58,7 @@ const TEXT = {
     shippingTitle: 'Livraison',
     prev: 'Photo précédente', next: 'Photo suivante',
     collection: 'Collection', aboutRead: 'Lire mon histoire →', aboutTitle: 'À propos de l’artiste', aboutCta: 'Voir les œuvres',
-    originalLabel: 'Œuvre', originalVal: 'Peinture originale (pas une reproduction)', paperLabel: 'Papier', paperVal: 'Papier aquarelle épais à grain fin (pressé à froid), 140 lb / 300 g/m²', signedLabel: 'Signature', signedVal: 'Signée par l’artiste au verso', presLabel: 'Présentation', presMatted: 'Non encadrée. Livrée dans un passe-partout de 8 × 10 po, prête à glisser dans un cadre standard.', presUnmatted: 'Non encadrée, sans passe-partout. Entre dans un cadre standard de 8 × 10 po.', shipTitle: 'Livraison et emballage', shipPack: 'Expédiée à plat, dans une pochette protectrice en cellophane.', shipNote: 'Chaque œuvre est accompagnée d’un mot de remerciement écrit à la main par l’artiste.', shipMade: 'Peinte à la main au Québec, Canada.', careTitle: 'Entretien', careText: 'Pour garder les couleurs vives, exposez l’œuvre à l’abri du soleil direct et de l’humidité, idéalement encadrée sous verre. Manipulez-la par les bords, les mains propres et sèches.',
+    originalLabel: 'Œuvre', originalVal: 'Peinture originale (pas une reproduction)', paperLabel: 'Papier', paperVal: 'Papier aquarelle épais à grain fin (pressé à froid), 140 lb / 300 g/m²', signedLabel: 'Signature', signedVal: 'Signée par l’artiste au verso', presLabel: 'Présentation', presMatted: 'Non encadrée. Livrée dans un passe-partout de 8 × 10 po, prête à glisser dans un cadre standard.', presUnmatted: 'Non encadrée, sans passe-partout. Entre dans un cadre standard de 8 × 10 po.', presLarge: 'Non encadrée. Format pensé pour un cadre de 50 × 70 cm avec passe-partout à ouverture de 40 × 50 cm (montrée dans un cadre IKEA RÖDALM).', shipTitle: 'Livraison et emballage', shipPack: 'Expédiée à plat, dans une pochette protectrice en cellophane.', shipNote: 'Chaque œuvre est accompagnée d’un mot de remerciement écrit à la main par l’artiste.', shipMade: 'Peinte à la main au Québec, Canada.', careTitle: 'Entretien', careText: 'Pour garder les couleurs vives, exposez l’œuvre à l’abri du soleil direct et de l’humidité, idéalement encadrée sous verre. Manipulez-la par les bords, les mains propres et sèches.',
     back: '← Toutes les œuvres', unique: 'Pièce unique, il n’y en a qu’une.', details: 'Détails',
     mediumLabel: 'Technique', sizeLabel: 'Format', mockNote: 'Encadrement montré à titre d’illustration.', arBtn: 'Voir chez moi', arTitle: 'Voir l’œuvre sur votre mur', arGo: 'Ouvrir la caméra', arHelp: 'Pointez un mur et bougez lentement le téléphone jusqu’à ce que l’œuvre s’y accroche. Elle apparaît à sa vraie grandeur : glissez pour la déplacer, pincez pour l’agrandir. Astuce : un mur avec un peu de texture ou un cadre déjà accroché aide la caméra.', arDesktop: 'Ouvrez cette page sur votre téléphone pour voir l’œuvre sur votre mur, à sa vraie grandeur.', arNote: 'Cadre montré à titre d’illustration.', close: 'Fermer', arPhoto: 'Essayer avec une photo de mon mur', arTake: 'Prendre une photo', arPick: 'Choisir dans mes photos', arPhotoHelp: 'Glissez l’œuvre pour la placer. Pincez (ou utilisez le curseur) pour ajuster la grandeur, et tournez deux doigts pour l’incliner.', arRotate: 'Tourner la photo', arRotatePiece: 'Tourner l’œuvre', arTwist: 'Ou tournez deux doigts sur l’œuvre.', arSize: 'Grandeur', arChange: 'Changer de photo', arSave: 'Enregistrer l’image', arBack: 'Vue 3D',
     demoBuy: 'Aperçu : le paiement sera actif une fois Stripe branché.', notFound: 'Œuvre introuvable.',
@@ -78,7 +78,7 @@ const TEXT = {
     shippingTitle: 'Shipping',
     prev: 'Previous photo', next: 'Next photo',
     collection: 'Collection', aboutRead: 'Read my story →', aboutTitle: 'About the artist', aboutCta: 'See the work',
-    originalLabel: 'Artwork', originalVal: 'Original painting (not a print)', paperLabel: 'Paper', paperVal: 'Heavyweight cold-pressed watercolour paper, 140 lb / 300 gsm', signedLabel: 'Signature', signedVal: 'Signed by the artist on the back', presLabel: 'Presentation', presMatted: 'Unframed. Arrives in an 8 × 10 in mat, ready to slip into a standard frame.', presUnmatted: 'Unframed, no mat. Fits a standard 8 × 10 in frame.', shipTitle: 'Shipping & packaging', shipPack: 'Ships flat in a protective cellophane sleeve.', shipNote: 'Every piece comes with a handwritten thank-you note from the artist.', shipMade: 'Hand-painted in Québec, Canada.', careTitle: 'Care', careText: 'To keep the colours vivid, display away from direct sunlight and humidity, ideally framed behind glass. Handle by the edges with clean, dry hands.',
+    originalLabel: 'Artwork', originalVal: 'Original painting (not a print)', paperLabel: 'Paper', paperVal: 'Heavyweight cold-pressed watercolour paper, 140 lb / 300 gsm', signedLabel: 'Signature', signedVal: 'Signed by the artist on the back', presLabel: 'Presentation', presMatted: 'Unframed. Arrives in an 8 × 10 in mat, ready to slip into a standard frame.', presUnmatted: 'Unframed, no mat. Fits a standard 8 × 10 in frame.', presLarge: 'Unframed. Sized for a 50 × 70 cm frame with a 40 × 50 cm mat opening (shown in an IKEA RÖDALM).', shipTitle: 'Shipping & packaging', shipPack: 'Ships flat in a protective cellophane sleeve.', shipNote: 'Every piece comes with a handwritten thank-you note from the artist.', shipMade: 'Hand-painted in Québec, Canada.', careTitle: 'Care', careText: 'To keep the colours vivid, display away from direct sunlight and humidity, ideally framed behind glass. Handle by the edges with clean, dry hands.',
     back: '← All works', unique: 'One of a kind: there is only one.', details: 'Details',
     mediumLabel: 'Medium', sizeLabel: 'Size', mockNote: 'Shown framed for illustration.', arBtn: 'View in your space', arTitle: 'See it on your wall', arGo: 'Open camera', arHelp: 'Point at a wall and move the phone slowly until the piece snaps onto it. It starts at its true size: drag to move it, pinch to resize. Tip: a wall with some texture or a frame already hanging helps the camera.', arDesktop: 'Open this page on your phone to see the piece on your wall, at its true size.', arNote: 'Frame shown for illustration.', close: 'Close', arPhoto: 'Try it with a photo of my wall', arTake: 'Take a photo', arPick: 'Choose from my photos', arPhotoHelp: 'Drag the piece to place it. Pinch (or use the slider) to adjust the size, and twist two fingers to tilt it.', arRotate: 'Rotate photo', arRotatePiece: 'Rotate piece', arTwist: 'Or twist two fingers on the piece.', arSize: 'Size', arChange: 'Change photo', arSave: 'Save image', arBack: '3D view',
     demoBuy: 'Preview: checkout goes live once Stripe is connected.', notFound: 'Piece not found.',
@@ -207,7 +207,7 @@ function renderListing() {
           ${a.medium ? `<dt>${t('mediumLabel')}</dt><dd>${escapeHtml(localized(a.medium))}</dd>` : ''}
           <dt>${t('paperLabel')}</dt><dd>${t('paperVal')}</dd>
           <dt>${t('signedLabel')}</dt><dd>${t('signedVal')}</dd>
-          <dt>${t('presLabel')}</dt><dd>${a.matted === false ? t('presUnmatted') : t('presMatted')}</dd>
+          <dt>${t('presLabel')}</dt><dd>${a.large ? t('presLarge') : a.matted === false ? t('presUnmatted') : t('presMatted')}</dd>
         </dl>
         <details class="listing-more" open>
           <summary>${t('shipTitle')}</summary>
@@ -576,12 +576,22 @@ function demoArtworks() {
     ['sage-clay', 'Sage & Clay', 'rectangular', { sold: true }],
     ['blue-gold', 'Blue & Gold', 'circular', { sold: true }],
     ['moss-cobalt', 'Moss & Cobalt', 'circular', { sold: true }],
+    // Large format (40 × 50 cm, for a 50 × 70 cm frame with mat)
+    ['sky-ochre', 'Sky & Ochre', 'circular', { sold: true, large: true, price: 8500 }],
+    ['moss-rain', 'Moss & Rain', 'circular', { sold: true, large: true, price: 8500 }],
   ];
   // Listing photo set for every piece: the piece, in its mat, on the sideboard, on the gallery wall,
   // the collection grid, and Alexandra's own framed photo. Room photos are free Unsplash photos.
   // Pieces with Alexandra's own new photos (colour-corrected, light oak dresser)
-  const updated = ['pink-s', 'sage-clay', 'blue-gold', 'moss-cobalt', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
-  const setFor = (slug) => [
+  const updated = ['sky-ochre', 'moss-rain', 'pink-s', 'sage-clay', 'blue-gold', 'moss-cobalt', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
+  const largeSet = (slug) => [
+    { src: `/art/${slug}-photo1.jpg?v=4`, fill: true },
+    { src: `/art/${slug}-photo3.jpg?v=4`, fill: true },
+    { src: `/art/${slug}.jpg` },
+    { src: `/art/${slug}-matted.jpg`, fill: true },
+  ];
+  const isLarge = (slug) => ['sky-ochre', 'moss-rain'].includes(slug);
+  const setFor = (slug) => isLarge(slug) ? largeSet(slug) : [
     { src: `/art/${slug}-photo1.jpg?v=4`, fill: true },
     { src: `/art/${slug}-photo3.jpg?v=4`, fill: true },
     { src: `/art/${slug}.jpg` },
@@ -652,6 +662,10 @@ function demoArtworks() {
       'Vert sauge, terre cuite et jaune beurre doux couvrent toute la feuille, avec des accents viridian profonds et quelques touches de bourgogne. Une œuvre terreuse et calme, tout en traits, points et textures au crayon de couleur.'],
     'blue-gold': ['Ultramarine, slate and soft sky blue meet warm ochre and gold inside a gentle circle. Copper lines, pale gouache dots and rows of little marks give it quiet movement.',
       'L’outremer, l’ardoise et le bleu ciel doux rencontrent l’ocre chaud et l’or dans un cercle tout en douceur. Lignes cuivrées, points de gouache pâle et rangées de petites marques lui donnent un mouvement tranquille.'],
+    'sky-ochre': ['A larger circle of soft cornflower, sky and slate blues, warmed by pools of ochre and honey. White gel-pen raindrops, coral threads and scattered dots drift across it with an airy, unhurried rhythm.',
+      'Un plus grand cercle de bleus bleuet, ciel et ardoise, réchauffé de flaques d’ocre et de miel. Gouttes au stylo gel blanc, fils corail et points épars le traversent avec un rythme aérien, sans hâte.'],
+    'moss-rain': ['Mint, seafoam and mossy olive washes float over a fine rain of hand-painted cobalt marks, grounded by touches of chocolate brown and deep forest green. Calm, detailed and endlessly layered.',
+      'Des lavis menthe, écume et olive mousse flottent sur une fine pluie de marques cobalt peintes à la main, ancrés par des touches de brun chocolat et de vert forêt profond. Calme, détaillée et tout en couches.'],
     'moss-cobalt': ['Moss green, olive and deep forest tones gather with bright cobalt and a glow of ochre gold. Raised cobalt dots, white gel-pen spirals and hand-drawn droplets give it a rich, layered texture.',
       'Vert mousse, olive et vert forêt profond se rassemblent avec un cobalt éclatant et une lueur d’ocre doré. Points de cobalt en relief, spirales au stylo gel blanc et gouttes dessinées à la main lui donnent une texture riche, tout en couches.'],
   });
@@ -675,13 +689,17 @@ function demoArtworks() {
       id: slug, title, collection: 'intuitive-abstracts', currency: 'cad', sold: Boolean(extra.sold), url: extra.sold ? null : (BUY[slug] || null), year: '',
       thumb: `/art/${slug}-sm.jpg`, art: `/art/${slug}.jpg`, image: customGallery[slug] ? customGallery[slug][0].src : `/art/${slug}-styled.jpg`,
       gallery: listingGallery(slug),
-      price: d.price, matted,
+      price: d.price, matted, large: Boolean(extra.large),
       // Short line under each card in the grid
-      cardSub: matted
+      cardSub: extra.large
+        ? { en: 'Watercolour · circle · 40 × 50 cm', fr: 'Aquarelle · cercle · 40 × 50 cm' }
+        : matted
         ? { en: `Watercolour · ${shapeName.en} · 5×7 in, matted`, fr: `Aquarelle · ${shapeName.fr} · 5×7 po, avec passe-partout` }
         : { en: 'Watercolour · 8×10 in', fr: 'Aquarelle · 8×10 po' },
       medium,
-      dimensions: matted
+      dimensions: extra.large
+        ? { en: '40 × 50 cm (15¾ × 19¾ in)', fr: '40 × 50 cm (15¾ × 19¾ po)' }
+        : matted
         ? { en: '5 × 7 in (12.7 × 17.8 cm), matted to 8 × 10 in (20.3 × 25.4 cm)', fr: '5 × 7 po (12,7 × 17,8 cm), passe-partout de 8 × 10 po (20,3 × 25,4 cm)' }
         : slug === 'blues-hues'
           ? { en: '8 × 10 in (20.3 × 25.4 cm), painted edge to edge', fr: '8 × 10 po (20,3 × 25,4 cm), peinte d’un bord à l’autre' }
