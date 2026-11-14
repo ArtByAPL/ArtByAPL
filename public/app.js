@@ -718,12 +718,6 @@ function demoArtworks() {
       description: st ? { en: [st[0], lead.en], fr: [st[1], lead.fr] } : null,
     };
   });
-  // TEMPORARY $2 test listing, to try the whole checkout once. Remove this block (and the Stripe test product) afterwards.
-  // Uses Teal Hues' photos and 3D model; its own Stripe link is tagged slug=test-piece and allows one purchase.
-  const teal = pieces.find((p) => p.id === 'teal-hues');
-  if (teal) pieces.unshift({ ...teal, id: 'test-piece', model: 'teal-hues', title: 'TEST piece ($2, already bought)', price: 200,
-    url: 'https://buy.stripe.com/bJe5kFfqie2Ycr8bAA8g00E', sold: false,
-    description: { en: ['Test listing for checking the checkout. Not a real piece.'], fr: ['Fiche de test pour vérifier le paiement. Pas une vraie œuvre.'] } });
   return pieces;
 }
 
