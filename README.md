@@ -73,3 +73,9 @@ The listing mock-ups (`public/art/<piece>-sideboard.jpg`) place Alexandra's
 painting into frames in free Unsplash photos (Unsplash License: free for commercial use, no attribution required):
 unsplash.com/photos/ZIUPl9ASefg (sideboard)
 Gallery wall (`public/art/<piece>-gallery-wall.jpg`): unsplash.com/photos/jbDOyAd-lMc
+
+## "View in your space" (AR)
+Each listing has a button that shows the piece in 3D, at true size in a light oak frame, and on phones
+places it on a wall with the camera (Android Scene Viewer / iPhone Quick Look). Models are in
+`public/art/3d/<piece>.glb`; the viewer is Google's model-viewer (BSD), self-hosted in `public/vendor/`.
+A new piece needs its own .glb (ask Claude to generate it).

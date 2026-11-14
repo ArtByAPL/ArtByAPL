@@ -59,7 +59,7 @@ const TEXT = {
     prev: 'Photo précédente', next: 'Photo suivante',
     collection: 'Collection', aboutRead: 'Lire mon histoire →', aboutTitle: 'À propos de l’artiste', aboutCta: 'Voir les œuvres',
     back: '← Toutes les œuvres', unique: 'Pièce unique, il n’y en a qu’une.', details: 'Détails',
-    mediumLabel: 'Technique', sizeLabel: 'Format', mockNote: 'Encadrement montré à titre d’illustration.',
+    mediumLabel: 'Technique', sizeLabel: 'Format', mockNote: 'Encadrement montré à titre d’illustration.', arBtn: 'Voir chez moi', arTitle: 'Voir l’œuvre sur votre mur', arGo: 'Ouvrir la caméra', arHelp: 'Pointez votre téléphone vers un mur : l’œuvre apparaît à sa vraie grandeur. Glissez-la pour la déplacer.', arDesktop: 'Ouvrez cette page sur votre téléphone pour voir l’œuvre sur votre mur, à sa vraie grandeur.', arNote: 'Cadre montré à titre d’illustration.', close: 'Fermer',
     demoBuy: 'Aperçu : le paiement sera actif une fois Stripe branché.', notFound: 'Œuvre introuvable.',
     contactText: 'Une question sur une œuvre ou envie d’une commande personnalisée?',
     secure: 'Paiement sécurisé par Stripe',
@@ -78,7 +78,7 @@ const TEXT = {
     prev: 'Previous photo', next: 'Next photo',
     collection: 'Collection', aboutRead: 'Read my story →', aboutTitle: 'About the artist', aboutCta: 'See the work',
     back: '← All works', unique: 'One of a kind: there is only one.', details: 'Details',
-    mediumLabel: 'Medium', sizeLabel: 'Size', mockNote: 'Shown framed for illustration.',
+    mediumLabel: 'Medium', sizeLabel: 'Size', mockNote: 'Shown framed for illustration.', arBtn: 'View in your space', arTitle: 'See it on your wall', arGo: 'Open camera', arHelp: 'Point your phone at a wall: the piece appears at its true size. Drag it to move it.', arDesktop: 'Open this page on your phone to see the piece on your wall, at its true size.', arNote: 'Frame shown for illustration.', close: 'Close',
     demoBuy: 'Preview: checkout goes live once Stripe is connected.', notFound: 'Piece not found.',
     contactText: 'A question about a piece, or interested in a commission?',
     secure: 'Secure payment by Stripe',
@@ -196,6 +196,7 @@ function renderListing() {
         <p class="listing-unique">${a.sold ? t('soldNote') : t('unique')}</p>
         ${a.sold || !a.url ? '' : `<a class="buy" href="${escapeHtml(a.url)}">${t('buy')}</a>`}
         <p class="demo-buy" hidden>${t('demoBuy')}</p>
+        <button type="button" class="ar-open"><span aria-hidden="true">◳</span> ${t('arBtn')}</button>
         <p class="listing-desc">${escapeHtml(localized(a.description))}</p>
         <h2>${t('details')}</h2>
         <dl class="listing-details">
@@ -206,6 +207,7 @@ function renderListing() {
         <p class="listing-secure">${t('secure')}</p>
       </div>
     </div>`;
+  setupAR(root, a);
   // Photo carousel: arrows, thumbnails, swipe and keyboard all go through show()
   const main = $('.listing-main', root);
   const show = (i) => {
@@ -283,6 +285,39 @@ const BUY = {
   'purple-blues': 'https://buy.stripe.com/cNi6oJ6TM1gc8aS0VW8g00C',
   'blues-hues': 'https://buy.stripe.com/dRm3cxba27EA1Mu6gg8g00D',
 };
+
+// "View in your space": true-size 3D model of the framed piece, placed on a wall with the phone camera
+function setupAR(root, a) {
+  const btn = $('.ar-open', root); if (!btn) return;
+  btn.addEventListener('click', async () => {
+    if (!customElements.get('model-viewer')) {
+      await new Promise((ok, ko) => { const sc = document.createElement('script'); sc.type = 'module';
+        sc.src = '/vendor/model-viewer.min.js'; sc.onload = ok; sc.onerror = ko; document.head.appendChild(sc); });
+    }
+    let dlg = $('#ar-dialog');
+    if (dlg) dlg.remove();
+    dlg = document.createElement('dialog'); dlg.id = 'ar-dialog'; dlg.className = 'ar-dialog';
+    dlg.innerHTML = `
+      <div class="ar-head"><h2>${t('arTitle')}</h2><button type="button" class="ar-close" aria-label="${t('close')}">×</button></div>
+      <model-viewer src="/art/3d/${escapeHtml(a.id)}.glb" alt="${escapeHtml(a.title)}"
+        ar ar-modes="webxr scene-viewer quick-look" ar-placement="wall" ar-scale="fixed"
+        camera-controls touch-action="pan-y" camera-orbit="-18deg 82deg auto" shadow-intensity="0.8"
+        exposure="1.15" environment-image="neutral" interaction-prompt="none">
+        <button slot="ar-button" class="ar-go">${t('arGo')}</button>
+      </model-viewer>
+      <p class="ar-help">${t('arHelp')}</p>
+      <p class="ar-desktop" hidden>${t('arDesktop')}</p>
+      <p class="ar-note">${t('arNote')}</p>`;
+    document.body.appendChild(dlg);
+    const mv = $('model-viewer', dlg);
+    const close = () => { dlg.close(); dlg.remove(); };
+    $('.ar-close', dlg).addEventListener('click', close);
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) close(); });
+    dlg.showModal();
+    // no AR on this device (desktop): say so instead of the camera button
+    setTimeout(() => { if (!mv.canActivateAR) { $('.ar-help', dlg).hidden = true; $('.ar-desktop', dlg).hidden = false; } }, 1200);
+  });
+}
 
 async function load() {
   // The catalogue (photos, text, buy links) lives in this file.
