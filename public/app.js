@@ -300,7 +300,7 @@ function setupAR(root, a) {
     dlg.innerHTML = `
       <div class="ar-head"><h2>${t('arTitle')}</h2><button type="button" class="ar-close" aria-label="${t('close')}">×</button></div>
       <model-viewer src="/art/3d/${escapeHtml(a.id)}.glb" alt="${escapeHtml(a.title)}"
-        ar ar-modes="scene-viewer webxr quick-look" ar-placement="wall" ar-scale="auto"
+        ar ar-modes="webxr scene-viewer quick-look" ar-placement="wall" ar-scale="auto"
         camera-controls touch-action="pan-y" camera-orbit="-18deg 82deg auto" shadow-intensity="0.8"
         exposure="1.15" environment-image="neutral" interaction-prompt="none">
         <button slot="ar-button" class="ar-go">${t('arGo')}</button>
