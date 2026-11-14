@@ -53,7 +53,7 @@ const TEXT = {
     filterAvailable: 'Disponibles', filterAll: 'Toutes',
     demo: 'Aperçu — œuvres de la boutique Etsy, paiement pas encore actif',
     empty: 'Aucune œuvre disponible pour le moment. Revenez bientôt!',
-    buy: 'Acheter cette œuvre', sold: 'Vendue',
+    buy: 'Acheter cette œuvre', sold: 'Vendue', soldOut: 'Vendue',
     soldNote: 'Cette œuvre a trouvé sa maison. Écrivez-moi si ce style vous plaît.',
     shippingTitle: 'Livraison',
     prev: 'Photo précédente', next: 'Photo suivante',
@@ -73,7 +73,7 @@ const TEXT = {
     filterAvailable: 'Available', filterAll: 'All',
     demo: 'Preview — pieces from the Etsy shop, checkout not live yet',
     empty: 'No pieces available right now. Check back soon!',
-    buy: 'Buy this piece', sold: 'Sold',
+    buy: 'Buy this piece', sold: 'Sold', soldOut: 'Sold out',
     soldNote: 'This piece has found its home. Write to me if you like this style.',
     shippingTitle: 'Shipping',
     prev: 'Previous photo', next: 'Next photo',
@@ -90,7 +90,7 @@ const TEXT = {
 
 // ────────────────────────────────────────────────────────────
 const $ = (s, el = document) => el.querySelector(s);
-const state = { lang: initialLang(), filter: 'available', artworks: [], demo: false };
+const state = { lang: initialLang(), filter: 'all', artworks: [], demo: false };
 
 function initialLang() {
   try {
@@ -137,7 +137,7 @@ function renderGrid() {
       <div class="card-frame${a.thumb ? ' has-print' : ''}">
         ${a.thumb ? `<img class="print" src="${escapeHtml(a.thumb)}" alt="${escapeHtml(a.title)}" loading="lazy">`
           : a.image ? `<img src="${escapeHtml(a.image)}" alt="${escapeHtml(a.title)}" loading="lazy">` : ''}
-        ${a.sold ? `<span class="badge">${t('sold')}</span>` : ''}
+        ${a.sold ? `<span class="badge">${t('soldOut')}</span>` : ''}
       </div>
       <div class="card-text">
         <div>
@@ -198,7 +198,7 @@ function renderListing() {
         <p class="listing-unique">${a.sold ? t('soldNote') : t('unique')}</p>
         ${a.sold || !a.url ? '' : `<a class="buy" href="${escapeHtml(a.url)}">${t('buy')}</a>`}
         <p class="demo-buy" hidden>${t('demoBuy')}</p>
-        <button type="button" class="ar-open"><span aria-hidden="true">◳</span> ${t('arBtn')}</button>
+        ${a.sold ? '' : `<button type="button" class="ar-open"><span aria-hidden="true">◳</span> ${t('arBtn')}</button>`}
         <div class="listing-desc">${[].concat(localized(a.description) || []).map((p) => `<p>${escapeHtml(p)}</p>`).join('')}</div>
         <h2>${t('details')}</h2>
         <dl class="listing-details">
@@ -496,8 +496,8 @@ async function load() {
       const live = {};
       for (const a of data.artworks) { if (a.slug && (!live[a.slug] || live[a.slug].sold)) live[a.slug] = a; }
       state.artworks = state.artworks
-        .filter((a) => !Object.keys(live).length || live[a.id])   // archived in Stripe = hidden
-        .map((a) => (live[a.id] ? { ...a, sold: live[a.id].sold, url: live[a.id].sold ? null : a.url } : a));
+        .filter((a) => a.sold || !Object.keys(live).length || live[a.id])   // archived in Stripe = hidden (already-sold pieces stay)
+        .map((a) => (live[a.id] ? { ...a, sold: a.sold || live[a.id].sold, url: a.sold || live[a.id].sold ? null : a.url } : a));
       state.artworks.sort((a, b) => Number(a.sold) - Number(b.sold));
     }
   } catch (_) { /* keep the catalogue as is */ }
@@ -571,11 +571,15 @@ function demoArtworks() {
     ['orange-hues', 'Orange Hues', 'circular'],
     ['purple-blues', 'Purple Blues', 'circular'],
     ['blues-hues', 'Blues Hues', 'watercolour & oil pastel', { medium: 'Watercolour & oil pastel', dimensions: '8×10 in', price: 6700 }],
+    // Already sold: shown at the end with a "Sold out" label, no buy button
+    ['pink-s', 'Pink S', 'circular', { sold: true }],
+    ['sage-clay', 'Sage & Clay', 'rectangular', { sold: true }],
+    ['blue-gold', 'Blue & Gold', 'circular', { sold: true }],
   ];
   // Listing photo set for every piece: the piece, in its mat, on the sideboard, on the gallery wall,
   // the collection grid, and Alexandra's own framed photo. Room photos are free Unsplash photos.
   // Pieces with Alexandra's own new photos (colour-corrected, light oak dresser)
-  const updated = ['purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
+  const updated = ['pink-s', 'sage-clay', 'blue-gold', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
   const setFor = (slug) => [
     { src: `/art/${slug}-photo1.jpg?v=2`, fill: true },
     { src: `/art/${slug}-photo3.jpg?v=2`, fill: true },
@@ -640,6 +644,14 @@ function demoArtworks() {
     'blues-hues': ['Layered washes of rich blues and teals, accented with touches of yellow, green and orange, flow from edge to edge. Expressive hand-drawn details (swirls, dots and dashes) give it a lively sense of movement.',
       'Des lavis superposés de bleus riches et de sarcelles, rehaussés de touches de jaune, de vert et d’orange, couvrent la feuille d’un bord à l’autre. Des détails expressifs dessinés à la main (spirales, points et traits) lui donnent un vif sentiment de mouvement.'],
   };
+  Object.assign(stories, {
+    'pink-s': ['A bold letter S sits at the heart of this circle, outlined in soft lilac and wrapped in fuchsia, blush, plum and warm honey. White gel pen details and raised dots give it a playful, hand-made charm.',
+      'Un grand S trône au cœur de ce cercle, tracé en lilas doux et entouré de fuchsia, de rose pâle, de prune et de miel chaud. Les détails au stylo gel blanc et les petits points en relief lui donnent un charme ludique, fait main.'],
+    'sage-clay': ['Sage green, clay and soft butter yellow spread across the full sheet, with deep viridian accents and touches of burgundy. Earthy and calm, layered with dashes, dots and coloured-pencil texture.',
+      'Vert sauge, terre cuite et jaune beurre doux couvrent toute la feuille, avec des accents viridian profonds et quelques touches de bourgogne. Une œuvre terreuse et calme, tout en traits, points et textures au crayon de couleur.'],
+    'blue-gold': ['Ultramarine, slate and soft sky blue meet warm ochre and gold inside a gentle circle. Copper lines, pale gouache dots and rows of little marks give it quiet movement.',
+      'L’outremer, l’ardoise et le bleu ciel doux rencontrent l’ocre chaud et l’or dans un cercle tout en douceur. Lignes cuivrées, points de gouache pâle et rangées de petites marques lui donnent un mouvement tranquille.'],
+  });
   const intro = {
     abstract: { en: 'Inspired by colour, movement and the organic flow of water, each painting is created intuitively, layer by layer, so no two are ever alike.',
       fr: 'Inspirée par la couleur, le mouvement et le flot organique de l’eau, chaque peinture est créée de façon intuitive, couche par couche : il n’y en a jamais deux pareilles.' },
@@ -657,7 +669,7 @@ function demoArtworks() {
       : { en: 'Watercolour and mixed media', fr: 'Aquarelle et techniques mixtes' };
     const shapeName = { circular: { en: 'circle', fr: 'cercle' }, rectangular: { en: 'edge to edge', fr: 'pleine page' } }[shape];
     return {
-      id: slug, title, collection: 'intuitive-abstracts', currency: 'cad', sold: false, url: BUY[slug] || null, year: '',
+      id: slug, title, collection: 'intuitive-abstracts', currency: 'cad', sold: Boolean(extra.sold), url: extra.sold ? null : (BUY[slug] || null), year: '',
       thumb: `/art/${slug}-sm.jpg`, art: `/art/${slug}.jpg`, image: customGallery[slug] ? customGallery[slug][0].src : `/art/${slug}-styled.jpg`,
       gallery: listingGallery(slug),
       price: d.price, matted,

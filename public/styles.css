@@ -128,7 +128,7 @@ h2 { font-family: var(--display); font-weight: 400; font-size: 2rem; margin: 0; 
   transition: transform 0.35s ease;
 }
 .card:hover .card-frame img { transform: translateY(-3px); }
-.card.is-sold .card-frame img { opacity: 0.55; }
+.card.is-sold .card-frame img { opacity: 0.85; }
 .badge {
   position: absolute; top: 12px; left: 12px;
   font: 600 0.72rem var(--body); letter-spacing: 0.08em; text-transform: uppercase;
