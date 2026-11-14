@@ -310,7 +310,7 @@ function setupAR(root, a) {
   btn.addEventListener('click', async () => {
     if (!customElements.get('model-viewer')) {
       await new Promise((ok, ko) => { const sc = document.createElement('script'); sc.type = 'module';
-        sc.src = '/vendor/model-viewer.min.js'; sc.onload = ok; sc.onerror = ko; document.head.appendChild(sc); });
+        sc.src = '/vendor/model-viewer.min.js?v=1794689770'; sc.onload = ok; sc.onerror = ko; document.head.appendChild(sc); });
     }
     let dlg = $('#ar-dialog');
     if (dlg) dlg.remove();
@@ -360,12 +360,25 @@ function setupAR(root, a) {
     let roll = 0, baked = 0, pending = null, settle = 0;
     const show = () => { mv.orientation = `${roll - baked}deg 0deg 0deg`; };
     mv.addEventListener('load', () => { if (pending !== null) { baked = pending; pending = null; show(); } });
-    const bake = () => { clearTimeout(settle); settle = setTimeout(() => {
+    let inAR = false;
+    const bake = () => { clearTimeout(settle); if (inAR) return; settle = setTimeout(() => {
       const want = Math.round(roll), r = ((want % 360) + 360) % 360;
       if (r === ((baked % 360) + 360) % 360 && pending === null) { baked = want; show(); return; }
       pending = want; mv.src = r ? `/api/glb/${encodeURIComponent(a.id)}.glb?roll=${r}` : `/art/3d/${encodeURIComponent(a.id)}.glb`;
     }, 350); };
     const setRoll = (r) => { roll = r; show(); bake(); };
+    // in the camera view, twisting two fingers turns the piece flat against the wall (patched into /vendor/model-viewer.min.js)
+    let arTurn = null;
+    mv.addEventListener('ar-status', (e) => {
+      inAR = e.detail.status === 'session-started';
+      if (!inAR) { arTurn = null; bake(); }
+    });
+    mv.addEventListener('ar-twist', (e) => {
+      if (arTurn === null) arTurn = roll;
+      arTurn += e.detail * 180 / Math.PI;
+      const snap = Math.round(arTurn / 90) * 90;
+      setRoll(Math.abs(arTurn - snap) < 5 ? snap : arTurn);
+    });
     $('.ar-rotate', dlg).addEventListener('click', () => {
       setRoll((Math.round(roll / 90) * 90 - 90) % 360);
       if (mv.updateFraming) mv.updateFraming();

@@ -78,4 +78,6 @@ Gallery wall (`public/art/<piece>-gallery-wall.jpg`): unsplash.com/photos/jbDOyA
 Each listing has a button that shows the piece in 3D, at true size in a light oak frame, and on phones
 places it on a wall with the camera (Android Scene Viewer / iPhone Quick Look). Models are in
 `public/art/3d/<piece>.glb`; the viewer is Google's model-viewer (BSD), self-hosted in `public/vendor/`.
+It has one small local patch: in camera (WebXR) mode on a wall, a two-finger twist fires an `ar-twist` event
+(model-viewer normally ignores twists on walls), which `app.js` uses to turn the piece. Re-apply it if the file is ever updated.
 A new piece needs its own .glb (ask Claude to generate it).
