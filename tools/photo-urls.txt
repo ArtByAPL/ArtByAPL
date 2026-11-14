@@ -1,2 +1,1 @@
-DMSerifDisplay-Regular.ttf https://raw.githubusercontent.com/google/fonts/main/ofl/dmserifdisplay/DMSerifDisplay-Regular.ttf
-DMSerifDisplay-Italic.ttf https://raw.githubusercontent.com/google/fonts/main/ofl/dmserifdisplay/DMSerifDisplay-Italic.ttf
+model-viewer.min.js https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js
