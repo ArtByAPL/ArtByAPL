@@ -575,11 +575,12 @@ function demoArtworks() {
     ['pink-s', 'Pink S', 'circular', { sold: true }],
     ['sage-clay', 'Sage & Clay', 'rectangular', { sold: true }],
     ['blue-gold', 'Blue & Gold', 'circular', { sold: true }],
+    ['moss-cobalt', 'Moss & Cobalt', 'circular', { sold: true }],
   ];
   // Listing photo set for every piece: the piece, in its mat, on the sideboard, on the gallery wall,
   // the collection grid, and Alexandra's own framed photo. Room photos are free Unsplash photos.
   // Pieces with Alexandra's own new photos (colour-corrected, light oak dresser)
-  const updated = ['pink-s', 'sage-clay', 'blue-gold', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
+  const updated = ['pink-s', 'sage-clay', 'blue-gold', 'moss-cobalt', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
   const setFor = (slug) => [
     { src: `/art/${slug}-photo1.jpg?v=4`, fill: true },
     { src: `/art/${slug}-photo3.jpg?v=4`, fill: true },
@@ -651,6 +652,8 @@ function demoArtworks() {
       'Vert sauge, terre cuite et jaune beurre doux couvrent toute la feuille, avec des accents viridian profonds et quelques touches de bourgogne. Une œuvre terreuse et calme, tout en traits, points et textures au crayon de couleur.'],
     'blue-gold': ['Ultramarine, slate and soft sky blue meet warm ochre and gold inside a gentle circle. Copper lines, pale gouache dots and rows of little marks give it quiet movement.',
       'L’outremer, l’ardoise et le bleu ciel doux rencontrent l’ocre chaud et l’or dans un cercle tout en douceur. Lignes cuivrées, points de gouache pâle et rangées de petites marques lui donnent un mouvement tranquille.'],
+    'moss-cobalt': ['Moss green, olive and deep forest tones gather with bright cobalt and a glow of ochre gold. Raised cobalt dots, white gel-pen spirals and hand-drawn droplets give it a rich, layered texture.',
+      'Vert mousse, olive et vert forêt profond se rassemblent avec un cobalt éclatant et une lueur d’ocre doré. Points de cobalt en relief, spirales au stylo gel blanc et gouttes dessinées à la main lui donnent une texture riche, tout en couches.'],
   });
   const intro = {
     abstract: { en: 'Inspired by colour, movement and the organic flow of water, each painting is created intuitively, layer by layer, so no two are ever alike.',
