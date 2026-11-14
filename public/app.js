@@ -371,21 +371,21 @@ function setupAR(root, a) {
       if (mv.updateFraming) mv.updateFraming();
     });
     // or twist two fingers on the 3D view (one finger still spins the view around the piece)
-    const tp = new Map(); let tw = null;
-    const twAngle = () => { const [p, q] = [...tp.values()]; return Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI; };
-    mv.addEventListener('pointerdown', (e) => { tp.set(e.pointerId, { x: e.clientX, y: e.clientY });
-      if (tp.size === 2) tw = { a: twAngle(), roll }; }, true);
-    mv.addEventListener('pointermove', (e) => {
-      if (!tp.has(e.pointerId)) return; tp.set(e.pointerId, { x: e.clientX, y: e.clientY });
-      if (tp.size !== 2 || !tw) return;
-      e.stopPropagation();
-      let d = twAngle() - tw.a; d = ((d + 540) % 360) - 180;
+    let tw = null;
+    const twAngle = (t) => Math.atan2(t[1].clientY - t[0].clientY, t[1].clientX - t[0].clientX) * 180 / Math.PI;
+    const twStart = (e) => { if (e.touches.length === 2) { tw = { a: twAngle(e.touches), roll }; e.preventDefault(); } };
+    const twMove = (e) => {
+      if (!tw || e.touches.length !== 2) return;
+      e.preventDefault(); e.stopPropagation();
+      let d = twAngle(e.touches) - tw.a; d = ((d + 540) % 360) - 180;
       let r = tw.roll - d; const snap = Math.round(r / 90) * 90;
       if (Math.abs(r - snap) < 5) r = snap;   // clicks into straight / quarter turns
       setRoll(r);
-    }, true);
-    const twEnd = (e) => { tp.delete(e.pointerId); if (tp.size < 2 && tw) { tw = null; if (mv.updateFraming) mv.updateFraming(); } };
-    mv.addEventListener('pointerup', twEnd, true); mv.addEventListener('pointercancel', twEnd, true);
+    };
+    const twEnd = (e) => { if (tw && e.touches.length < 2) { tw = null; if (mv.updateFraming) mv.updateFraming(); } };
+    mv.addEventListener('touchstart', twStart, { capture: true, passive: false });
+    mv.addEventListener('touchmove', twMove, { capture: true, passive: false });
+    mv.addEventListener('touchend', twEnd, true); mv.addEventListener('touchcancel', twEnd, true);
     setupWallPhoto(dlg, a, mv);
   });
 }
