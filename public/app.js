@@ -38,7 +38,7 @@ const CONFIG = {
   ],
   defaultCollection: 'intuitive-abstracts',
   // Big image at the top: one piece, edited and hosted in /art
-  hero: { image: '/art/forest-walk.jpg', title: 'Forest Walk' },
+  hero: { image: '/art/collection-grid.jpg', title: 'The collection', photo: true },
   shipping: {
     fr: "Livraison gratuite au Canada et aux États-Unis. Expédiée sous 3 à 5 jours ouvrables, bien protégée.",
     en: "Free shipping within Canada and the US. Ships within 3–5 business days, carefully packaged.",
@@ -593,7 +593,7 @@ function demoArtworks() {
   ];
   const isLarge = (slug) => ['sky-ochre', 'moss-rain'].includes(slug);
   const setFor = (slug) => isLarge(slug) ? largeSet(slug) : [
-    { src: `/art/${slug}-photo1.jpg?v=6`, fill: true },
+    { src: `/art/${slug}-photo1.jpg?v=7`, fill: true },
     { src: `/art/${slug}-photo3.jpg?v=6`, fill: true },
     { src: `/art/${slug}.jpg` },
     { src: `/art/${slug}-matted.jpg`, fill: true },
@@ -683,7 +683,7 @@ function demoArtworks() {
   };
   const unmatted = ['mountain-landscape', 'blues-hues'];
   // Display order: by colour (blues → greens → purples → pinks → reds/oranges → warm), sold pieces mixed in
-  const ORDER = ['blue-peak', 'deep-blues', 'blue-hues-rectangular', 'blues-hues', 'sky-ochre', 'blue-gold', 'teal-hues', 'blue-hues-circular',
+  const ORDER = ['deep-blues', 'blue-hues-rectangular', 'blues-hues', 'blue-peak', 'sky-ochre', 'blue-gold', 'teal-hues', 'blue-hues-circular',
     'tidal-blues', 'moss-cobalt', 'moss-rain', 'forest-walk', 'sage-clay', 'violet-green', 'mystic-purple', 'purple-hues-rectangular',
     'purple-blues', 'violet-hues', 'purple-hues-circular', 'soft-pinks', 'pink-s', 'pink-hues', 'warm-hues', 'autumn-hues-circular',
     'orange-hues', 'autumn-hues-rectangular', 'mountain-landscape'];
@@ -729,7 +729,9 @@ function renderHero() {
   if (!el) return;
   const h = CONFIG.hero;
   el.innerHTML = h && h.image
-    ? `<div class="hero-crop"><img class="print" src="${escapeHtml(h.image)}" alt="${escapeHtml(h.title)}"></div>`
+    ? (h.photo
+      ? `<div class="hero-photo"><img src="${escapeHtml(h.image)}" alt="${escapeHtml(h.title)}"></div>`
+      : `<div class="hero-crop"><img class="print" src="${escapeHtml(h.image)}" alt="${escapeHtml(h.title)}"></div>`)
     : `<img src="${watercolour(7, ['#d93a6a', '#1d8a85', '#f2a03d', '#5b2a86', '#2fb39e'], { w: 600, h: 600, paper: 'transparent' })}" alt="">`;
 }
 

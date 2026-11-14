@@ -375,3 +375,6 @@ a.card { text-decoration: none; color: inherit; }
 .listing-more ul { margin: 12px 0 0; padding-left: 18px; line-height: 1.6; font-size: .95rem; }
 .listing-more p { margin: 12px 0 0; line-height: 1.6; font-size: .95rem; }
 .card-frame.is-photo { aspect-ratio: 4 / 5; }
+.hero-photo { width: 100%; max-width: 440px; margin-inline: auto; }
+.hero-photo img { width: 100%; height: auto; display: block; border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(45, 42, 36, 0.10), 0 30px 60px -30px rgba(45, 42, 36, 0.45); }
