@@ -496,9 +496,11 @@ function demoArtworks() {
     { src: `/art/${slug}.jpg` },
     { src: `/art/${slug}-matted.jpg`, fill: true },
     { src: `/art/${slug}-sideboard.jpg`, mock: true, fill: true },
-    // Mountain Landscape is an 8×10 without a mat: no gallery wall for it
-    ...(slug === 'mountain-landscape' ? [] : [{ src: `/art/${slug}-gallery-wall.jpg`, mock: true, fill: true }]),
-    { src: '/art/collection-grid.jpg', fill: true },
+    // Mountain Landscape is a different kind of piece (8×10, no mat): no gallery wall, no collection grid
+    ...(slug === 'mountain-landscape' ? [] : [
+      { src: `/art/${slug}-gallery-wall.jpg`, mock: true, fill: true },
+      { src: '/art/collection-grid.jpg', fill: true },
+    ]),
   ];
   const customGallery = Object.fromEntries(updated.map((slug) => [slug, setFor(slug)]));
   const listingGallery = (slug) => customGallery[slug] || [
