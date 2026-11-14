@@ -1,1 +1,1 @@
-model-viewer.min.js https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js
+etsy-logo.jpg https://i.etsystatic.com/65548102/r/isla/477f70/84690840/isla_fullxfull.84690840_gx1r30ij.jpg
