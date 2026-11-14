@@ -498,7 +498,6 @@ async function load() {
       state.artworks = state.artworks
         .filter((a) => a.sold || !Object.keys(live).length || live[a.id])   // archived in Stripe = hidden (already-sold pieces stay)
         .map((a) => (live[a.id] ? { ...a, sold: a.sold || live[a.id].sold, url: a.sold || live[a.id].sold ? null : a.url } : a));
-      state.artworks.sort((a, b) => Number(a.sold) - Number(b.sold));
     }
   } catch (_) { /* keep the catalogue as is */ }
   if ($('.collections')) renderGrid();
@@ -680,11 +679,11 @@ function demoArtworks() {
       fr: 'Une œuvre apaisante pour les amoureux de la nature, et un beau cadeau pour quiconque se sent chez soi en montagne ou au bord de l’eau.' },
   };
   const unmatted = ['mountain-landscape', 'blues-hues'];
-  // Display order: by colour (blues → greens → purples → pinks → reds/oranges → warm), sold pieces last
-  const ORDER = ['deep-blues', 'blue-hues-rectangular', 'blues-hues', 'teal-hues', 'blue-hues-circular', 'tidal-blues',
-    'forest-walk', 'violet-green', 'mystic-purple', 'purple-hues-rectangular', 'purple-blues', 'violet-hues', 'purple-hues-circular',
-    'soft-pinks', 'pink-hues', 'warm-hues', 'autumn-hues-circular', 'orange-hues', 'autumn-hues-rectangular', 'mountain-landscape',
-    'sky-ochre', 'blue-gold', 'moss-cobalt', 'moss-rain', 'sage-clay', 'pink-s'];
+  // Display order: by colour (blues → greens → purples → pinks → reds/oranges → warm), sold pieces mixed in
+  const ORDER = ['deep-blues', 'blue-hues-rectangular', 'blues-hues', 'sky-ochre', 'blue-gold', 'teal-hues', 'blue-hues-circular',
+    'tidal-blues', 'moss-cobalt', 'moss-rain', 'forest-walk', 'sage-clay', 'violet-green', 'mystic-purple', 'purple-hues-rectangular',
+    'purple-blues', 'violet-hues', 'purple-hues-circular', 'soft-pinks', 'pink-s', 'pink-hues', 'warm-hues', 'autumn-hues-circular',
+    'orange-hues', 'autumn-hues-rectangular', 'mountain-landscape'];
   const rank = (slug) => { const i = ORDER.indexOf(slug); return i < 0 ? ORDER.length : i; };
   list.sort((a, b) => rank(a[0]) - rank(b[0]));
   const pieces = list.map(([slug, title, shape, extra = {}]) => {
