@@ -58,6 +58,7 @@ const TEXT = {
     shippingTitle: 'Livraison',
     prev: 'Photo précédente', next: 'Photo suivante',
     collection: 'Collection', aboutRead: 'Lire mon histoire →', aboutTitle: 'À propos de l’artiste', aboutCta: 'Voir les œuvres',
+    originalLabel: 'Œuvre', originalVal: 'Peinture originale (pas une reproduction)', paperLabel: 'Papier', paperVal: 'Papier aquarelle épais à grain fin (pressé à froid), 140 lb / 300 g/m²', signedLabel: 'Signature', signedVal: 'Signée par l’artiste au verso', presLabel: 'Présentation', presMatted: 'Non encadrée. Livrée dans un passe-partout de 8 × 10 po, prête à glisser dans un cadre standard.', presUnmatted: 'Non encadrée, sans passe-partout. Entre dans un cadre standard de 8 × 10 po.', shipTitle: 'Livraison et emballage', shipPack: 'Expédiée à plat, dans une pochette protectrice en cellophane.', shipNote: 'Chaque œuvre est accompagnée d’un mot de remerciement écrit à la main par l’artiste.', shipMade: 'Peinte à la main au Québec, Canada.', careTitle: 'Entretien', careText: 'Pour garder les couleurs vives, exposez l’œuvre à l’abri du soleil direct et de l’humidité, idéalement encadrée sous verre. Manipulez-la par les bords, les mains propres et sèches.',
     back: '← Toutes les œuvres', unique: 'Pièce unique, il n’y en a qu’une.', details: 'Détails',
     mediumLabel: 'Technique', sizeLabel: 'Format', mockNote: 'Encadrement montré à titre d’illustration.', arBtn: 'Voir chez moi', arTitle: 'Voir l’œuvre sur votre mur', arGo: 'Ouvrir la caméra', arHelp: 'Pointez un mur et bougez lentement le téléphone jusqu’à ce que l’œuvre s’y accroche. Elle apparaît à sa vraie grandeur : glissez pour la déplacer, pincez pour l’agrandir. Astuce : un mur avec un peu de texture ou un cadre déjà accroché aide la caméra.', arDesktop: 'Ouvrez cette page sur votre téléphone pour voir l’œuvre sur votre mur, à sa vraie grandeur.', arNote: 'Cadre montré à titre d’illustration.', close: 'Fermer', arPhoto: 'Essayer avec une photo de mon mur', arTake: 'Prendre une photo', arPick: 'Choisir dans mes photos', arPhotoHelp: 'Glissez l’œuvre pour la placer. Pincez (ou utilisez le curseur) pour ajuster la grandeur.', arSize: 'Grandeur', arChange: 'Changer de photo', arSave: 'Enregistrer l’image', arBack: 'Vue 3D',
     demoBuy: 'Aperçu : le paiement sera actif une fois Stripe branché.', notFound: 'Œuvre introuvable.',
@@ -77,6 +78,7 @@ const TEXT = {
     shippingTitle: 'Shipping',
     prev: 'Previous photo', next: 'Next photo',
     collection: 'Collection', aboutRead: 'Read my story →', aboutTitle: 'About the artist', aboutCta: 'See the work',
+    originalLabel: 'Artwork', originalVal: 'Original painting (not a print)', paperLabel: 'Paper', paperVal: 'Heavyweight cold-pressed watercolour paper, 140 lb / 300 gsm', signedLabel: 'Signature', signedVal: 'Signed by the artist on the back', presLabel: 'Presentation', presMatted: 'Unframed. Arrives in an 8 × 10 in mat, ready to slip into a standard frame.', presUnmatted: 'Unframed, no mat. Fits a standard 8 × 10 in frame.', shipTitle: 'Shipping & packaging', shipPack: 'Ships flat in a protective cellophane sleeve.', shipNote: 'Every piece comes with a handwritten thank-you note from the artist.', shipMade: 'Hand-painted in Québec, Canada.', careTitle: 'Care', careText: 'To keep the colours vivid, display away from direct sunlight and humidity, ideally framed behind glass. Handle by the edges with clean, dry hands.',
     back: '← All works', unique: 'One of a kind: there is only one.', details: 'Details',
     mediumLabel: 'Medium', sizeLabel: 'Size', mockNote: 'Shown framed for illustration.', arBtn: 'View in your space', arTitle: 'See it on your wall', arGo: 'Open camera', arHelp: 'Point at a wall and move the phone slowly until the piece snaps onto it. It starts at its true size: drag to move it, pinch to resize. Tip: a wall with some texture or a frame already hanging helps the camera.', arDesktop: 'Open this page on your phone to see the piece on your wall, at its true size.', arNote: 'Frame shown for illustration.', close: 'Close', arPhoto: 'Try it with a photo of my wall', arTake: 'Take a photo', arPick: 'Choose from my photos', arPhotoHelp: 'Drag the piece to place it. Pinch (or use the slider) to adjust the size.', arSize: 'Size', arChange: 'Change photo', arSave: 'Save image', arBack: '3D view',
     demoBuy: 'Preview: checkout goes live once Stripe is connected.', notFound: 'Piece not found.',
@@ -140,7 +142,7 @@ function renderGrid() {
       <div class="card-text">
         <div>
           <div class="card-title">${escapeHtml(a.title)}</div>
-          <div class="card-sub">${escapeHtml([a.medium, a.dimensions].filter(Boolean).join(' · '))}</div>
+          <div class="card-sub">${escapeHtml(localized(a.cardSub) || [localized(a.medium), localized(a.dimensions)].filter(Boolean).join(' · '))}</div>
         </div>
         <div class="card-price">${money(a.price, a.currency)}</div>
       </div>
@@ -197,13 +199,29 @@ function renderListing() {
         ${a.sold || !a.url ? '' : `<a class="buy" href="${escapeHtml(a.url)}">${t('buy')}</a>`}
         <p class="demo-buy" hidden>${t('demoBuy')}</p>
         <button type="button" class="ar-open"><span aria-hidden="true">◳</span> ${t('arBtn')}</button>
-        <p class="listing-desc">${escapeHtml(localized(a.description))}</p>
+        <div class="listing-desc">${[].concat(localized(a.description) || []).map((p) => `<p>${escapeHtml(p)}</p>`).join('')}</div>
         <h2>${t('details')}</h2>
         <dl class="listing-details">
-          ${a.medium ? `<dt>${t('mediumLabel')}</dt><dd>${escapeHtml(localized(a.medium))}</dd>` : ''}
+          <dt>${t('originalLabel')}</dt><dd>${t('originalVal')}</dd>
           ${a.dimensions ? `<dt>${t('sizeLabel')}</dt><dd>${escapeHtml(localized(a.dimensions))}</dd>` : ''}
-          <dt>${t('shippingTitle')}</dt><dd>${escapeHtml(CONFIG.shipping[state.lang])}</dd>
+          ${a.medium ? `<dt>${t('mediumLabel')}</dt><dd>${escapeHtml(localized(a.medium))}</dd>` : ''}
+          <dt>${t('paperLabel')}</dt><dd>${t('paperVal')}</dd>
+          <dt>${t('signedLabel')}</dt><dd>${t('signedVal')}</dd>
+          <dt>${t('presLabel')}</dt><dd>${a.matted === false ? t('presUnmatted') : t('presMatted')}</dd>
         </dl>
+        <details class="listing-more" open>
+          <summary>${t('shipTitle')}</summary>
+          <ul>
+            <li>${escapeHtml(CONFIG.shipping[state.lang])}</li>
+            <li>${t('shipPack')}</li>
+            <li>${t('shipNote')}</li>
+            <li>${t('shipMade')}</li>
+          </ul>
+        </details>
+        <details class="listing-more">
+          <summary>${t('careTitle')}</summary>
+          <p>${t('careText')}</p>
+        </details>
         <p class="listing-secure">${t('secure')}</p>
       </div>
     </div>`;
@@ -511,24 +529,81 @@ function demoArtworks() {
     { src: '/art/collection-grid.jpg', fill: true },
     { src: `/art/${slug}-styled.jpg`, fill: true },
   ];
-  const descriptions = {
-    'forest-walk': {
-      en: 'Deep teals, forest greens and earthy browns, with touches of gold and pencil detail, painted in a circle and set on a deep plum backdrop. Painted intuitively in watercolour and mixed media on paper.',
-      fr: 'Des sarcelles profonds, des verts forêt et des bruns terreux, avec des touches d’or et des détails au crayon, peints dans un cercle sur un fond prune foncé. Peinte de façon intuitive à l’aquarelle et en techniques mixtes sur papier.',
-    },
+  // Per-piece story (first paragraph of each listing), in English and French.
+  const stories = {
+    'forest-walk': ['Deep teals and mossy greens drift between warm ochre and earthy brown, like light filtering through a forest canopy. Stippled shapes and fine pencil lines reveal themselves the closer you look.',
+      'Des sarcelles profonds et des verts mousse dérivent entre l’ocre chaud et le brun terreux, comme la lumière qui filtre à travers les arbres. Pointillés et fins traits de crayon se révèlent à mesure qu’on s’approche.'],
+    'deep-blues': ['Cobalt, ultramarine and navy pool together with flashes of olive and gold. Scattered brushmarks and hand-drawn swirls give it the feeling of moving water on a bright day.',
+      'Le cobalt, l’outremer et le marine se rassemblent, ponctués d’éclats d’olive et d’or. Touches de pinceau et spirales dessinées à la main évoquent l’eau en mouvement par une journée lumineuse.'],
+    'mystic-purple': ['Rich violet and magenta bloom alongside deep emerald and smoky plum. Dotted textures and soft spirals give this piece a quiet, dreamlike energy.',
+      'Le violet profond et le magenta s’épanouissent aux côtés d’un émeraude foncé et d’un prune fumé. Textures pointillées et douces spirales donnent à l’œuvre une énergie calme, presque onirique.'],
+    'autumn-hues-circular': ['Crimson, burnt orange and amber gather like fallen leaves, grounded by touches of deep brown. Tiny dashes and hand-drawn patterns echo the rhythm of a crisp fall walk.',
+      'Cramoisi, orange brûlé et ambre se rassemblent comme des feuilles tombées, ancrés par quelques touches de brun foncé. Petits traits et motifs dessinés à la main rappellent le rythme d’une promenade d’automne.'],
+    'mountain-landscape': ['Inspired by mountain horizons, flowing water and the beauty of natural landscapes, this dreamy, expressive mountainscape is held within a soft circle. Golden slopes, a coral peak and deep teal water are built up in rich layers of colour, organic textures and hand-drawn details.',
+      'Inspiré des horizons de montagnes, de l’eau qui coule et de la beauté des paysages, ce paysage rêveur et expressif est contenu dans un cercle tout en douceur. Pentes dorées, sommet corail et eaux sarcelle profondes sont construits en riches couches de couleur, de textures organiques et de détails dessinés à la main.'],
+    'soft-pinks': ['Blush, rose and soft fuchsia float across the circle with hints of peach and plum. Light and airy, with delicate marks that keep the eye wandering.',
+      'Rose pâle, vieux rose et fuchsia doux flottent dans le cercle avec des notes de pêche et de prune. Une œuvre légère et aérienne, aux marques délicates qui invitent le regard à se promener.'],
+    'violet-green': ['Saturated violet meets jade and teal, with touches of slate blue. Rows of tiny marks and a few hand-drawn arcs bring a gentle rhythm to the bold colour.',
+      'Un violet intense rencontre le jade et le sarcelle, avec quelques touches de bleu ardoise. Rangées de petites marques et arcs dessinés à la main donnent un rythme doux à ces couleurs franches.'],
+    'tidal-blues': ['Sea green, slate blue and olive wash across the page from edge to edge, like a tide pulling back over the sand. Layers of dots, dashes and coloured-pencil texture add depth the closer you look.',
+      'Vert océan, bleu ardoise et olive couvrent la feuille d’un bord à l’autre, comme une marée qui se retire sur le sable. Points, traits et textures au crayon de couleur ajoutent de la profondeur à mesure qu’on s’approche.'],
+    'purple-hues-rectangular': ['Bright cerulean and violet run into magenta and warm gold across the full sheet. Swirls, stippling and crayon textures fill the spaces in between.',
+      'Un bleu céruléen éclatant et le violet se fondent dans le magenta et l’or chaud, sur toute la feuille. Spirales, pointillés et textures au pastel remplissent les espaces entre les formes.'],
+    'blue-hues-rectangular': ['Turquoise, cobalt and deep teal flow edge to edge, with leaf-like strokes and fine concentric swirls. Fresh and calming, like looking down into clear water.',
+      'Turquoise, cobalt et sarcelle profond s’étendent d’un bord à l’autre, avec des touches en forme de feuilles et de fines spirales concentriques. Une œuvre fraîche et apaisante, comme un regard plongé dans une eau claire.'],
+    'autumn-hues-rectangular': ['Coral, terracotta and mustard sit against deep forest green across the full sheet. Gold spirals, crimson lines and dense dotted patterns give it a warm, layered richness.',
+      'Corail, terre cuite et moutarde côtoient un vert forêt profond sur toute la feuille. Spirales dorées, lignes cramoisies et motifs pointillés lui donnent une richesse chaleureuse, tout en couches.'],
+    'purple-hues-circular': ['Lavender, violet and periwinkle drift through the circle with touches of warm ochre. Soft line-drawn spirals and dashes keep it light and playful.',
+      'Lavande, violet et pervenche dérivent dans le cercle, avec quelques touches d’ocre chaud. De douces spirales et petits traits dessinés à la main la gardent légère et ludique.'],
+    'teal-hues': ['Indigo, cobalt and soft teal mingle with warm chestnut and sepia. Fine copper lines and rows of little marks carry the eye around the circle.',
+      'Indigo, cobalt et sarcelle doux se mêlent à des bruns châtaigne et sépia. De fines lignes cuivrées et des rangées de petites marques guident le regard tout autour du cercle.'],
+    'violet-hues': ['Cobalt and sapphire wash into plum and magenta, warmed by hints of amber. Rhythmic dashes and hand-drawn spirals trace the edge of the circle.',
+      'Le cobalt et le saphir se fondent dans le prune et le magenta, réchauffés par des notes d’ambre. Traits rythmés et spirales dessinées à la main suivent le contour du cercle.'],
+    'pink-hues': ['Hot pink, scarlet and sunny yellow burst across the circle, cooled by touches of lilac. Bold, joyful and full of energy.',
+      'Rose vif, écarlate et jaune soleil éclatent dans le cercle, adoucis par quelques touches de lilas. Une œuvre audacieuse, joyeuse et pleine d’énergie.'],
+    'blue-hues-circular': ['Aqua, teal and cerulean, with pops of deep green and a few dark accents. Fine swirls and leaf-like marks give it the calm of a still lake.',
+      'Aqua, sarcelle et céruléen, avec des éclats de vert profond et quelques accents sombres. De fines spirales et des marques en forme de feuilles lui donnent le calme d’un lac paisible.'],
+    'warm-hues': ['Fiery orange, coral and fuchsia glow beside sunlit yellow, traced with gold spirals and crimson dashes. Warm and vibrant, like the last light of a summer evening.',
+      'Orange ardent, corail et fuchsia brillent à côté d’un jaune ensoleillé, parcourus de spirales dorées et de traits cramoisis. Chaleureuse et vibrante, comme la dernière lumière d’un soir d’été.'],
+    'orange-hues': ['Marigold, amber and tangerine flow together with soft olive washes. Red-orange marks and fine spirals bring a sunny, upbeat energy.',
+      'Souci, ambre et mandarine se fondent dans de doux lavis olive. Marques rouge orangé et fines spirales apportent une énergie ensoleillée et joyeuse.'],
+    'purple-blues': ['Cobalt and royal blue melt into violet and plum, with rows of tiny marks and soft swirls. Moody and luminous at the same time.',
+      'Le cobalt et le bleu roi se fondent dans le violet et le prune, avec des rangées de petites marques et de douces spirales. À la fois profonde et lumineuse.'],
+    'blues-hues': ['Layered washes of rich blues and teals, accented with touches of yellow, green and orange, flow from edge to edge. Expressive hand-drawn details (swirls, dots and dashes) give it a lively sense of movement.',
+      'Des lavis superposés de bleus riches et de sarcelles, rehaussés de touches de jaune, de vert et d’orange, couvrent la feuille d’un bord à l’autre. Des détails expressifs dessinés à la main (spirales, points et traits) lui donnent un vif sentiment de mouvement.'],
   };
+  const intro = {
+    abstract: { en: 'Inspired by colour, movement and the organic flow of water, each painting is created intuitively, layer by layer, so no two are ever alike.',
+      fr: 'Inspirée par la couleur, le mouvement et le flot organique de l’eau, chaque peinture est créée de façon intuitive, couche par couche : il n’y en a jamais deux pareilles.' },
+    landscape: { en: 'A calming piece for nature lovers, and a lovely gift for anyone who feels at home in the mountains or by the water.',
+      fr: 'Une œuvre apaisante pour les amoureux de la nature, et un beau cadeau pour quiconque se sent chez soi en montagne ou au bord de l’eau.' },
+  };
+  const unmatted = ['mountain-landscape', 'blues-hues'];
   return list.map(([slug, title, shape, extra = {}]) => {
     const d = { ...small, ...extra };
-    const medium = extra.medium || (shape === 'landscape' ? 'Watercolour landscape' : `Watercolour · ${shape}`);
+    const matted = !unmatted.includes(slug);
+    const st = stories[slug];
+    const lead = slug === 'mountain-landscape' ? intro.landscape : intro.abstract;
+    const medium = slug === 'blues-hues'
+      ? { en: 'Watercolour, ink and pastel', fr: 'Aquarelle, encre et pastel' }
+      : { en: 'Watercolour and mixed media', fr: 'Aquarelle et techniques mixtes' };
+    const shapeName = { circular: { en: 'circle', fr: 'cercle' }, rectangular: { en: 'edge to edge', fr: 'pleine page' } }[shape];
     return {
       id: slug, title, collection: 'intuitive-abstracts', currency: 'cad', sold: false, url: BUY[slug] || null, year: '',
       thumb: `/art/${slug}-sm.jpg`, art: `/art/${slug}.jpg`, image: customGallery[slug] ? customGallery[slug][0].src : `/art/${slug}-styled.jpg`,
       gallery: listingGallery(slug),
-      medium, dimensions: d.dimensions, price: d.price,
-      description: descriptions[slug] || {
-        en: `Original ${medium.toLowerCase()} painting by Alexandra Paige, ${d.dimensions}.`,
-        fr: `Aquarelle originale d’Alexandra Paige, ${d.dimensions}.`,
-      },
+      price: d.price, matted,
+      // Short line under each card in the grid
+      cardSub: matted
+        ? { en: `Watercolour · ${shapeName.en} · 5×7 in, matted`, fr: `Aquarelle · ${shapeName.fr} · 5×7 po, avec passe-partout` }
+        : { en: 'Watercolour · 8×10 in', fr: 'Aquarelle · 8×10 po' },
+      medium,
+      dimensions: matted
+        ? { en: '5 × 7 in (12.7 × 17.8 cm), matted to 8 × 10 in (20.3 × 25.4 cm)', fr: '5 × 7 po (12,7 × 17,8 cm), passe-partout de 8 × 10 po (20,3 × 25,4 cm)' }
+        : slug === 'blues-hues'
+          ? { en: '8 × 10 in (20.3 × 25.4 cm), painted edge to edge', fr: '8 × 10 po (20,3 × 25,4 cm), peinte d’un bord à l’autre' }
+          : { en: '8 × 10 in (20.3 × 25.4 cm), with a natural white border', fr: '8 × 10 po (20,3 × 25,4 cm), avec une bordure blanche naturelle' },
+      description: st ? { en: [st[0], lead.en], fr: [st[1], lead.fr] } : null,
     };
   });
 }
