@@ -625,11 +625,13 @@ function demoArtworks() {
     // Large format (40 × 50 cm, for a 50 × 70 cm frame with mat)
     ['sky-ochre', 'Sky & Ochre', 'circular', { sold: true, large: true, price: 8500 }],
     ['moss-rain', 'Moss & Rain', 'circular', { sold: true, large: true, price: 8500 }],
+    ['tide-pool', 'Rock Pool', 'rectangular', { sold: true, large: true, price: 8500 }],
+    ['sorbet', 'Sorbet', 'rectangular', { sold: true, large: true, price: 8500 }],
   ];
   // Listing photo set for every piece: the piece, in its mat, on the sideboard, on the gallery wall,
   // the collection grid, and Alexandra's own framed photo. Room photos are free Unsplash photos.
   // Pieces with Alexandra's own new photos (colour-corrected, light oak dresser)
-  const updated = ['blue-peak', 'sky-ochre', 'moss-rain', 'pink-s', 'sage-clay', 'blue-gold', 'moss-cobalt', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
+  const updated = ['tide-pool', 'sorbet', 'blue-peak', 'sky-ochre', 'moss-rain', 'pink-s', 'sage-clay', 'blue-gold', 'moss-cobalt', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
   const largeSet = (slug) => [
     { src: `/art/${slug}-photo1.jpg?v=5`, fill: true },
     { src: `/art/${slug}-room.jpg?v=5`, mock: true, fill: true },
@@ -637,7 +639,7 @@ function demoArtworks() {
     { src: `/art/${slug}.jpg?v=5` },
     { src: `/art/${slug}-matted.jpg?v=5`, fill: true },
   ];
-  const isLarge = (slug) => ['sky-ochre', 'moss-rain'].includes(slug);
+  const isLarge = (slug) => ['sky-ochre', 'moss-rain', 'tide-pool', 'sorbet'].includes(slug);
   const setFor = (slug) => isLarge(slug) ? largeSet(slug) : [
     { src: `/art/${slug}-photo1.jpg?v=8`, fill: true },
     { src: `/art/${slug}-photo3.jpg?v=6`, fill: true },
@@ -718,6 +720,10 @@ function demoArtworks() {
       'Des lavis menthe, écume et olive mousse flottent sur une fine pluie de marques cobalt peintes à la main, ancrés par des touches de brun chocolat et de vert forêt profond. Calme, détaillée et tout en couches.'],
     'blue-peak': ['A misty mountain landscape in cobalt and ultramarine, painted in a circle and set on a deep navy card. Layered washes, crayon texture and tiny white highlights catch the light on the peak, with a few birds drifting across the sky.',
       'Un paysage de montagne brumeux en bleu cobalt et outremer, peint dans un cercle et posé sur un carton bleu marine profond. Lavis superposés, texture au pastel et petits rehauts blancs font briller le sommet, avec quelques oiseaux qui traversent le ciel.'],
+    'tide-pool': ['A larger piece painted edge to edge in turquoise, cobalt and sea green, deepening into plum and violet. White gel-pen swirls, raised dots and coral-like squiggles give it the feel of looking down into a rock pool.',
+      'Une plus grande œuvre peinte d’un bord à l’autre en turquoise, cobalt et vert océan, qui plonge vers le prune et le violet. Spirales au stylo gel blanc, points en relief et motifs en forme de corail évoquent un regard plongé dans une cuvette de marée.'],
+    'sorbet': ['A larger piece painted edge to edge in hot pink, fuchsia, violet and glowing lemon yellow, with touches of mint. Swirls, dashes and dots layered over soft washes make it joyful and full of energy.',
+      'Une plus grande œuvre peinte d’un bord à l’autre en rose vif, fuchsia, violet et jaune citron lumineux, avec quelques touches de menthe. Spirales, traits et points superposés sur de doux lavis la rendent joyeuse et pleine d’énergie.'],
     'moss-cobalt': ['Moss green, olive and deep forest tones gather with bright cobalt and a glow of ochre gold. Raised cobalt dots, white gel-pen spirals and hand-drawn droplets give it a rich, layered texture.',
       'Vert mousse, olive et vert forêt profond se rassemblent avec un cobalt éclatant et une lueur d’ocre doré. Points de cobalt en relief, spirales au stylo gel blanc et gouttes dessinées à la main lui donnent une texture riche, tout en couches.'],
   });
@@ -729,9 +735,9 @@ function demoArtworks() {
   };
   const unmatted = ['mountain-landscape', 'blues-hues'];
   // Display order: by colour (blues → greens → purples → pinks → reds/oranges → warm), sold pieces mixed in
-  const ORDER = ['deep-blues', 'blue-hues-rectangular', 'blues-hues', 'blue-peak', 'sky-ochre', 'blue-gold', 'teal-hues', 'blue-hues-circular',
+  const ORDER = ['deep-blues', 'blue-hues-rectangular', 'blues-hues', 'blue-peak', 'sky-ochre', 'blue-gold', 'teal-hues', 'blue-hues-circular', 'tide-pool',
     'tidal-blues', 'moss-cobalt', 'moss-rain', 'forest-walk', 'sage-clay', 'violet-green', 'mystic-purple', 'purple-hues-rectangular',
-    'purple-blues', 'violet-hues', 'purple-hues-circular', 'soft-pinks', 'pink-s', 'pink-hues', 'warm-hues', 'autumn-hues-circular',
+    'purple-blues', 'violet-hues', 'purple-hues-circular', 'soft-pinks', 'pink-s', 'pink-hues', 'sorbet', 'warm-hues', 'autumn-hues-circular',
     'orange-hues', 'autumn-hues-rectangular', 'mountain-landscape'];
   const rank = (slug) => { const i = ORDER.indexOf(slug); return i < 0 ? ORDER.length : i; };
   list.sort((a, b) => rank(a[0]) - rank(b[0]));
@@ -751,7 +757,7 @@ function demoArtworks() {
       price: d.price, matted, large: Boolean(extra.large), cardPhoto: extra.large ? `/art/${slug}-card.jpg?v=5` : null,
       // Short line under each card in the grid
       cardSub: extra.large
-        ? { en: 'Watercolour · circle · 40 × 50 cm', fr: 'Aquarelle · cercle · 40 × 50 cm' }
+        ? (shape === 'circular' ? { en: 'Watercolour · circle · 40 × 50 cm', fr: 'Aquarelle · cercle · 40 × 50 cm' } : { en: 'Watercolour · edge to edge · 40 × 50 cm', fr: 'Aquarelle · pleine page · 40 × 50 cm' })
         : matted
         ? { en: `Watercolour · ${shapeName.en} · 5×7 in, matted`, fr: `Aquarelle · ${shapeName.fr} · 5×7 po, avec passe-partout` }
         : { en: 'Watercolour · 8×10 in', fr: 'Aquarelle · 8×10 po' },
