@@ -575,6 +575,7 @@ function demoArtworks() {
     ['sage-clay', 'Sage & Clay', 'rectangular', { sold: true }],
     ['blue-gold', 'Blue & Gold', 'circular', { sold: true }],
     ['moss-cobalt', 'Moss & Cobalt', 'circular', { sold: true }],
+    ['blue-peak', 'Blue Peak', 'circular', { sold: true }],
     // Large format (40 × 50 cm, for a 50 × 70 cm frame with mat)
     ['sky-ochre', 'Sky & Ochre', 'circular', { sold: true, large: true, price: 8500 }],
     ['moss-rain', 'Moss & Rain', 'circular', { sold: true, large: true, price: 8500 }],
@@ -582,7 +583,7 @@ function demoArtworks() {
   // Listing photo set for every piece: the piece, in its mat, on the sideboard, on the gallery wall,
   // the collection grid, and Alexandra's own framed photo. Room photos are free Unsplash photos.
   // Pieces with Alexandra's own new photos (colour-corrected, light oak dresser)
-  const updated = ['sky-ochre', 'moss-rain', 'pink-s', 'sage-clay', 'blue-gold', 'moss-cobalt', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
+  const updated = ['blue-peak', 'sky-ochre', 'moss-rain', 'pink-s', 'sage-clay', 'blue-gold', 'moss-cobalt', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
   const largeSet = (slug) => [
     { src: `/art/${slug}-photo1.jpg?v=5`, fill: true },
     { src: `/art/${slug}-room.jpg?v=5`, mock: true, fill: true },
@@ -598,7 +599,7 @@ function demoArtworks() {
     { src: `/art/${slug}-matted.jpg`, fill: true },
     { src: `/art/${slug}-sideboard.jpg`, mock: true, fill: true },
     // Mountain Landscape is a different kind of piece (8×10, no mat): no gallery wall, no collection grid
-    ...(slug === 'mountain-landscape' ? [] : [
+    ...(['mountain-landscape', 'blue-peak'].includes(slug) ? [] : [
       { src: `/art/${slug}-gallery-wall.jpg`, mock: true, fill: true },
       { src: '/art/collection-grid.jpg', fill: true },
     ]),
@@ -669,6 +670,8 @@ function demoArtworks() {
       'Un plus grand cercle de bleus bleuet, ciel et ardoise, réchauffé de flaques d’ocre et de miel. Gouttes au stylo gel blanc, fils corail et points épars le traversent avec un rythme aérien, sans hâte.'],
     'moss-rain': ['Mint, seafoam and mossy olive washes float over a fine rain of hand-painted cobalt marks, grounded by touches of chocolate brown and deep forest green. Calm, detailed and endlessly layered.',
       'Des lavis menthe, écume et olive mousse flottent sur une fine pluie de marques cobalt peintes à la main, ancrés par des touches de brun chocolat et de vert forêt profond. Calme, détaillée et tout en couches.'],
+    'blue-peak': ['A misty mountain landscape in cobalt and ultramarine, painted in a circle and set on a deep navy card. Layered washes, crayon texture and tiny white highlights catch the light on the peak, with a few birds drifting across the sky.',
+      'Un paysage de montagne brumeux en bleu cobalt et outremer, peint dans un cercle et posé sur un carton bleu marine profond. Lavis superposés, texture au pastel et petits rehauts blancs font briller le sommet, avec quelques oiseaux qui traversent le ciel.'],
     'moss-cobalt': ['Moss green, olive and deep forest tones gather with bright cobalt and a glow of ochre gold. Raised cobalt dots, white gel-pen spirals and hand-drawn droplets give it a rich, layered texture.',
       'Vert mousse, olive et vert forêt profond se rassemblent avec un cobalt éclatant et une lueur d’ocre doré. Points de cobalt en relief, spirales au stylo gel blanc et gouttes dessinées à la main lui donnent une texture riche, tout en couches.'],
   });
@@ -680,7 +683,7 @@ function demoArtworks() {
   };
   const unmatted = ['mountain-landscape', 'blues-hues'];
   // Display order: by colour (blues → greens → purples → pinks → reds/oranges → warm), sold pieces mixed in
-  const ORDER = ['deep-blues', 'blue-hues-rectangular', 'blues-hues', 'sky-ochre', 'blue-gold', 'teal-hues', 'blue-hues-circular',
+  const ORDER = ['blue-peak', 'deep-blues', 'blue-hues-rectangular', 'blues-hues', 'sky-ochre', 'blue-gold', 'teal-hues', 'blue-hues-circular',
     'tidal-blues', 'moss-cobalt', 'moss-rain', 'forest-walk', 'sage-clay', 'violet-green', 'mystic-purple', 'purple-hues-rectangular',
     'purple-blues', 'violet-hues', 'purple-hues-circular', 'soft-pinks', 'pink-s', 'pink-hues', 'warm-hues', 'autumn-hues-circular',
     'orange-hues', 'autumn-hues-rectangular', 'mountain-landscape'];
