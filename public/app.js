@@ -609,8 +609,11 @@ function demoArtworks() {
     { src: `/art/${slug}.jpg` },
     { src: `/art/${slug}-matted.jpg`, fill: true },
     { src: `/art/${slug}-sideboard.jpg`, mock: true, fill: true },
-    { src: `/art/${slug}-gallery-wall.jpg`, mock: true, fill: true },
-    { src: '/art/collection-grid.jpg', fill: true },
+    // Blues Hues (8×10, painted edge to edge) doesn't belong on the gallery wall / collection grid of small circles
+    ...(slug === 'blues-hues' ? [] : [
+      { src: `/art/${slug}-gallery-wall.jpg`, mock: true, fill: true },
+      { src: '/art/collection-grid.jpg', fill: true },
+    ]),
     { src: `/art/${slug}-styled.jpg`, fill: true },
   ];
   // Per-piece story (first paragraph of each listing), in English and French.
