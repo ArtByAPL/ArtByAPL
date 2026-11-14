@@ -530,8 +530,8 @@ function demoArtworks() {
   // Pieces with Alexandra's own new photos (colour-corrected, light oak dresser)
   const updated = ['purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
   const setFor = (slug) => [
-    { src: `/art/${slug}-photo1.jpg`, fill: true },
-    { src: `/art/${slug}-photo3.jpg`, fill: true },
+    { src: `/art/${slug}-photo1.jpg?v=2`, fill: true },
+    { src: `/art/${slug}-photo3.jpg?v=2`, fill: true },
     { src: `/art/${slug}.jpg` },
     { src: `/art/${slug}-matted.jpg`, fill: true },
     { src: `/art/${slug}-sideboard.jpg`, mock: true, fill: true },
