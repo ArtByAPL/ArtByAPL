@@ -60,11 +60,11 @@ const TEXT = {
     collection: 'Collection', aboutRead: 'Lire mon histoire →', aboutTitle: 'À propos de l’artiste', aboutCta: 'Voir les œuvres',
     originalLabel: 'Œuvre', originalVal: 'Peinture originale (pas une reproduction)', paperLabel: 'Papier', paperVal: 'Papier aquarelle épais à grain fin (pressé à froid), 140 lb / 300 g/m²', signedLabel: 'Signature', signedVal: 'Signée par l’artiste au verso', presLabel: 'Présentation', presMatted: 'Non encadrée. Livrée dans un passe-partout de 8 × 10 po, prête à glisser dans un cadre standard.', presUnmatted: 'Non encadrée, sans passe-partout. Entre dans un cadre standard de 8 × 10 po.', shipTitle: 'Livraison et emballage', shipPack: 'Expédiée à plat, dans une pochette protectrice en cellophane.', shipNote: 'Chaque œuvre est accompagnée d’un mot de remerciement écrit à la main par l’artiste.', shipMade: 'Peinte à la main au Québec, Canada.', careTitle: 'Entretien', careText: 'Pour garder les couleurs vives, exposez l’œuvre à l’abri du soleil direct et de l’humidité, idéalement encadrée sous verre. Manipulez-la par les bords, les mains propres et sèches.',
     back: '← Toutes les œuvres', unique: 'Pièce unique, il n’y en a qu’une.', details: 'Détails',
-    mediumLabel: 'Technique', sizeLabel: 'Format', mockNote: 'Encadrement montré à titre d’illustration.', arBtn: 'Voir chez moi', arTitle: 'Voir l’œuvre sur votre mur', arGo: 'Ouvrir la caméra', arHelp: 'Pointez un mur et bougez lentement le téléphone jusqu’à ce que l’œuvre s’y accroche. Elle apparaît à sa vraie grandeur : glissez pour la déplacer, pincez pour l’agrandir. Astuce : un mur avec un peu de texture ou un cadre déjà accroché aide la caméra.', arDesktop: 'Ouvrez cette page sur votre téléphone pour voir l’œuvre sur votre mur, à sa vraie grandeur.', arNote: 'Cadre montré à titre d’illustration.', close: 'Fermer', arPhoto: 'Essayer avec une photo de mon mur', arTake: 'Prendre une photo', arPick: 'Choisir dans mes photos', arPhotoHelp: 'Glissez l’œuvre pour la placer. Pincez (ou utilisez le curseur) pour ajuster la grandeur.', arSize: 'Grandeur', arChange: 'Changer de photo', arSave: 'Enregistrer l’image', arBack: 'Vue 3D',
+    mediumLabel: 'Technique', sizeLabel: 'Format', mockNote: 'Encadrement montré à titre d’illustration.', arBtn: 'Voir chez moi', arTitle: 'Voir l’œuvre sur votre mur', arGo: 'Ouvrir la caméra', arHelp: 'Pointez un mur et bougez lentement le téléphone jusqu’à ce que l’œuvre s’y accroche. Elle apparaît à sa vraie grandeur : glissez pour la déplacer, pincez pour l’agrandir. Astuce : un mur avec un peu de texture ou un cadre déjà accroché aide la caméra.', arDesktop: 'Ouvrez cette page sur votre téléphone pour voir l’œuvre sur votre mur, à sa vraie grandeur.', arNote: 'Cadre montré à titre d’illustration.', close: 'Fermer', arPhoto: 'Essayer avec une photo de mon mur', arTake: 'Prendre une photo', arPick: 'Choisir dans mes photos', arPhotoHelp: 'Glissez l’œuvre pour la placer. Pincez (ou utilisez le curseur) pour ajuster la grandeur, et tournez deux doigts pour l’incliner.', arRotate: 'Tourner la photo', arSize: 'Grandeur', arChange: 'Changer de photo', arSave: 'Enregistrer l’image', arBack: 'Vue 3D',
     demoBuy: 'Aperçu : le paiement sera actif une fois Stripe branché.', notFound: 'Œuvre introuvable.',
     contactText: 'Une question sur une œuvre ou envie d’une commande personnalisée?',
     secure: 'Paiement sécurisé par Stripe',
-    seeWorks: 'Voir les œuvres', close: 'Fermer', arPhoto: 'Essayer avec une photo de mon mur', arTake: 'Prendre une photo', arPick: 'Choisir dans mes photos', arPhotoHelp: 'Glissez l’œuvre pour la placer. Pincez (ou utilisez le curseur) pour ajuster la grandeur.', arSize: 'Grandeur', arChange: 'Changer de photo', arSave: 'Enregistrer l’image', arBack: 'Vue 3D', lang: 'EN',
+    seeWorks: 'Voir les œuvres', close: 'Fermer', arPhoto: 'Essayer avec une photo de mon mur', arTake: 'Prendre une photo', arPick: 'Choisir dans mes photos', arPhotoHelp: 'Glissez l’œuvre pour la placer. Pincez (ou utilisez le curseur) pour ajuster la grandeur, et tournez deux doigts pour l’incliner.', arSize: 'Grandeur', arChange: 'Changer de photo', arSave: 'Enregistrer l’image', arBack: 'Vue 3D', lang: 'EN',
   },
   en: {
     navWorks: 'Works', navAbout: 'About', navContact: 'Contact',
@@ -80,11 +80,11 @@ const TEXT = {
     collection: 'Collection', aboutRead: 'Read my story →', aboutTitle: 'About the artist', aboutCta: 'See the work',
     originalLabel: 'Artwork', originalVal: 'Original painting (not a print)', paperLabel: 'Paper', paperVal: 'Heavyweight cold-pressed watercolour paper, 140 lb / 300 gsm', signedLabel: 'Signature', signedVal: 'Signed by the artist on the back', presLabel: 'Presentation', presMatted: 'Unframed. Arrives in an 8 × 10 in mat, ready to slip into a standard frame.', presUnmatted: 'Unframed, no mat. Fits a standard 8 × 10 in frame.', shipTitle: 'Shipping & packaging', shipPack: 'Ships flat in a protective cellophane sleeve.', shipNote: 'Every piece comes with a handwritten thank-you note from the artist.', shipMade: 'Hand-painted in Québec, Canada.', careTitle: 'Care', careText: 'To keep the colours vivid, display away from direct sunlight and humidity, ideally framed behind glass. Handle by the edges with clean, dry hands.',
     back: '← All works', unique: 'One of a kind: there is only one.', details: 'Details',
-    mediumLabel: 'Medium', sizeLabel: 'Size', mockNote: 'Shown framed for illustration.', arBtn: 'View in your space', arTitle: 'See it on your wall', arGo: 'Open camera', arHelp: 'Point at a wall and move the phone slowly until the piece snaps onto it. It starts at its true size: drag to move it, pinch to resize. Tip: a wall with some texture or a frame already hanging helps the camera.', arDesktop: 'Open this page on your phone to see the piece on your wall, at its true size.', arNote: 'Frame shown for illustration.', close: 'Close', arPhoto: 'Try it with a photo of my wall', arTake: 'Take a photo', arPick: 'Choose from my photos', arPhotoHelp: 'Drag the piece to place it. Pinch (or use the slider) to adjust the size.', arSize: 'Size', arChange: 'Change photo', arSave: 'Save image', arBack: '3D view',
+    mediumLabel: 'Medium', sizeLabel: 'Size', mockNote: 'Shown framed for illustration.', arBtn: 'View in your space', arTitle: 'See it on your wall', arGo: 'Open camera', arHelp: 'Point at a wall and move the phone slowly until the piece snaps onto it. It starts at its true size: drag to move it, pinch to resize. Tip: a wall with some texture or a frame already hanging helps the camera.', arDesktop: 'Open this page on your phone to see the piece on your wall, at its true size.', arNote: 'Frame shown for illustration.', close: 'Close', arPhoto: 'Try it with a photo of my wall', arTake: 'Take a photo', arPick: 'Choose from my photos', arPhotoHelp: 'Drag the piece to place it. Pinch (or use the slider) to adjust the size, and twist two fingers to tilt it.', arRotate: 'Rotate photo', arSize: 'Size', arChange: 'Change photo', arSave: 'Save image', arBack: '3D view',
     demoBuy: 'Preview: checkout goes live once Stripe is connected.', notFound: 'Piece not found.',
     contactText: 'A question about a piece, or interested in a commission?',
     secure: 'Secure payment by Stripe',
-    seeWorks: 'See the work', close: 'Close', arPhoto: 'Try it with a photo of my wall', arTake: 'Take a photo', arPick: 'Choose from my photos', arPhotoHelp: 'Drag the piece to place it. Pinch (or use the slider) to adjust the size.', arSize: 'Size', arChange: 'Change photo', arSave: 'Save image', arBack: '3D view', lang: 'FR',
+    seeWorks: 'See the work', close: 'Close', arPhoto: 'Try it with a photo of my wall', arTake: 'Take a photo', arPick: 'Choose from my photos', arPhotoHelp: 'Drag the piece to place it. Pinch (or use the slider) to adjust the size, and twist two fingers to tilt it.', arSize: 'Size', arChange: 'Change photo', arSave: 'Save image', arBack: '3D view', lang: 'FR',
   },
 };
 
@@ -326,7 +326,8 @@ function setupAR(root, a) {
       <div class="wall" hidden>
         <canvas class="wall-canvas"></canvas>
         <label class="wall-size">${t('arSize')} <input type="range" min="4" max="90" value="22"></label>
-        <div class="wall-actions"><button type="button" class="wall-change">${t('arChange')}</button>
+        <div class="wall-actions"><button type="button" class="wall-rotate">↻ ${t('arRotate')}</button>
+          <button type="button" class="wall-change">${t('arChange')}</button>
           <button type="button" class="wall-save">${t('arSave')}</button>
           <button type="button" class="wall-back">${t('arBack')}</button></div>
         <p class="ar-help">${t('arPhotoHelp')}</p>
@@ -360,7 +361,16 @@ function setupWallPhoto(dlg, a, mv) {
   const wall = $('.wall', dlg), cv = $('.wall-canvas', wall), ctx = cv.getContext('2d');
   const inputs = [...dlg.querySelectorAll('.wall-pick input')], input = inputs[1], slider = $('.wall-size input', wall);
   const art = new Image(); art.src = `/art/framed/${a.id}.jpg`;
-  let photo = null, pos = { x: 0.5, y: 0.42 }, size = 0.22;   // size = frame width / photo width
+  let photo = null, orig = null, turns = 0, pos = { x: 0.5, y: 0.42 }, size = 0.22, ang = 0;   // size = frame width / photo width, ang = piece tilt (rad)
+  // the wall photo, turned by 90° steps (for photos that come in sideways); capped so phones don't run out of canvas memory
+  const turn = () => {
+    const k = Math.min(1, 2400 / Math.max(orig.width, orig.height)), w = Math.round(orig.width * k), h = Math.round(orig.height * k);
+    if (turns % 4 === 0 && k === 1) { photo = orig; return; }
+    const c = document.createElement('canvas'), side = turns % 2 === 1;
+    c.width = side ? h : w; c.height = side ? w : h;
+    const g = c.getContext('2d'); g.translate(c.width / 2, c.height / 2); g.rotate(turns * Math.PI / 2); g.drawImage(orig, -w / 2, -h / 2, w, h);
+    photo = c;
+  };
   const fit = () => {
     const box = mv.getBoundingClientRect().width || dlg.clientWidth - 36;
     const maxH = Math.min(window.innerHeight * 0.58, 520);
@@ -373,35 +383,46 @@ function setupWallPhoto(dlg, a, mv) {
     if (!photo) return;
     c.drawImage(photo, 0, 0, W, H);
     if (!art.complete || !art.naturalWidth) return;
-    const w = size * W, h = w * art.naturalHeight / art.naturalWidth, x = pos.x * W - w / 2, y = pos.y * H - h / 2;
-    c.save(); c.shadowColor = 'rgba(0,0,0,.35)'; c.shadowBlur = w * 0.06; c.shadowOffsetX = w * 0.015; c.shadowOffsetY = w * 0.03;
-    c.drawImage(art, x, y, w, h); c.restore();
+    const w = size * W, h = w * art.naturalHeight / art.naturalWidth;
+    c.save(); c.translate(pos.x * W, pos.y * H); c.rotate(ang); c.shadowColor = 'rgba(0,0,0,.35)'; c.shadowBlur = w * 0.06; c.shadowOffsetX = w * 0.015; c.shadowOffsetY = w * 0.03;
+    c.drawImage(art, -w / 2, -h / 2, w, h); c.restore();
   };
   art.onload = () => draw();
   const show = (on) => { wall.hidden = !on; mv.hidden = on; $('.ar-3d-text', dlg).hidden = on; $('.wall-pick', dlg).hidden = on; };
   inputs.forEach((inp) => inp.addEventListener('change', () => {
     const f = inp.files && inp.files[0]; if (!f) return;
     const img = new Image();
-    img.onload = () => { photo = img; show(true); fit(); draw(); inp.value = ''; };
+    img.onload = () => { orig = img; turns = 0; ang = 0; turn(); show(true); fit(); draw(); inp.value = ''; };
     img.src = URL.createObjectURL(f);
   }));
   $('.wall-change', wall).addEventListener('click', () => { wall.hidden = true; $('.wall-pick', dlg).hidden = false; });
   $('.wall-back', wall).addEventListener('click', () => show(false));
+  $('.wall-rotate', wall).addEventListener('click', () => {
+    const oldW = photo.width; turns = (turns + 1) % 4; turn();
+    pos = { x: 1 - pos.y, y: pos.x };   // keep the piece on the same spot of the wall, at the same size
+    size = Math.min(0.9, Math.max(0.04, size * oldW / photo.width)); slider.value = Math.round(size * 100);
+    fit(); draw();
+  });
   slider.addEventListener('input', () => { size = slider.value / 100; draw(); });
   // drag with one pointer, pinch with two
   const pts = new Map(); let start = null;
   const rel = (e) => { const r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height }; };
   const dist = () => { const [p, q] = [...pts.values()]; return Math.hypot(p.x - q.x, (p.y - q.y) * cv.height / cv.width); };
+  const angle = () => { const [p, q] = [...pts.values()]; return Math.atan2((q.y - p.y) * cv.height / cv.width, q.x - p.x); };
   cv.addEventListener('pointerdown', (e) => { cv.setPointerCapture(e.pointerId); pts.set(e.pointerId, rel(e));
-    start = { pos: { ...pos }, size, p: rel(e), d: pts.size === 2 ? dist() : 0 }; });
+    start = { pos: { ...pos }, size, ang, p: rel(e), d: pts.size === 2 ? dist() : 0, a: pts.size === 2 ? angle() : 0 }; });
   cv.addEventListener('pointermove', (e) => {
     if (!pts.has(e.pointerId)) return; pts.set(e.pointerId, rel(e));
     if (pts.size === 1) { const p = rel(e); pos = { x: Math.min(1, Math.max(0, start.pos.x + p.x - start.p.x)), y: Math.min(1, Math.max(0, start.pos.y + p.y - start.p.y)) }; }
-    else if (pts.size === 2 && start.d) { size = Math.min(0.9, Math.max(0.04, start.size * dist() / start.d)); slider.value = Math.round(size * 100); }
+    else if (pts.size === 2 && start.d) {
+      size = Math.min(0.9, Math.max(0.04, start.size * dist() / start.d)); slider.value = Math.round(size * 100);
+      let d = angle() - start.a; d = Math.atan2(Math.sin(d), Math.cos(d));
+      ang = start.ang + d; if (Math.abs(ang) < 0.05) ang = 0;   // snaps back to straight within ~3°
+    }
     draw();
   });
   const up = (e) => { pts.delete(e.pointerId); const left = [...pts.values()][0];
-    if (left) start = { pos: { ...pos }, size, p: left, d: 0 }; };
+    if (left) start = { pos: { ...pos }, size, ang, p: left, d: 0, a: 0 }; };
   cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
   cv.addEventListener('wheel', (e) => { e.preventDefault(); size = Math.min(0.9, Math.max(0.04, size * (e.deltaY < 0 ? 1.06 : 0.94))); slider.value = Math.round(size * 100); draw(); }, { passive: false });
   $('.wall-save', wall).addEventListener('click', () => {
