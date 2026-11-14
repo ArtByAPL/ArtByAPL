@@ -73,7 +73,7 @@ const TEXT = {
     filterAvailable: 'Available', filterAll: 'All',
     demo: 'Preview — pieces from the Etsy shop, checkout not live yet',
     empty: 'No pieces available right now. Check back soon!',
-    buy: 'Buy this piece', sold: 'Sold', soldOut: 'Sold out',
+    buy: 'Buy this piece', sold: 'Sold', soldOut: 'Sold',
     soldNote: 'This piece has found its home. Write to me if you like this style.',
     shippingTitle: 'Shipping',
     prev: 'Previous photo', next: 'Next photo',
