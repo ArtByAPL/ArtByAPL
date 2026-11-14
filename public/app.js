@@ -593,7 +593,7 @@ function demoArtworks() {
   ];
   const isLarge = (slug) => ['sky-ochre', 'moss-rain'].includes(slug);
   const setFor = (slug) => isLarge(slug) ? largeSet(slug) : [
-    { src: `/art/${slug}-photo1.jpg?v=7`, fill: true },
+    { src: `/art/${slug}-photo1.jpg?v=8`, fill: true },
     { src: `/art/${slug}-photo3.jpg?v=6`, fill: true },
     { src: `/art/${slug}.jpg` },
     { src: `/art/${slug}-matted.jpg`, fill: true },
