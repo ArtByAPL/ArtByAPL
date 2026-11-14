@@ -51,15 +51,7 @@ a { color: inherit; }
   text-decoration: none; letter-spacing: -0.01em; white-space: nowrap;
 }
 .wordmark strong { font-weight: 400; font-style: italic; color: var(--accent); }
-.wordmark .dot {
-  width: 22px; height: 22px; border-radius: 50%;
-  background:
-    radial-gradient(circle at 30% 35%, #f2a03d 0 22%, transparent 45%),
-    radial-gradient(circle at 70% 40%, #1d8a85 0 24%, transparent 50%),
-    radial-gradient(circle at 45% 72%, #8e2d6e 0 26%, transparent 52%),
-    #d93a6a;
-  filter: saturate(1.1);
-}
+.wordmark .logo { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; display: block; box-shadow: 0 0 0 1px rgba(45,42,36,.08); }
 .site-header nav { display: flex; align-items: center; gap: clamp(12px, 3vw, 28px); }
 .site-header nav a { text-decoration: none; font-size: 0.95rem; color: var(--muted); }
 .site-header nav a:hover { color: var(--ink); }
