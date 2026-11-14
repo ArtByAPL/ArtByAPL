@@ -59,11 +59,11 @@ const TEXT = {
     prev: 'Photo précédente', next: 'Photo suivante',
     collection: 'Collection', aboutRead: 'Lire mon histoire →', aboutTitle: 'À propos de l’artiste', aboutCta: 'Voir les œuvres',
     back: '← Toutes les œuvres', unique: 'Pièce unique, il n’y en a qu’une.', details: 'Détails',
-    mediumLabel: 'Technique', sizeLabel: 'Format', mockNote: 'Encadrement montré à titre d’illustration.', arBtn: 'Voir chez moi', arTitle: 'Voir l’œuvre sur votre mur', arGo: 'Ouvrir la caméra', arHelp: 'Pointez un mur et bougez lentement le téléphone jusqu’à ce que l’œuvre s’y accroche. Elle apparaît à sa vraie grandeur : glissez pour la déplacer, pincez pour l’agrandir. Astuce : un mur avec un peu de texture ou un cadre déjà accroché aide la caméra.', arDesktop: 'Ouvrez cette page sur votre téléphone pour voir l’œuvre sur votre mur, à sa vraie grandeur.', arNote: 'Cadre montré à titre d’illustration.', close: 'Fermer', arPhoto: 'Essayer avec une photo de mon mur', arPhotoHelp: 'Glissez l’œuvre pour la placer. Pincez (ou utilisez le curseur) pour ajuster la grandeur.', arSize: 'Grandeur', arChange: 'Changer de photo', arSave: 'Enregistrer l’image', arBack: 'Vue 3D',
+    mediumLabel: 'Technique', sizeLabel: 'Format', mockNote: 'Encadrement montré à titre d’illustration.', arBtn: 'Voir chez moi', arTitle: 'Voir l’œuvre sur votre mur', arGo: 'Ouvrir la caméra', arHelp: 'Pointez un mur et bougez lentement le téléphone jusqu’à ce que l’œuvre s’y accroche. Elle apparaît à sa vraie grandeur : glissez pour la déplacer, pincez pour l’agrandir. Astuce : un mur avec un peu de texture ou un cadre déjà accroché aide la caméra.', arDesktop: 'Ouvrez cette page sur votre téléphone pour voir l’œuvre sur votre mur, à sa vraie grandeur.', arNote: 'Cadre montré à titre d’illustration.', close: 'Fermer', arPhoto: 'Essayer avec une photo de mon mur', arTake: 'Prendre une photo', arPick: 'Choisir dans mes photos', arPhotoHelp: 'Glissez l’œuvre pour la placer. Pincez (ou utilisez le curseur) pour ajuster la grandeur.', arSize: 'Grandeur', arChange: 'Changer de photo', arSave: 'Enregistrer l’image', arBack: 'Vue 3D',
     demoBuy: 'Aperçu : le paiement sera actif une fois Stripe branché.', notFound: 'Œuvre introuvable.',
     contactText: 'Une question sur une œuvre ou envie d’une commande personnalisée?',
     secure: 'Paiement sécurisé par Stripe',
-    seeWorks: 'Voir les œuvres', close: 'Fermer', arPhoto: 'Essayer avec une photo de mon mur', arPhotoHelp: 'Glissez l’œuvre pour la placer. Pincez (ou utilisez le curseur) pour ajuster la grandeur.', arSize: 'Grandeur', arChange: 'Changer de photo', arSave: 'Enregistrer l’image', arBack: 'Vue 3D', lang: 'EN',
+    seeWorks: 'Voir les œuvres', close: 'Fermer', arPhoto: 'Essayer avec une photo de mon mur', arTake: 'Prendre une photo', arPick: 'Choisir dans mes photos', arPhotoHelp: 'Glissez l’œuvre pour la placer. Pincez (ou utilisez le curseur) pour ajuster la grandeur.', arSize: 'Grandeur', arChange: 'Changer de photo', arSave: 'Enregistrer l’image', arBack: 'Vue 3D', lang: 'EN',
   },
   en: {
     navWorks: 'Works', navAbout: 'About', navContact: 'Contact',
@@ -78,11 +78,11 @@ const TEXT = {
     prev: 'Previous photo', next: 'Next photo',
     collection: 'Collection', aboutRead: 'Read my story →', aboutTitle: 'About the artist', aboutCta: 'See the work',
     back: '← All works', unique: 'One of a kind: there is only one.', details: 'Details',
-    mediumLabel: 'Medium', sizeLabel: 'Size', mockNote: 'Shown framed for illustration.', arBtn: 'View in your space', arTitle: 'See it on your wall', arGo: 'Open camera', arHelp: 'Point at a wall and move the phone slowly until the piece snaps onto it. It starts at its true size: drag to move it, pinch to resize. Tip: a wall with some texture or a frame already hanging helps the camera.', arDesktop: 'Open this page on your phone to see the piece on your wall, at its true size.', arNote: 'Frame shown for illustration.', close: 'Close', arPhoto: 'Try it with a photo of my wall', arPhotoHelp: 'Drag the piece to place it. Pinch (or use the slider) to adjust the size.', arSize: 'Size', arChange: 'Change photo', arSave: 'Save image', arBack: '3D view',
+    mediumLabel: 'Medium', sizeLabel: 'Size', mockNote: 'Shown framed for illustration.', arBtn: 'View in your space', arTitle: 'See it on your wall', arGo: 'Open camera', arHelp: 'Point at a wall and move the phone slowly until the piece snaps onto it. It starts at its true size: drag to move it, pinch to resize. Tip: a wall with some texture or a frame already hanging helps the camera.', arDesktop: 'Open this page on your phone to see the piece on your wall, at its true size.', arNote: 'Frame shown for illustration.', close: 'Close', arPhoto: 'Try it with a photo of my wall', arTake: 'Take a photo', arPick: 'Choose from my photos', arPhotoHelp: 'Drag the piece to place it. Pinch (or use the slider) to adjust the size.', arSize: 'Size', arChange: 'Change photo', arSave: 'Save image', arBack: '3D view',
     demoBuy: 'Preview: checkout goes live once Stripe is connected.', notFound: 'Piece not found.',
     contactText: 'A question about a piece, or interested in a commission?',
     secure: 'Secure payment by Stripe',
-    seeWorks: 'See the work', close: 'Close', arPhoto: 'Try it with a photo of my wall', arPhotoHelp: 'Drag the piece to place it. Pinch (or use the slider) to adjust the size.', arSize: 'Size', arChange: 'Change photo', arSave: 'Save image', arBack: '3D view', lang: 'FR',
+    seeWorks: 'See the work', close: 'Close', arPhoto: 'Try it with a photo of my wall', arTake: 'Take a photo', arPick: 'Choose from my photos', arPhotoHelp: 'Drag the piece to place it. Pinch (or use the slider) to adjust the size.', arSize: 'Size', arChange: 'Change photo', arSave: 'Save image', arBack: '3D view', lang: 'FR',
   },
 };
 
@@ -317,7 +317,13 @@ function setupAR(root, a) {
         <p class="ar-help">${t('arHelp')}</p>
         <p class="ar-desktop" hidden>${t('arDesktop')}</p>
       </div>
-      <label class="wall-pick">${t('arPhoto')}<input type="file" accept="image/*" hidden></label>
+      <div class="wall-pick">
+        <p class="wall-pick-title">${t('arPhoto')}</p>
+        <div class="wall-pick-btns">
+          <label class="wall-btn wall-btn-main">📷 ${t('arTake')}<input type="file" accept="image/*" capture="environment" hidden></label>
+          <label class="wall-btn">🖼️ ${t('arPick')}<input type="file" accept="image/*" hidden></label>
+        </div>
+      </div>
       <p class="ar-note">${t('arNote')}</p>`;
     document.body.appendChild(dlg);
     const mv = $('model-viewer', dlg);
@@ -334,7 +340,7 @@ function setupAR(root, a) {
 // "Try it with a photo of my wall": place the framed piece on the buyer's own photo, drag + pinch, save
 function setupWallPhoto(dlg, a, mv) {
   const wall = $('.wall', dlg), cv = $('.wall-canvas', wall), ctx = cv.getContext('2d');
-  const input = $('.wall-pick input', dlg), slider = $('.wall-size input', wall);
+  const inputs = [...dlg.querySelectorAll('.wall-pick input')], input = inputs[1], slider = $('.wall-size input', wall);
   const art = new Image(); art.src = `/art/framed/${a.id}.jpg`;
   let photo = null, pos = { x: 0.5, y: 0.42 }, size = 0.22;   // size = frame width / photo width
   const fit = () => {
@@ -355,13 +361,13 @@ function setupWallPhoto(dlg, a, mv) {
   };
   art.onload = () => draw();
   const show = (on) => { wall.hidden = !on; mv.hidden = on; $('.ar-3d-text', dlg).hidden = on; $('.wall-pick', dlg).hidden = on; };
-  input.addEventListener('change', () => {
-    const f = input.files && input.files[0]; if (!f) return;
+  inputs.forEach((inp) => inp.addEventListener('change', () => {
+    const f = inp.files && inp.files[0]; if (!f) return;
     const img = new Image();
-    img.onload = () => { photo = img; show(true); fit(); draw(); };
+    img.onload = () => { photo = img; show(true); fit(); draw(); inp.value = ''; };
     img.src = URL.createObjectURL(f);
-  });
-  $('.wall-change', wall).addEventListener('click', () => input.click());
+  }));
+  $('.wall-change', wall).addEventListener('click', () => { wall.hidden = true; $('.wall-pick', dlg).hidden = false; });
   $('.wall-back', wall).addEventListener('click', () => show(false));
   slider.addEventListener('input', () => { size = slider.value / 100; draw(); });
   // drag with one pointer, pinch with two
