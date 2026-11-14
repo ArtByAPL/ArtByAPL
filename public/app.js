@@ -355,8 +355,17 @@ function setupAR(root, a) {
     // no AR on this device (desktop): say so instead of the camera button
     setTimeout(() => { if (!mv.canActivateAR) { $('.ar-3d-text .ar-help:not(.ar-twist)', dlg).hidden = true; $('.ar-desktop', dlg).hidden = false; } }, 1200);
     // turn the piece a quarter turn at a time (it shows up turned the same way when placed on the wall)
-    let roll = 0;
-    const setRoll = (r) => { roll = r; mv.orientation = `${roll}deg 0deg 0deg`; };
+    // roll = how the piece is turned. The preview turns it instantly; then, once it settles, the 3D file itself
+    // is swapped for one with the turn built in (from /api/glb), because the phone's AR camera loads the file, not the preview.
+    let roll = 0, baked = 0, pending = null, settle = 0;
+    const show = () => { mv.orientation = `${roll - baked}deg 0deg 0deg`; };
+    mv.addEventListener('load', () => { if (pending !== null) { baked = pending; pending = null; show(); } });
+    const bake = () => { clearTimeout(settle); settle = setTimeout(() => {
+      const want = Math.round(roll), r = ((want % 360) + 360) % 360;
+      if (r === ((baked % 360) + 360) % 360 && pending === null) { baked = want; show(); return; }
+      pending = want; mv.src = r ? `/api/glb/${encodeURIComponent(a.id)}.glb?roll=${r}` : `/art/3d/${encodeURIComponent(a.id)}.glb`;
+    }, 350); };
+    const setRoll = (r) => { roll = r; show(); bake(); };
     $('.ar-rotate', dlg).addEventListener('click', () => {
       setRoll((Math.round(roll / 90) * 90 - 90) % 360);
       if (mv.updateFraming) mv.updateFraming();
