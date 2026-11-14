@@ -128,16 +128,61 @@ function renderText() {
 }
 
 // ── Gallery ─────────────────────────────────────────────────
+// Photos you can flip through right on a card (no need to open the listing)
+function cardSlides(a) {
+  const first = a.cardPhoto || a.thumb || a.image;
+  const skip = new Set([first && first.split('?')[0], a.art, '/art/collection-grid.jpg']);
+  const rest = (a.gallery || []).map((g) => g.src).filter((src) => !skip.has(src.split('?')[0]));
+  return [first, ...rest].filter(Boolean);
+}
+function setupCardSlides() {
+  const root = $('.collections');
+  if (!root || root.dataset.slides) return;
+  root.dataset.slides = '1';
+  const go = (card, step) => {
+    const a = state.artworks.find((x) => x.id === card.dataset.id); if (!a) return;
+    const slides = cardSlides(a), n = slides.length;
+    const i = (((Number(card.dataset.slide) || 0) + step) % n + n) % n;
+    card.dataset.slide = i;
+    const frame = $('.card-frame', card), img = $('img', frame);
+    if (!frame.dataset.cls) frame.dataset.cls = frame.className;
+    frame.className = i === 0 ? frame.dataset.cls : 'card-frame show-photo';
+    img.className = i === 0 && frame.dataset.cls.includes('has-print') ? 'print' : '';
+    img.loading = 'eager'; img.src = slides[i];
+    frame.querySelectorAll('.cs-dots i').forEach((d, k) => d.classList.toggle('on', k === i));
+    // warm the next photo so flipping feels instant
+    const nx = new Image(); nx.src = slides[(i + 1) % n];
+  };
+  root.addEventListener('click', (e) => {
+    const b = e.target.closest('.cs-nav'); if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    go(b.closest('.card'), b.classList.contains('cs-next') ? 1 : -1);
+  });
+  // swipe on phones
+  let sx = 0, sy = 0, swiped = false;
+  root.addEventListener('touchstart', (e) => { const t0 = e.touches[0]; sx = t0.clientX; sy = t0.clientY; swiped = false; }, { passive: true });
+  root.addEventListener('touchend', (e) => {
+    const card = e.target.closest('.card'); if (!card || !e.target.closest('.card-frame')) return;
+    const t1 = e.changedTouches[0], dx = t1.clientX - sx, dy = t1.clientY - sy;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.3) { swiped = true; go(card, dx < 0 ? 1 : -1); }
+  }, { passive: true });
+  root.addEventListener('click', (e) => { if (swiped && e.target.closest('.card-frame')) { e.preventDefault(); swiped = false; } }, true);
+}
+
 function renderGrid() {
   const list = state.filter === 'available' ? state.artworks.filter((a) => !a.sold) : state.artworks;
   $('.demo-note').hidden = !state.demo;
   $('.empty').hidden = list.length > 0;
   const card = (a) => `
-    <a class="card${a.sold ? ' is-sold' : ''}" href="/piece.html?p=${encodeURIComponent(a.id)}">
+    <a class="card${a.sold ? ' is-sold' : ''}" data-id="${escapeHtml(a.id)}" href="/piece.html?p=${encodeURIComponent(a.id)}">
       <div class="card-frame${a.cardPhoto ? ' is-photo' : a.thumb ? ' has-print' : ''}">
         ${a.cardPhoto ? `<img src="${escapeHtml(a.cardPhoto)}" alt="${escapeHtml(a.title)}" loading="lazy">` : a.thumb ? `<img class="print" src="${escapeHtml(a.thumb)}" alt="${escapeHtml(a.title)}" loading="lazy">`
           : a.image ? `<img src="${escapeHtml(a.image)}" alt="${escapeHtml(a.title)}" loading="lazy">` : ''}
         ${a.sold ? `<span class="badge">${t('soldOut')}</span>` : ''}
+        ${cardSlides(a).length > 1 ? `
+        <button type="button" class="cs-nav cs-prev" aria-label="${t('prev')}">‹</button>
+        <button type="button" class="cs-nav cs-next" aria-label="${t('next')}">›</button>
+        <span class="cs-dots">${cardSlides(a).map((_, i) => `<i${i ? '' : ' class="on"'}></i>`).join('')}</span>` : ''}
       </div>
       <div class="card-text">
         <div>
@@ -159,6 +204,7 @@ function renderGrid() {
       </div>
       <div class="grid">${items.map(card).join('')}</div>
     </section>`).join('');
+  setupCardSlides();
   document.querySelectorAll('.filters button').forEach((b) => b.classList.toggle('is-active', b.dataset.filter === state.filter));
 }
 

@@ -378,3 +378,15 @@ a.card { text-decoration: none; color: inherit; }
 .hero-photo { width: 100%; max-width: 440px; margin-inline: auto; }
 .hero-photo img { width: 100%; height: auto; display: block; border-radius: 4px;
   box-shadow: 0 2px 4px rgba(45, 42, 36, 0.10), 0 30px 60px -30px rgba(45, 42, 36, 0.45); }
+/* Flip through a piece's photos right on its card */
+.card-frame.show-photo { padding: 0; }
+.card-frame.show-photo img { width: 100%; height: 100%; max-height: none; object-fit: cover; box-shadow: none; transform: none !important; }
+.cs-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 34px; height: 34px; border-radius: 50%;
+  border: 0; background: rgba(255,255,255,.88); color: var(--ink); font-size: 1.35rem; line-height: 1; cursor: pointer;
+  display: grid; place-items: center; opacity: 0; transition: opacity .2s ease; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+.cs-prev { left: 8px; } .cs-next { right: 8px; }
+.card:hover .cs-nav, .cs-nav:focus-visible { opacity: 1; }
+.cs-dots { position: absolute; bottom: 10px; left: 0; right: 0; display: flex; justify-content: center; gap: 5px; z-index: 2; pointer-events: none; }
+.cs-dots i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.75); box-shadow: 0 0 0 1px rgba(0,0,0,.12); }
+.cs-dots i.on { background: var(--ink); }
+@media (hover: none) { .cs-nav { opacity: .9; width: 30px; height: 30px; } }
