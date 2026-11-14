@@ -317,7 +317,7 @@ function setupAR(root, a) {
     dlg = document.createElement('dialog'); dlg.id = 'ar-dialog'; dlg.className = 'ar-dialog';
     dlg.innerHTML = `
       <div class="ar-head"><h2>${t('arTitle')}</h2><button type="button" class="ar-close" aria-label="${t('close')}">×</button></div>
-      <model-viewer src="/art/3d/${escapeHtml(a.model || a.id)}.glb" alt="${escapeHtml(a.title)}"
+      <model-viewer src="/art/3d/${escapeHtml(a.id)}.glb" alt="${escapeHtml(a.title)}"
         ar ar-modes="webxr scene-viewer quick-look" ar-placement="wall" ar-scale="auto"
         camera-controls disable-zoom disable-pan touch-action="none" camera-orbit="-18deg 82deg auto" shadow-intensity="0.8"
         exposure="1.15" environment-image="neutral" interaction-prompt="none">
@@ -364,7 +364,7 @@ function setupAR(root, a) {
     const bake = () => { clearTimeout(settle); if (inAR) return; settle = setTimeout(() => {
       const want = Math.round(roll), r = ((want % 360) + 360) % 360;
       if (r === ((baked % 360) + 360) % 360 && pending === null) { baked = want; show(); return; }
-      pending = want; mv.src = r ? `/api/glb/${encodeURIComponent(a.model || a.id)}.glb?roll=${r}` : `/art/3d/${encodeURIComponent(a.model || a.id)}.glb`;
+      pending = want; mv.src = r ? `/api/glb/${encodeURIComponent(a.id)}.glb?roll=${r}` : `/art/3d/${encodeURIComponent(a.id)}.glb`;
     }, 350); };
     const setRoll = (r) => { roll = r; show(); bake(); };
     // in the camera view, twisting two fingers turns the piece flat against the wall (patched into /vendor/model-viewer.min.js)
@@ -407,7 +407,7 @@ function setupAR(root, a) {
 function setupWallPhoto(dlg, a, mv) {
   const wall = $('.wall', dlg), cv = $('.wall-canvas', wall), ctx = cv.getContext('2d');
   const inputs = [...dlg.querySelectorAll('.wall-pick input')], input = inputs[1], slider = $('.wall-size input', wall);
-  const art = new Image(); art.src = `/art/framed/${a.model || a.id}.jpg`;
+  const art = new Image(); art.src = `/art/framed/${a.id}.jpg`;
   let photo = null, orig = null, turns = 0, pos = { x: 0.5, y: 0.42 }, size = 0.22, ang = 0;   // size = frame width / photo width, ang = piece tilt (rad)
   // the wall photo, turned by 90° steps (for photos that come in sideways); capped so phones don't run out of canvas memory
   const turn = () => {
@@ -659,7 +659,7 @@ function demoArtworks() {
       fr: 'Une œuvre apaisante pour les amoureux de la nature, et un beau cadeau pour quiconque se sent chez soi en montagne ou au bord de l’eau.' },
   };
   const unmatted = ['mountain-landscape', 'blues-hues'];
-  const pieces = list.map(([slug, title, shape, extra = {}]) => {
+  return list.map(([slug, title, shape, extra = {}]) => {
     const d = { ...small, ...extra };
     const matted = !unmatted.includes(slug);
     const st = stories[slug];
@@ -686,13 +686,6 @@ function demoArtworks() {
       description: st ? { en: [st[0], lead.en], fr: [st[1], lead.fr] } : null,
     };
   });
-  // TEMPORARY $2 test listing, to try the whole checkout once. Remove this block (and the Stripe test product) afterwards.
-  // Uses Teal Hues' photos and 3D model; its own Stripe link is tagged slug=test-piece and allows one purchase.
-  const teal = pieces.find((p) => p.id === 'teal-hues');
-  if (teal) pieces.unshift({ ...teal, id: 'test-piece', model: 'teal-hues', title: 'TEST piece ($2, do not buy)', price: 200,
-    url: 'https://buy.stripe.com/bJe5kFfqie2Ycr8bAA8g00E', sold: false,
-    description: { en: ['Test listing for checking the checkout. Not a real piece.'], fr: ['Fiche de test pour vérifier le paiement. Pas une vraie œuvre.'] } });
-  return pieces;
 }
 
 // Hero image: the piece chosen in CONFIG.hero
