@@ -1,16 +1,1 @@
-# Scandi living room candidates, previews (Unsplash free licence)
-lr1.jpg https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?w=700
-lr2.jpg https://images.unsplash.com/photo-1772797583328-f83bc3f94f80?w=700
-lr3.jpg https://images.unsplash.com/photo-1663756915436-c6842b9d3eb0?w=700
-lr4.jpg https://images.unsplash.com/photo-1724582586458-a51791349977?w=700
-lr5.jpg https://images.unsplash.com/photo-1759722667550-81316a23d723?w=700
-lr6.jpg https://images.unsplash.com/photo-1774477178005-bff823e43be8?w=700
-lr7.jpg https://images.unsplash.com/photo-1650347683651-3c7c10241099?w=700
-lr8.jpg https://images.unsplash.com/photo-1724582586529-62622e50c0b3?w=700
-lr9.jpg https://images.unsplash.com/photo-1716078410207-20e223587181?w=700
-lr10.jpg https://images.unsplash.com/photo-1773895314453-5da2901061f6?w=700
-lr11.jpg https://images.unsplash.com/photo-1724582586495-d050726cf354?w=700
-lr12.jpg https://images.unsplash.com/photo-1687075197066-eb8bb5e91b16?w=700
-lr13.jpg https://images.unsplash.com/photo-1773895313936-d14ca8561dc7?w=700
-lr14.jpg https://images.unsplash.com/photo-1768904228330-62196a0171d6?w=700
-lr15.jpg https://images.unsplash.com/photo-1691036561870-e2badbd0fd22?w=700
+livingroom.jpg https://images.unsplash.com/photo-1759722667550-81316a23d723?w=2400&q=90
