@@ -390,3 +390,6 @@ a.card { text-decoration: none; color: inherit; }
 .cs-dots i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.75); box-shadow: 0 0 0 1px rgba(0,0,0,.12); }
 .cs-dots i.on { background: var(--ink); }
 @media (hover: none) { .cs-nav { opacity: .9; width: 30px; height: 30px; } }
+.about-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 0 0 clamp(40px, 6vw, 72px); }
+.about-photos img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4px; display: block; }
+@media (max-width: 560px) { .about-photos { grid-template-columns: 1fr; } }

@@ -17,15 +17,17 @@ const CONFIG = {
   // About the artist page: Alexandra's bio (her own words). Edit freely.
   aboutPage: {
     photo: '/art/alexandra.jpg',
+    // More photos of Alexandra, shown in a row under the bio
+    photos: ['/art/alexandra-studio.jpg', '/art/alexandra-trail.jpg'],
     bio: [
       { en: "I’m Alexandra, a watercolour artist inspired by the places that feel like home.",
         fr: "Je m’appelle Alexandra, une artiste aquarelliste inspirée par les lieux qui me font sentir chez moi." },
       { en: "I paint intuitively, letting water and pigment find their own path across the page. Rather than recreating a landscape exactly as it appears, I’m interested in capturing the feeling of a place: the hush of a misty forest, the warmth of autumn light, the rhythm of the ocean, or the colour of a memory that lingers long after the moment has passed.",
         fr: "Je peins de façon intuitive, en laissant l’eau et le pigment trouver leur propre chemin sur la page. Plutôt que de reproduire un paysage tel qu’il est, je cherche à saisir l’émotion d’un lieu : le silence d’une forêt dans la brume, la chaleur de la lumière d’automne, le rythme de l’océan, ou la couleur d’un souvenir qui persiste longtemps après le moment." },
-      { en: "I grew up on the West Coast, surrounded by mountains, rainforest, and ocean. Nature has always been where I feel most grounded. Many of my ideas arrive while running long trails, wandering through forests, or spending time at our family cabin on a small island off the coast of Vancouver.",
-        fr: "J’ai grandi sur la côte Ouest, entourée de montagnes, de forêt pluviale et d’océan. C’est dans la nature que je me sens le plus ancrée. Bien des idées me viennent en courant de longs sentiers, en me promenant en forêt ou en passant du temps au chalet familial, sur une petite île au large de Vancouver." },
-      { en: "Today, I split my time between the West Coast and Québec, drawing inspiration from both landscapes. The mossy greens, endless coastlines, changing seasons, and quiet moments of everyday life all find their way into my work.",
-        fr: "Aujourd’hui, je partage mon temps entre la côte Ouest et le Québec, et je m’inspire des deux paysages. Les verts moussus, les côtes à perte de vue, les saisons qui changent et les petits moments tranquilles du quotidien se retrouvent tous dans mon travail." },
+      { en: "I grew up on the West Coast of Canada, surrounded by mountains, rainforest, and ocean. Nature has always been where I feel most grounded. Many of my ideas arrive while running long trails, wandering through forests, or spending time at our family cabin on a small island off the coast of Vancouver.",
+        fr: "J’ai grandi sur la côte Ouest canadienne, entourée de montagnes, de forêt pluviale et d’océan. C’est dans la nature que je me sens le plus ancrée. Bien des idées me viennent en courant de longs sentiers, en me promenant en forêt ou en passant du temps au chalet familial, sur une petite île au large de Vancouver." },
+      { en: "Today, I split my time between Canada’s West Coast and Québec, drawing inspiration from both landscapes. The mossy greens, endless coastlines, changing seasons, and quiet moments of everyday life all find their way into my work.",
+        fr: "Aujourd’hui, je partage mon temps entre la côte Ouest canadienne et le Québec, et je m’inspire des deux paysages. Les verts moussus, les côtes à perte de vue, les saisons qui changent et les petits moments tranquilles du quotidien se retrouvent tous dans mon travail." },
       { en: "Each piece begins with a feeling, a moment, or a memory. No two are ever quite the same.",
         fr: "Chaque œuvre commence par une émotion, un moment ou un souvenir. Il n’y en a jamais deux tout à fait pareilles." },
     ],
@@ -322,6 +324,7 @@ function renderAboutPage() {
         </p>
       </div>
     </div>
+    ${(p.photos || []).length ? `<div class="about-photos">${p.photos.map((src) => `<img src="${escapeHtml(src)}" alt="${escapeHtml(CONFIG.name)}" loading="lazy">`).join('')}</div>` : ''}
     <div class="about-strip">${['forest-walk', 'soft-pinks', 'deep-blues', 'violet-green'].map((sl) =>
       `<a href="/piece.html?p=${sl}"><img src="/art/${sl}-sm.jpg" alt="" loading="lazy"></a>`).join('')}</div>`;
 }
