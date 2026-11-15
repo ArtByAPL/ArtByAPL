@@ -375,7 +375,8 @@ a.card { text-decoration: none; color: inherit; }
 .listing-more ul { margin: 12px 0 0; padding-left: 18px; line-height: 1.6; font-size: .95rem; }
 .listing-more p { margin: 12px 0 0; line-height: 1.6; font-size: .95rem; }
 .card-frame.is-photo { aspect-ratio: 4 / 5; }
-.hero-photo { width: 100%; max-width: 440px; margin-inline: auto; }
+.hero-photo { width: 100%; max-width: 640px; margin-inline: auto; }
+@media (min-width: 821px) { .hero:has(.hero-photo) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); } }
 .hero-photo img { width: 100%; height: auto; display: block; border-radius: 4px;
   box-shadow: 0 2px 4px rgba(45, 42, 36, 0.10), 0 30px 60px -30px rgba(45, 42, 36, 0.45); }
 /* Flip through a piece's photos right on its card */
@@ -393,3 +394,4 @@ a.card { text-decoration: none; color: inherit; }
 .about-photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; max-width: 860px; margin: 0 auto clamp(40px, 6vw, 72px); }
 .about-photos img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4px; display: block; }
 @media (max-width: 560px) { .about-photos { gap: 8px; } }
+.hero h1 em { white-space: nowrap; }
