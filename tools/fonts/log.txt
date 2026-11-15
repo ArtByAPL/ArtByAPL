@@ -1,8 +1,1 @@
-cs1.jpg 200
-cs2.jpg 200
-cs3.jpg 200
-cs4.jpg 200
-cs5.jpg 200
-cs6.jpg 200
-cs7.jpg 200
-cs8.jpg 200
+entry.jpg 200
