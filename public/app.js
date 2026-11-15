@@ -41,7 +41,7 @@ const CONFIG = {
   ],
   defaultCollection: 'intuitive-abstracts',
   // Big image at the top: one piece, edited and hosted in /art
-  hero: { image: '/art/hero-grid.jpg', title: 'The collection', photo: true },
+  hero: { image: '/art/hero-grid.jpg?v=2', title: 'The collection', photo: true },
   shipping: {
     fr: "Livraison gratuite au Canada et aux États-Unis. Expédiée sous 3 à 5 jours ouvrables, bien protégée.",
     en: "Free shipping within Canada and the US. Ships within 3–5 business days, carefully packaged.",
