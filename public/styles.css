@@ -15,9 +15,9 @@
 }
 /* Title font: still deciding between DM Serif Display and Fraunces (preview switcher) */
 :root { --c1: var(--accent); --c2: var(--accent); --c3: var(--accent);
-  --dw: 400; --em: italic; --ls: -0.015em; --h1: clamp(2.8rem, 8vw, 6rem); --fv: normal; }
-:root[data-font="fraunces"]  { --display: 'Fraunces', Georgia, serif; --dw: 450; --ls: -0.02em; --h1: clamp(2.6rem, 7.5vw, 5.4rem); --fv: 'SOFT' 100, 'WONK' 1; }
-:root[data-font="dmserif"]   { --display: 'DM Serif Display', Georgia, serif; --ls: -0.01em; --h1: clamp(2.6rem, 7.5vw, 5.4rem); }
+  --dw: 400; --em: italic; --ls: -0.015em; --h1: clamp(2.2rem, 5vw, 3.9rem); --fv: normal; }
+:root[data-font="fraunces"]  { --display: 'Fraunces', Georgia, serif; --dw: 450; --ls: -0.02em; --h1: clamp(2.1rem, 4.8vw, 3.6rem); --fv: 'SOFT' 100, 'WONK' 1; }
+:root[data-font="dmserif"]   { --display: 'DM Serif Display', Georgia, serif; --ls: -0.01em; --h1: clamp(2.1rem, 4.8vw, 3.6rem); }
 .wordmark, .hero h1, h2, .card-title, .piece-title, .about-text { font-weight: var(--dw) !important; font-variation-settings: var(--fv); }
 .wordmark strong, .hero h1 em { font-style: var(--em); font-weight: var(--dw); }
 .hero h1 { font-size: var(--h1); letter-spacing: var(--ls); }
@@ -83,7 +83,7 @@ a { color: inherit; }
 .hero-cta:hover { background: var(--btn-hover); }
 .hero h1 {
   font-family: var(--display); font-weight: 400;
-  font-size: clamp(2.8rem, 8vw, 6rem); line-height: 0.98; letter-spacing: -0.015em;
+  font-size: clamp(2.2rem, 5vw, 3.9rem); line-height: 1.05; letter-spacing: -0.015em;
   margin: 0 0 24px;
 }
 .hero h1 em { font-style: italic; color: var(--accent); }

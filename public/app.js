@@ -51,7 +51,7 @@ const CONFIG = {
 const TEXT = {
   fr: {
     navWorks: 'Œuvres', navAbout: 'À propos', navContact: 'Contact',
-    heroTitle: 'Des moments, des humeurs et des souvenirs <em>en couleur.</em>',
+    heroTitle: 'Des moments, des humeurs<br>et des souvenirs <em>en couleur.</em>',
     heroSub: 'Aquarelles originales d’Alexandra Paige.',
     filterAvailable: 'Disponibles', filterAll: 'Toutes',
     demo: 'Aperçu — œuvres de la boutique Etsy, paiement pas encore actif',
@@ -71,7 +71,7 @@ const TEXT = {
   },
   en: {
     navWorks: 'Works', navAbout: 'About', navContact: 'Contact',
-    heroTitle: 'Moments, moods and memories <em>in colour.</em>',
+    heroTitle: 'Moments, moods<br>and memories <em>in colour.</em>',
     heroSub: 'Original watercolours by Alexandra Paige.',
     filterAvailable: 'Available', filterAll: 'All',
     demo: 'Preview — pieces from the Etsy shop, checkout not live yet',
