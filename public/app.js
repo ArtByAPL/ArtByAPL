@@ -694,7 +694,7 @@ function demoArtworks() {
   const squareSet = (slug) => [
     { src: `/art/${slug}-photo1.jpg?v=2`, fill: true },
     { src: `/art/${slug}.jpg` },
-    { src: `/art/${slug}-office.jpg?v=2`, mock: true, fill: true },
+    { src: `/art/${slug}-office.jpg?v=3`, mock: true, fill: true },
     { src: '/art/commission-2x2.jpg?v=2', mock: true, fill: true },
     { src: '/art/commission-office.jpg', fill: true },
   ];
