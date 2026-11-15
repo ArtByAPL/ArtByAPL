@@ -603,7 +603,7 @@ function demoArtworks() {
     ['forest-walk', 'Forest Walk', 'circular'],
     ['deep-blues', 'Deep Blues', 'circular'],
     ['mystic-purple', 'Mystic Purple', 'circular'],
-    ['autumn-hues-circular', 'earth-blush', 'Fallen Leaves', 'circular'],
+    ['autumn-hues-circular', 'Fallen Leaves', 'circular'],
     ['mountain-landscape', 'Mountain Landscape', 'landscape', { dimensions: '8×10 in', price: 6700 }],
     ['soft-pinks', 'Soft Pinks', 'circular'],
     ['violet-green', 'Violet & Jade', 'circular'],
@@ -744,7 +744,7 @@ function demoArtworks() {
   // Display order: by colour (blues → greens → purples → pinks → reds/oranges → warm), sold pieces mixed in
   const ORDER = ['deep-blues', 'blue-hues-rectangular', 'blues-hues', 'blue-peak', 'sky-ochre', 'blue-gold', 'teal-hues', 'blue-hues-circular', 'tide-pool',
     'tidal-blues', 'moss-cobalt', 'moss-rain', 'forest-walk', 'sage-clay', 'violet-green', 'mystic-purple', 'purple-hues-rectangular',
-    'purple-blues', 'violet-hues', 'purple-hues-circular', 'soft-pinks', 'pink-s', 'pink-hues', 'sorbet', 'warm-hues', 'autumn-hues-circular',
+    'purple-blues', 'violet-hues', 'purple-hues-circular', 'soft-pinks', 'pink-s', 'pink-hues', 'sorbet', 'warm-hues', 'autumn-hues-circular', 'earth-blush',
     'orange-hues', 'autumn-hues-rectangular', 'mountain-landscape'];
   const rank = (slug) => { const i = ORDER.indexOf(slug); return i < 0 ? ORDER.length : i; };
   list.sort((a, b) => rank(a[0]) - rank(b[0]));
