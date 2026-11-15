@@ -603,7 +603,7 @@ function demoArtworks() {
     ['forest-walk', 'Forest Walk', 'circular'],
     ['deep-blues', 'Deep Blues', 'circular'],
     ['mystic-purple', 'Mystic Purple', 'circular'],
-    ['autumn-hues-circular', 'Fallen Leaves', 'circular'],
+    ['autumn-hues-circular', 'earth-blush', 'Fallen Leaves', 'circular'],
     ['mountain-landscape', 'Mountain Landscape', 'landscape', { dimensions: '8×10 in', price: 6700 }],
     ['soft-pinks', 'Soft Pinks', 'circular'],
     ['violet-green', 'Violet & Jade', 'circular'],
@@ -626,6 +626,7 @@ function demoArtworks() {
     ['blue-gold', 'Blue & Gold', 'circular', { sold: true }],
     ['moss-cobalt', 'Moss & Cobalt', 'circular', { sold: true }],
     ['blue-peak', 'Blue Peak', 'circular', { sold: true }],
+    ['earth-blush', 'Earth & Blush', 'circular', { sold: true }],
     // Large format (40 × 50 cm, for a 50 × 70 cm frame with mat)
     ['sky-ochre', 'Sky & Ochre', 'circular', { sold: true, large: true, price: 8500 }],
     ['moss-rain', 'Moss & Rain', 'circular', { sold: true, large: true, price: 8500 }],
@@ -635,7 +636,7 @@ function demoArtworks() {
   // Listing photo set for every piece: the piece, in its mat, on the sideboard, on the gallery wall,
   // the collection grid, and Alexandra's own framed photo. Room photos are free Unsplash photos.
   // Pieces with Alexandra's own new photos (colour-corrected, light oak dresser)
-  const updated = ['tide-pool', 'sorbet', 'blue-peak', 'sky-ochre', 'moss-rain', 'pink-s', 'sage-clay', 'blue-gold', 'moss-cobalt', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
+  const updated = ['earth-blush', 'tide-pool', 'sorbet', 'blue-peak', 'sky-ochre', 'moss-rain', 'pink-s', 'sage-clay', 'blue-gold', 'moss-cobalt', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
   const largeSet = (slug) => [
     { src: `/art/${slug}-photo1.jpg?v=5`, fill: true },
     { src: `/art/${slug}-room.jpg?v=5`, mock: true, fill: true },
@@ -724,6 +725,8 @@ function demoArtworks() {
       'Des lavis menthe, écume et olive mousse flottent sur une fine pluie de marques cobalt peintes à la main, ancrés par des touches de brun chocolat et de vert forêt profond. Calme, détaillée et tout en couches.'],
     'blue-peak': ['A misty mountain landscape in cobalt and ultramarine, painted in a circle and set on a deep navy card. Layered washes, crayon texture and tiny white highlights catch the light on the peak, with a few birds drifting across the sky.',
       'Un paysage de montagne brumeux en bleu cobalt et outremer, peint dans un cercle et posé sur un carton bleu marine profond. Lavis superposés, texture au pastel et petits rehauts blancs font briller le sommet, avec quelques oiseaux qui traversent le ciel.'],
+    'earth-blush': ['Blush pink, terracotta and warm caramel meet mustard yellow and deep forest green, set on a soft kraft-brown card. Red crayon raindrops, white gel-pen marks and dashes of pine give it an earthy, cosy warmth.',
+      'Rose poudré, terre cuite et caramel chaud rencontrent le jaune moutarde et le vert forêt profond, sur un carton brun kraft tout doux. Gouttes au pastel rouge, petites marques au stylo gel blanc et traits vert sapin lui donnent une chaleur terreuse et réconfortante.'],
     'tide-pool': ['A larger piece painted edge to edge in turquoise, cobalt and sea green, deepening into plum and violet. White gel-pen swirls, raised dots and coral-like squiggles give it the feel of looking down into a rock pool.',
       'Une plus grande œuvre peinte d’un bord à l’autre en turquoise, cobalt et vert océan, qui plonge vers le prune et le violet. Spirales au stylo gel blanc, points en relief et motifs en forme de corail évoquent un regard plongé dans une cuvette de marée.'],
     'sorbet': ['A larger piece painted edge to edge in hot pink, fuchsia, violet and glowing lemon yellow, with touches of mint. Swirls, dashes and dots layered over soft washes make it joyful and full of energy.',
