@@ -692,10 +692,10 @@ function demoArtworks() {
     { src: `/art/${slug}-matted.jpg?v=5`, fill: true },
   ];
   const squareSet = (slug) => [
-    { src: `/art/${slug}-photo1.jpg`, fill: true },
+    { src: `/art/${slug}-photo1.jpg?v=2`, fill: true },
     { src: `/art/${slug}.jpg` },
-    { src: `/art/${slug}-office.jpg`, mock: true, fill: true },
-    { src: '/art/commission-2x2.jpg', mock: true, fill: true },
+    { src: `/art/${slug}-office.jpg?v=2`, mock: true, fill: true },
+    { src: '/art/commission-2x2.jpg?v=2', mock: true, fill: true },
     { src: '/art/commission-office.jpg', fill: true },
   ];
   const isSquare = (slug) => ['lilac-tide', 'meadow-light', 'harbour-sun', 'wildflower-shore'].includes(slug);
@@ -827,7 +827,7 @@ function demoArtworks() {
       id: slug, title, collection: 'intuitive-abstracts', currency: 'cad', sold: Boolean(extra.sold), url: extra.sold ? null : (BUY[slug] || null), year: '',
       thumb: `/art/${slug}-sm.jpg`, art: `/art/${slug}.jpg`, image: customGallery[slug] ? customGallery[slug][0].src : `/art/${slug}-styled.jpg`,
       gallery: listingGallery(slug),
-      price: d.price, matted, large: Boolean(extra.large), cardPhoto: extra.large ? `/art/${slug}-card.jpg?v=5` : extra.square ? `/art/${slug}-card.jpg` : null, square: Boolean(extra.square), commission: Boolean(extra.commission),
+      price: d.price, matted, large: Boolean(extra.large), cardPhoto: extra.large ? `/art/${slug}-card.jpg?v=5` : extra.square ? `/art/${slug}-card.jpg?v=2` : null, square: Boolean(extra.square), commission: Boolean(extra.commission),
       // Short line under each card in the grid
       cardSub: extra.square
         ? { en: 'Watercolour · commission · 12 × 12 in', fr: 'Aquarelle · commande · 12 × 12 po' }
