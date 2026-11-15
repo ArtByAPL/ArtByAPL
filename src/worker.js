@@ -3,6 +3,7 @@
 // Only /api/* requests run here.
 import { handleArtworks } from './stripe.js';
 import { handleGlb } from './glb.js';
+import { handleRates } from './rates.js';
 
 export default {
   async fetch(request, env, ctx) {
@@ -10,6 +11,9 @@ export default {
 
     if (url.pathname === '/api/artworks' && request.method === 'GET') {
       return handleArtworks(request, env, ctx);
+    }
+    if (url.pathname === '/api/rates' && request.method === 'GET') {
+      return handleRates(request, env, ctx);
     }
     if (url.pathname.startsWith('/api/glb/') && request.method === 'GET') {
       return handleGlb(request, env);

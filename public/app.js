@@ -62,6 +62,7 @@ const TEXT = {
     prev: 'Photo précédente', next: 'Photo suivante',
     collection: 'Collection', aboutRead: 'Lire mon histoire →', aboutTitle: 'À propos de l’artiste', aboutCta: 'Voir les œuvres',
     originalLabel: 'Œuvre', originalVal: 'Peinture originale (pas une reproduction)', paperLabel: 'Papier', paperVal: 'Papier aquarelle épais à grain fin (pressé à froid), 140 lb / 300 g/m²', signedLabel: 'Signature', signedVal: 'Signée par l’artiste au verso', presLabel: 'Présentation', presMatted: 'Non encadrée. Livrée dans un passe-partout de 8 × 10 po (20,3 × 25,4 cm), prête à glisser dans un cadre standard.', presUnmatted: 'Non encadrée, sans passe-partout. Entre dans un cadre standard de 8 × 10 po (20,3 × 25,4 cm).', presLarge: 'Non encadrée. Format pensé pour un cadre de 19¾ × 27½ po (50 × 70 cm) avec passe-partout à ouverture de 15¾ × 19¾ po (40 × 50 cm) (montrée dans un cadre IKEA RÖDALM).', shipTitle: 'Livraison et emballage', shipPack: 'Expédiée à plat, dans une pochette protectrice en cellophane.', shipNote: 'Chaque œuvre est accompagnée d’un mot de remerciement écrit à la main par l’artiste.', shipMade: 'Peinte à la main au Québec, Canada.', careTitle: 'Entretien', careText: 'Pour garder les couleurs vives, exposez l’œuvre à l’abri du soleil direct et de l’humidité, idéalement encadrée sous verre. Manipulez-la par les bords, les mains propres et sèches.',
+    fxNote: 'Prix approximatif. Le paiement se fait en dollars canadiens ({p}).',
     back: '← Toutes les œuvres', unique: 'Pièce unique, il n’y en a qu’une.', details: 'Détails',
     mediumLabel: 'Technique', sizeLabel: 'Format', mockNote: 'Encadrement montré à titre d’illustration.', arBtn: 'Voir chez moi', arTitle: 'Voir l’œuvre sur votre mur', arGo: 'Ouvrir la caméra', arHelp: 'Pointez un mur et bougez lentement le téléphone jusqu’à ce que l’œuvre s’y accroche. Elle apparaît à sa vraie grandeur : glissez pour la déplacer, pincez pour l’agrandir. Astuce : un mur avec un peu de texture ou un cadre déjà accroché aide la caméra.', arDesktop: 'Ouvrez cette page sur votre téléphone pour voir l’œuvre sur votre mur, à sa vraie grandeur.', arNote: 'Cadre montré à titre d’illustration.', close: 'Fermer', arPhoto: 'Essayer avec une photo de mon mur', arTake: 'Prendre une photo', arPick: 'Choisir dans mes photos', arPhotoHelp: 'Glissez l’œuvre pour la placer. Pincez (ou utilisez le curseur) pour ajuster la grandeur, et tournez deux doigts pour l’incliner.', arRotate: 'Tourner la photo', arRotatePiece: 'Tourner l’œuvre', arTwist: 'Ou tournez deux doigts sur l’œuvre.', arSize: 'Grandeur', arChange: 'Changer de photo', arSave: 'Enregistrer l’image', arBack: 'Vue 3D',
     demoBuy: 'Aperçu : le paiement sera actif une fois Stripe branché.', notFound: 'Œuvre introuvable.',
@@ -82,6 +83,7 @@ const TEXT = {
     prev: 'Previous photo', next: 'Next photo',
     collection: 'Collection', aboutRead: 'Read my story →', aboutTitle: 'About the artist', aboutCta: 'See the work',
     originalLabel: 'Artwork', originalVal: 'Original painting (not a print)', paperLabel: 'Paper', paperVal: 'Heavyweight cold-pressed watercolour paper, 140 lb / 300 gsm', signedLabel: 'Signature', signedVal: 'Signed by the artist on the back', presLabel: 'Presentation', presMatted: 'Unframed. Arrives in an 8 × 10 in (20.3 × 25.4 cm) mat, ready to slip into a standard frame.', presUnmatted: 'Unframed, no mat. Fits a standard 8 × 10 in (20.3 × 25.4 cm) frame.', presLarge: 'Unframed. Sized for a 19¾ × 27½ in (50 × 70 cm) frame with a 15¾ × 19¾ in (40 × 50 cm) mat opening (shown in an IKEA RÖDALM).', shipTitle: 'Shipping & packaging', shipPack: 'Ships flat in a protective cellophane sleeve.', shipNote: 'Every piece comes with a handwritten thank-you note from the artist.', shipMade: 'Hand-painted in Québec, Canada.', careTitle: 'Care', careText: 'To keep the colours vivid, display away from direct sunlight and humidity, ideally framed behind glass. Handle by the edges with clean, dry hands.',
+    fxNote: 'Approximate price. You’ll be charged in Canadian dollars ({p}).',
     back: '← All works', unique: 'One of a kind: there is only one.', details: 'Details',
     mediumLabel: 'Medium', sizeLabel: 'Size', mockNote: 'Shown framed for illustration.', arBtn: 'View in your space', arTitle: 'See it on your wall', arGo: 'Open camera', arHelp: 'Point at a wall and move the phone slowly until the piece snaps onto it. It starts at its true size: drag to move it, pinch to resize. Tip: a wall with some texture or a frame already hanging helps the camera.', arDesktop: 'Open this page on your phone to see the piece on your wall, at its true size.', arNote: 'Frame shown for illustration.', close: 'Close', arPhoto: 'Try it with a photo of my wall', arTake: 'Take a photo', arPick: 'Choose from my photos', arPhotoHelp: 'Drag the piece to place it. Pinch (or use the slider) to adjust the size, and twist two fingers to tilt it.', arRotate: 'Rotate photo', arRotatePiece: 'Rotate piece', arTwist: 'Or twist two fingers on the piece.', arSize: 'Size', arChange: 'Change photo', arSave: 'Save image', arBack: '3D view',
     demoBuy: 'Preview: checkout goes live once Stripe is connected.', notFound: 'Piece not found.',
@@ -93,7 +95,12 @@ const TEXT = {
 
 // ────────────────────────────────────────────────────────────
 const $ = (s, el = document) => el.querySelector(s);
-const state = { lang: initialLang(), filter: 'all', artworks: [], demo: false };
+const state = { lang: initialLang(), filter: 'all', artworks: [], demo: false, currency: initialCurrency(), rates: { CAD: 1, USD: 0.72, EUR: 0.66, GBP: 0.56, AUD: 1.1 } };
+const CURRENCIES = ['CAD', 'USD', 'EUR', 'GBP', 'AUD'];
+function initialCurrency() {
+  try { const c = localStorage.getItem('currency'); if (['CAD', 'USD', 'EUR', 'GBP', 'AUD'].includes(c)) return c; } catch (_) {}
+  return 'CAD';
+}
 
 function initialLang() {
   try {
@@ -105,11 +112,43 @@ function initialLang() {
 
 function t(key) { return TEXT[state.lang][key]; }
 
-function money(cents, currency) {
-  return new Intl.NumberFormat(state.lang === 'fr' ? 'fr-CA' : 'en-CA', {
-    style: 'currency', currency: (currency || 'cad').toUpperCase(),
-    minimumFractionDigits: cents % 100 === 0 ? 0 : 2,
-  }).format(cents / 100);
+// Prices are set (and charged) in CAD. Other currencies are shown as an approximate, rounded conversion.
+function money(cents, currency, exact) {
+  const base = (currency || 'cad').toUpperCase();
+  const loc = state.lang === 'fr' ? 'fr-CA' : 'en-CA';
+  const cur = exact ? base : state.currency;
+  if (cur === base) {
+    return new Intl.NumberFormat(loc, { style: 'currency', currency: base, currencyDisplay: base === 'CAD' && state.currency !== 'CAD' ? 'code' : 'symbol',
+      minimumFractionDigits: cents % 100 === 0 ? 0 : 2 }).format(cents / 100);
+  }
+  const v = Math.round((cents / 100) * (state.rates[cur] || 1));
+  return '≈ ' + new Intl.NumberFormat(loc, { style: 'currency', currency: cur, currencyDisplay: 'narrowSymbol', maximumFractionDigits: 0 }).format(v);
+}
+async function loadRates() {
+  try {
+    const r = await fetch('/api/rates');
+    if (r.ok) { const j = await r.json(); if (j.rates && j.rates.USD) state.rates = j.rates; }
+  } catch (_) {}
+}
+function rerenderPrices() {
+  if ($('.collections')) renderGrid();
+  if ($('.listing')) renderListing();
+}
+function setupCurrency() {
+  const lang = $('.lang-toggle');
+  if (!lang || $('.currency-select')) return;
+  const sel = document.createElement('select');
+  sel.className = 'currency-select';
+  sel.setAttribute('aria-label', 'Currency');
+  sel.innerHTML = CURRENCIES.map((c) => `<option value="${c}">${c}</option>`).join('');
+  sel.value = state.currency;
+  lang.parentNode.insertBefore(sel, lang);
+  sel.addEventListener('change', () => {
+    state.currency = sel.value;
+    try { localStorage.setItem('currency', state.currency); } catch (_) {}
+    rerenderPrices();
+  });
+  loadRates().then(() => { if (state.currency !== 'CAD') rerenderPrices(); });
 }
 
 function escapeHtml(s) {
@@ -244,6 +283,7 @@ function renderListing() {
           return c ? `<a class="listing-collection" href="/#${escapeHtml(c.id)}">${escapeHtml(localized(c.name))}</a>` : ''; })()}
         <h1>${escapeHtml(a.title)}</h1>
         <p class="listing-price">${a.sold ? t('sold') : money(a.price, a.currency)}</p>
+        ${!a.sold && state.currency !== 'CAD' ? `<p class="listing-fx">${t('fxNote').replace('{p}', money(a.price, a.currency, true))}</p>` : ''}
         <p class="listing-unique">${a.sold ? t('soldNote') : t('unique')}</p>
         ${a.sold || !a.url ? '' : `<a class="buy" href="${escapeHtml(a.url)}">${t('buy')}</a>`}
         <p class="demo-buy" hidden>${t('demoBuy')}</p>
@@ -796,6 +836,8 @@ function renderHero() {
       : `<div class="hero-crop"><img class="print" src="${escapeHtml(h.image)}" alt="${escapeHtml(h.title)}"></div>`)
     : `<img src="${watercolour(7, ['#d93a6a', '#1d8a85', '#f2a03d', '#5b2a86', '#2fb39e'], { w: 600, h: 600, paper: 'transparent' })}" alt="">`;
 }
+
+setupCurrency();
 
 // ── Events ──────────────────────────────────────────────────
 document.addEventListener('keydown', (e) => {
