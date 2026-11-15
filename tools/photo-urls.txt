@@ -1,12 +1,1 @@
-wm1.jpg https://images.unsplash.com/photo-1623276234990-c74be03fd36a?w=700
-wm2.jpg https://images.unsplash.com/photo-1713936041916-0b05f500b6ef?w=700
-wm3.jpg https://images.unsplash.com/photo-1638277300236-dde420606df0?w=700
-wm4.jpg https://images.unsplash.com/photo-1739183646664-952f213eba02?w=700
-wm5.jpg https://images.unsplash.com/photo-1685791712275-b79224981fa0?w=700
-wm6.jpg https://images.unsplash.com/photo-1717765161322-c4228745c5f0?w=700
-wm7.jpg https://images.unsplash.com/photo-1658761384111-ab373c8c823b?w=700
-wm8.jpg https://images.unsplash.com/photo-1659606229646-d8c8e09b8937?w=700
-wm9.jpg https://images.unsplash.com/photo-1646971697587-69688ba1457f?w=700
-wm10.jpg https://images.unsplash.com/photo-1722236133390-b3e698722d0d?w=700
-wm11.jpg https://images.unsplash.com/photo-1727207334719-9b40e061e8a2?w=700
-wm12.jpg https://images.unsplash.com/photo-1708985691295-42d0a6e7190f?w=700
+warm.jpg https://images.unsplash.com/photo-1739183646664-952f213eba02?w=2400&q=90
