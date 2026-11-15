@@ -18,7 +18,7 @@ const CONFIG = {
   aboutPage: {
     photo: '/art/alexandra.jpg',
     // More photos of Alexandra, shown in a row under the bio
-    photos: ['/art/alexandra-studio.jpg', '/art/alexandra-trail.jpg'],
+    photos: ['/art/alexandra-studio.jpg?v=2', '/art/alexandra-trail.jpg'],
     bio: [
       { en: "I’m Alexandra, a watercolour artist inspired by the places that feel like home.",
         fr: "Je m’appelle Alexandra, une artiste aquarelliste inspirée par les lieux qui me font sentir chez moi." },
