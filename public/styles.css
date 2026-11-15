@@ -403,3 +403,4 @@ a.card { text-decoration: none; color: inherit; }
   background-position: calc(100% - 11px) 52%, calc(100% - 7px) 52%; background-size: 4px 4px; background-repeat: no-repeat; }
 .listing-fx { font-size: 0.85rem; color: var(--muted); margin: 0 0 14px; }
 @media (max-width: 560px) { .currency-select { margin-left: 4px; margin-right: 4px; padding: 4px 18px 4px 8px; background-position: calc(100% - 9px) 52%, calc(100% - 5px) 52%; } .site-header nav { gap: 10px; } .wordmark { font-size: 1.35rem; } }
+.card.is-sold .card-price.is-commission { text-decoration: none; font-size: 0.85rem; }

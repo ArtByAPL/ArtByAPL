@@ -62,6 +62,7 @@ const TEXT = {
     prev: 'Photo précédente', next: 'Photo suivante',
     collection: 'Collection', aboutRead: 'Lire mon histoire →', aboutTitle: 'À propos de l’artiste', aboutCta: 'Voir les œuvres',
     originalLabel: 'Œuvre', originalVal: 'Peinture originale (pas une reproduction)', paperLabel: 'Papier', paperVal: 'Papier aquarelle épais à grain fin (pressé à froid), 140 lb / 300 g/m²', signedLabel: 'Signature', signedVal: 'Signée par l’artiste au verso', presLabel: 'Présentation', presMatted: 'Non encadrée. Livrée dans un passe-partout de 8 × 10 po (20,3 × 25,4 cm), prête à glisser dans un cadre standard.', presUnmatted: 'Non encadrée, sans passe-partout. Entre dans un cadre standard de 8 × 10 po (20,3 × 25,4 cm).', presLarge: 'Non encadrée. Format pensé pour un cadre de 19¾ × 27½ po (50 × 70 cm) avec passe-partout à ouverture de 15¾ × 19¾ po (40 × 50 cm) (montrée dans un cadre IKEA RÖDALM).', shipTitle: 'Livraison et emballage', shipPack: 'Expédiée à plat, dans une pochette protectrice en cellophane.', shipNote: 'Chaque œuvre est accompagnée d’un mot de remerciement écrit à la main par l’artiste.', shipMade: 'Peinte à la main au Québec, Canada.', careTitle: 'Entretien', careText: 'Pour garder les couleurs vives, exposez l’œuvre à l’abri du soleil direct et de l’humidité, idéalement encadrée sous verre. Manipulez-la par les bords, les mains propres et sèches.',
+    commission: 'Commande', presSquare: 'Non encadrée, sans passe-partout. Fait partie d’une série de quatre œuvres carrées peintes sur commande, conçues pour des cadres de 12 × 12 po (30,5 × 30,5 cm).', commissionNote: 'Cette œuvre fait partie d’une commande privée de quatre pièces. Vous aimeriez une série pensée pour votre espace? Écrivez-moi.',
     fxNote: 'Prix approximatif. Le paiement se fait en dollars canadiens ({p}).',
     back: '← Toutes les œuvres', unique: 'Pièce unique, il n’y en a qu’une.', details: 'Détails',
     mediumLabel: 'Technique', sizeLabel: 'Format', mockNote: 'Encadrement montré à titre d’illustration.', arBtn: 'Voir chez moi', arTitle: 'Voir l’œuvre sur votre mur', arGo: 'Ouvrir la caméra', arHelp: 'Pointez un mur et bougez lentement le téléphone jusqu’à ce que l’œuvre s’y accroche. Elle apparaît à sa vraie grandeur : glissez pour la déplacer, pincez pour l’agrandir. Astuce : un mur avec un peu de texture ou un cadre déjà accroché aide la caméra.', arDesktop: 'Ouvrez cette page sur votre téléphone pour voir l’œuvre sur votre mur, à sa vraie grandeur.', arNote: 'Cadre montré à titre d’illustration.', close: 'Fermer', arPhoto: 'Essayer avec une photo de mon mur', arTake: 'Prendre une photo', arPick: 'Choisir dans mes photos', arPhotoHelp: 'Glissez l’œuvre pour la placer. Pincez (ou utilisez le curseur) pour ajuster la grandeur, et tournez deux doigts pour l’incliner.', arRotate: 'Tourner la photo', arRotatePiece: 'Tourner l’œuvre', arTwist: 'Ou tournez deux doigts sur l’œuvre.', arSize: 'Grandeur', arChange: 'Changer de photo', arSave: 'Enregistrer l’image', arBack: 'Vue 3D',
@@ -83,6 +84,7 @@ const TEXT = {
     prev: 'Previous photo', next: 'Next photo',
     collection: 'Collection', aboutRead: 'Read my story →', aboutTitle: 'About the artist', aboutCta: 'See the work',
     originalLabel: 'Artwork', originalVal: 'Original painting (not a print)', paperLabel: 'Paper', paperVal: 'Heavyweight cold-pressed watercolour paper, 140 lb / 300 gsm', signedLabel: 'Signature', signedVal: 'Signed by the artist on the back', presLabel: 'Presentation', presMatted: 'Unframed. Arrives in an 8 × 10 in (20.3 × 25.4 cm) mat, ready to slip into a standard frame.', presUnmatted: 'Unframed, no mat. Fits a standard 8 × 10 in (20.3 × 25.4 cm) frame.', presLarge: 'Unframed. Sized for a 19¾ × 27½ in (50 × 70 cm) frame with a 15¾ × 19¾ in (40 × 50 cm) mat opening (shown in an IKEA RÖDALM).', shipTitle: 'Shipping & packaging', shipPack: 'Ships flat in a protective cellophane sleeve.', shipNote: 'Every piece comes with a handwritten thank-you note from the artist.', shipMade: 'Hand-painted in Québec, Canada.', careTitle: 'Care', careText: 'To keep the colours vivid, display away from direct sunlight and humidity, ideally framed behind glass. Handle by the edges with clean, dry hands.',
+    commission: 'Commission', presSquare: 'Unframed, no mat. Part of a set of four square pieces painted on commission, sized for 12 × 12 in (30.5 × 30.5 cm) frames.', commissionNote: 'This piece was part of a private commission of four. Would you like a set made for your own space? Get in touch.',
     fxNote: 'Approximate price. You’ll be charged in Canadian dollars ({p}).',
     back: '← All works', unique: 'One of a kind: there is only one.', details: 'Details',
     mediumLabel: 'Medium', sizeLabel: 'Size', mockNote: 'Shown framed for illustration.', arBtn: 'View in your space', arTitle: 'See it on your wall', arGo: 'Open camera', arHelp: 'Point at a wall and move the phone slowly until the piece snaps onto it. It starts at its true size: drag to move it, pinch to resize. Tip: a wall with some texture or a frame already hanging helps the camera.', arDesktop: 'Open this page on your phone to see the piece on your wall, at its true size.', arNote: 'Frame shown for illustration.', close: 'Close', arPhoto: 'Try it with a photo of my wall', arTake: 'Take a photo', arPick: 'Choose from my photos', arPhotoHelp: 'Drag the piece to place it. Pinch (or use the slider) to adjust the size, and twist two fingers to tilt it.', arRotate: 'Rotate photo', arRotatePiece: 'Rotate piece', arTwist: 'Or twist two fingers on the piece.', arSize: 'Size', arChange: 'Change photo', arSave: 'Save image', arBack: '3D view',
@@ -231,7 +233,7 @@ function renderGrid() {
           <div class="card-title">${escapeHtml(a.title)}</div>
           <div class="card-sub">${escapeHtml(localized(a.cardSub) || [localized(a.medium), localized(a.dimensions)].filter(Boolean).join(' · '))}</div>
         </div>
-        <div class="card-price">${money(a.price, a.currency)}</div>
+        <div class="card-price${a.commission ? ' is-commission' : ''}">${a.commission ? t('commission') : money(a.price, a.currency)}</div>
       </div>
     </a>`;
   const groups = CONFIG.collections
@@ -284,7 +286,7 @@ function renderListing() {
         <h1>${escapeHtml(a.title)}</h1>
         <p class="listing-price">${a.sold ? t('sold') : money(a.price, a.currency)}</p>
         ${!a.sold && state.currency !== 'CAD' ? `<p class="listing-fx">${t('fxNote').replace('{p}', money(a.price, a.currency, true))}</p>` : ''}
-        <p class="listing-unique">${a.sold ? t('soldNote') : t('unique')}</p>
+        <p class="listing-unique">${a.commission ? t('commissionNote') : a.sold ? t('soldNote') : t('unique')}</p>
         ${a.sold || !a.url ? '' : `<a class="buy" href="${escapeHtml(a.url)}">${t('buy')}</a>`}
         <p class="demo-buy" hidden>${t('demoBuy')}</p>
         ${a.sold ? '' : `<button type="button" class="ar-open"><span aria-hidden="true">◳</span> ${t('arBtn')}</button>`}
@@ -296,7 +298,7 @@ function renderListing() {
           ${a.medium ? `<dt>${t('mediumLabel')}</dt><dd>${escapeHtml(localized(a.medium))}</dd>` : ''}
           <dt>${t('paperLabel')}</dt><dd>${t('paperVal')}</dd>
           <dt>${t('signedLabel')}</dt><dd>${t('signedVal')}</dd>
-          <dt>${t('presLabel')}</dt><dd>${a.large ? t('presLarge') : a.matted === false ? t('presUnmatted') : t('presMatted')}</dd>
+          <dt>${t('presLabel')}</dt><dd>${a.square ? t('presSquare') : a.large ? t('presLarge') : a.matted === false ? t('presUnmatted') : t('presMatted')}</dd>
         </dl>
         <details class="listing-more" open>
           <summary>${t('shipTitle')}</summary>
@@ -672,11 +674,16 @@ function demoArtworks() {
     ['moss-rain', 'Moss & Rain', 'circular', { sold: true, large: true, price: 8500 }],
     ['tide-pool', 'Rock Pool', 'rectangular', { sold: true, large: true, price: 8500 }],
     ['sorbet', 'Sorbet', 'rectangular', { sold: true, large: true, price: 8500 }],
+    // Commission: a set of four 12 × 12 in square pieces
+    ['lilac-tide', 'Lilac Tide', 'rectangular', { sold: true, square: true, commission: true, price: 0 }],
+    ['meadow-light', 'Meadow Light', 'rectangular', { sold: true, square: true, commission: true, price: 0 }],
+    ['harbour-sun', 'Harbour Sun', 'rectangular', { sold: true, square: true, commission: true, price: 0 }],
+    ['wildflower-shore', 'Wildflower Shore', 'rectangular', { sold: true, square: true, commission: true, price: 0 }],
   ];
   // Listing photo set for every piece: the piece, in its mat, on the sideboard, on the gallery wall,
   // the collection grid, and Alexandra's own framed photo. Room photos are free Unsplash photos.
   // Pieces with Alexandra's own new photos (colour-corrected, light oak dresser)
-  const updated = ['earth-blush', 'tide-pool', 'sorbet', 'blue-peak', 'sky-ochre', 'moss-rain', 'pink-s', 'sage-clay', 'blue-gold', 'moss-cobalt', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
+  const updated = ['lilac-tide', 'meadow-light', 'harbour-sun', 'wildflower-shore', 'earth-blush', 'tide-pool', 'sorbet', 'blue-peak', 'sky-ochre', 'moss-rain', 'pink-s', 'sage-clay', 'blue-gold', 'moss-cobalt', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
   const largeSet = (slug) => [
     { src: `/art/${slug}-photo1.jpg?v=5`, fill: true },
     { src: `/art/${slug}-room.jpg?v=5`, mock: true, fill: true },
@@ -684,11 +691,20 @@ function demoArtworks() {
     { src: `/art/${slug}.jpg?v=5` },
     { src: `/art/${slug}-matted.jpg?v=5`, fill: true },
   ];
+  const squareSet = (slug) => [
+    { src: `/art/${slug}-photo1.jpg`, fill: true },
+    { src: `/art/${slug}.jpg` },
+    { src: `/art/${slug}-room.jpg`, mock: true, fill: true },
+    { src: '/art/commission-2x2.jpg', mock: true, fill: true },
+    { src: '/art/commission-shelf.jpg' },
+    { src: '/art/commission-office.jpg', fill: true },
+  ];
+  const isSquare = (slug) => ['lilac-tide', 'meadow-light', 'harbour-sun', 'wildflower-shore'].includes(slug);
   const isLarge = (slug) => ['sky-ochre', 'moss-rain', 'tide-pool', 'sorbet'].includes(slug);
   // Pieces that aren't in the original 9-piece grid get their own version, with them in the middle
   const ownGrid = ['deep-blues', 'autumn-hues-circular', 'violet-green', 'teal-hues', 'blue-hues-circular', 'pink-s', 'blue-gold', 'moss-cobalt', 'earth-blush'];
   const gridFor = (slug) => (ownGrid.includes(slug) ? `/art/${slug}-collection.jpg` : '/art/collection-grid.jpg');
-  const setFor = (slug) => isLarge(slug) ? largeSet(slug) : [
+  const setFor = (slug) => isSquare(slug) ? squareSet(slug) : isLarge(slug) ? largeSet(slug) : [
     { src: `/art/${slug}-photo1.jpg?v=8`, fill: true },
     { src: `/art/${slug}-photo3.jpg?v=6`, fill: true },
     { src: `/art/${slug}.jpg` },
@@ -770,6 +786,14 @@ function demoArtworks() {
       'Un paysage de montagne brumeux en bleu cobalt et outremer, peint dans un cercle et posé sur un carton bleu marine profond. Lavis superposés, texture au pastel et petits rehauts blancs font briller le sommet, avec quelques oiseaux qui traversent le ciel.'],
     'earth-blush': ['Blush pink, terracotta and warm caramel meet mustard yellow and deep forest green, set on a soft kraft-brown card. Red crayon raindrops, white gel-pen marks and dashes of pine give it an earthy, cosy warmth.',
       'Rose poudré, terre cuite et caramel chaud rencontrent le jaune moutarde et le vert forêt profond, sur un carton brun kraft tout doux. Gouttes au pastel rouge, petites marques au stylo gel blanc et traits vert sapin lui donnent une chaleur terreuse et réconfortante.'],
+    'lilac-tide': ['Cobalt and sky blue drift beside soft lilac, mauve and warm mustard, with a little chain of green squares tucked into one corner. Raindrop dashes and gel-pen stitching give it a gentle, coastal rhythm.',
+      'Le cobalt et le bleu ciel dérivent aux côtés du lilas, du mauve et d’un jaune moutarde chaleureux, avec une petite chaîne de carrés verts dans un coin. Traits en forme de gouttes et points au stylo gel lui donnent un rythme doux, côtier.'],
+    'meadow-light': ['Sunny lemon and olive meet sky blue and deep cobalt, crossed by a ladder of little blue squares. Honey-coloured dashes and patterned patches feel like a bright afternoon in a summer field.',
+      'Le jaune citron et l’olive rencontrent le bleu ciel et le cobalt profond, traversés par une échelle de petits carrés bleus. Traits couleur miel et motifs évoquent un après-midi lumineux dans un champ d’été.'],
+    'harbour-sun': ['Warm tangerine and ochre sit against cobalt, sage and soft taupe, with circles, dots and long trails of blue dashes. A sunny, easy-going piece with the feel of a harbour on a clear day.',
+      'Le mandarine chaud et l’ocre côtoient le cobalt, la sauge et un taupe doux, avec des cercles, des points et de longues traînées de petits traits bleus. Une œuvre ensoleillée et décontractée, comme un port par une journée claire.'],
+    'wildflower-shore': ['Orchid pink, periwinkle and cobalt bloom alongside sage, taupe and touches of gold, with ringed circles in one corner and dashes of deep blue. Soft and joyful, like wildflowers by the water.',
+      'Le rose orchidée, la pervenche et le cobalt s’épanouissent aux côtés de la sauge, du taupe et de touches dorées, avec des cercles cerclés dans un coin et des traits bleu profond. Une œuvre douce et joyeuse, comme des fleurs sauvages au bord de l’eau.'],
     'tide-pool': ['A larger piece painted edge to edge in turquoise, cobalt and sea green, deepening into plum and violet. White gel-pen swirls, raised dots and coral-like squiggles give it the feel of looking down into a rock pool.',
       'Une plus grande œuvre peinte d’un bord à l’autre en turquoise, cobalt et vert océan, qui plonge vers le prune et le violet. Spirales au stylo gel blanc, points en relief et motifs en forme de corail évoquent un regard plongé dans une cuvette de marée.'],
     'sorbet': ['A larger piece painted edge to edge in hot pink, fuchsia, violet and glowing lemon yellow, with touches of mint. Swirls, dashes and dots layered over soft washes make it joyful and full of energy.',
@@ -785,7 +809,7 @@ function demoArtworks() {
   };
   const unmatted = ['mountain-landscape', 'blues-hues'];
   // Display order: by colour (blues → greens → purples → pinks → reds/oranges → warm), sold pieces mixed in
-  const ORDER = ['deep-blues', 'blue-hues-rectangular', 'blues-hues', 'blue-peak', 'sky-ochre', 'blue-gold', 'teal-hues', 'blue-hues-circular', 'tide-pool',
+  const ORDER = ['deep-blues', 'blue-hues-rectangular', 'blues-hues', 'blue-peak', 'sky-ochre', 'blue-gold', 'teal-hues', 'blue-hues-circular', 'tide-pool', 'lilac-tide', 'meadow-light', 'harbour-sun', 'wildflower-shore',
     'tidal-blues', 'moss-cobalt', 'moss-rain', 'forest-walk', 'sage-clay', 'violet-green', 'mystic-purple', 'purple-hues-rectangular',
     'purple-blues', 'violet-hues', 'purple-hues-circular', 'soft-pinks', 'pink-s', 'pink-hues', 'sorbet', 'warm-hues', 'autumn-hues-circular', 'earth-blush',
     'orange-hues', 'autumn-hues-rectangular', 'mountain-landscape'];
@@ -804,15 +828,19 @@ function demoArtworks() {
       id: slug, title, collection: 'intuitive-abstracts', currency: 'cad', sold: Boolean(extra.sold), url: extra.sold ? null : (BUY[slug] || null), year: '',
       thumb: `/art/${slug}-sm.jpg`, art: `/art/${slug}.jpg`, image: customGallery[slug] ? customGallery[slug][0].src : `/art/${slug}-styled.jpg`,
       gallery: listingGallery(slug),
-      price: d.price, matted, large: Boolean(extra.large), cardPhoto: extra.large ? `/art/${slug}-card.jpg?v=5` : null,
+      price: d.price, matted, large: Boolean(extra.large), cardPhoto: extra.large ? `/art/${slug}-card.jpg?v=5` : extra.square ? `/art/${slug}-card.jpg` : null, square: Boolean(extra.square), commission: Boolean(extra.commission),
       // Short line under each card in the grid
-      cardSub: extra.large
+      cardSub: extra.square
+        ? { en: 'Watercolour · commission · 12 × 12 in', fr: 'Aquarelle · commande · 12 × 12 po' }
+        : extra.large
         ? (shape === 'circular' ? { en: 'Watercolour · circle · 15¾ × 19¾ in', fr: 'Aquarelle · cercle · 15¾ × 19¾ po' } : { en: 'Watercolour · edge to edge · 15¾ × 19¾ in', fr: 'Aquarelle · pleine page · 15¾ × 19¾ po' })
         : matted
         ? { en: `Watercolour · ${shapeName.en} · 5 × 7 in, matted`, fr: `Aquarelle · ${shapeName.fr} · 5 × 7 po, avec passe-partout` }
         : { en: 'Watercolour · 8 × 10 in', fr: 'Aquarelle · 8 × 10 po' },
       medium,
-      dimensions: extra.large
+      dimensions: extra.square
+        ? { en: '12 × 12 in (30.5 × 30.5 cm), with a white border of about 1 in (2.5 cm)', fr: '12 × 12 po (30,5 × 30,5 cm), avec une bordure blanche d’environ 1 po (2,5 cm)' }
+        : extra.large
         ? { en: '15¾ × 19¾ in (40 × 50 cm)', fr: '15¾ × 19¾ po (40 × 50 cm)' }
         : matted
         ? { en: '5 × 7 in (12.7 × 17.8 cm), matted to 8 × 10 in (20.3 × 25.4 cm)', fr: '5 × 7 po (12,7 × 17,8 cm), passe-partout de 8 × 10 po (20,3 × 25,4 cm)' }
