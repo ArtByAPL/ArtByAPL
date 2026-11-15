@@ -694,9 +694,8 @@ function demoArtworks() {
   const squareSet = (slug) => [
     { src: `/art/${slug}-photo1.jpg`, fill: true },
     { src: `/art/${slug}.jpg` },
-    { src: `/art/${slug}-room.jpg`, mock: true, fill: true },
+    { src: `/art/${slug}-office.jpg`, mock: true, fill: true },
     { src: '/art/commission-2x2.jpg', mock: true, fill: true },
-    { src: '/art/commission-shelf.jpg' },
     { src: '/art/commission-office.jpg', fill: true },
   ];
   const isSquare = (slug) => ['lilac-tide', 'meadow-light', 'harbour-sun', 'wildflower-shore'].includes(slug);
