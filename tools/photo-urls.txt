@@ -1,8 +1,1 @@
-of1.jpg https://images.unsplash.com/photo-1775214593099-15fac0470bda?w=700
-of2.jpg https://images.unsplash.com/photo-1667827576128-374c6ab46ee2?w=700
-of3.jpg https://images.unsplash.com/photo-1781197479551-dcba5ebcc414?w=700
-of4.jpg https://images.unsplash.com/photo-1662019292903-dcdb25107874?w=700
-of5.jpg https://images.unsplash.com/photo-1675683446830-fe009facdafe?w=700
-of6.jpg https://images.unsplash.com/photo-1658856039235-7745824f88db?w=700
-of7.jpg https://images.unsplash.com/photo-1662018108352-4cc84dd5ce71?w=700
-of8.jpg https://images.unsplash.com/photo-1697809462690-57bc1601f665?w=700
+office.jpg https://images.unsplash.com/photo-1781197479551-dcba5ebcc414?w=2000&q=90
