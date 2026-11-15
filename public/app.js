@@ -6,27 +6,28 @@ const CONFIG = {
   instagram: 'https://www.instagram.com/artby_apl/',
   name: 'Alexandra Paige',
   tagline: {
-    fr: 'Explorer les humeurs, les moments et les souvenirs par la couleur et le mouvement.',
-    en: 'Exploring moods, moments and memories through colour and movement.',
+    fr: 'Explorer les moments, les humeurs et les souvenirs par le mouvement et la couleur.',
+    en: 'Exploring moments, moods, and memories through movement and colour.',
   },
   // Short intro shown on the home page (the full story is on about.html)
   about: {
-    fr: "Alexandra Paige est une artiste (presque) autodidacte, née et élevée à North Vancouver. Elle peint à l’aquarelle, avec parfois de l’encre et des pastels, en explorant les humeurs, les moments et les souvenirs par la couleur et le mouvement.",
-    en: "Alexandra Paige is a (mostly) self-taught artist, born and raised in North Vancouver. She paints in watercolour, sometimes with ink and pastels, exploring moods, moments and memories through colour and movement.",
+    fr: "Je m’appelle Alexandra, une artiste aquarelliste inspirée par les lieux qui me font sentir chez moi. Je peins de façon intuitive, en laissant l’eau et le pigment trouver leur propre chemin sur la page, pour saisir l’émotion d’un lieu plutôt que son image exacte.",
+    en: "I’m Alexandra, a watercolour artist inspired by the places that feel like home. I paint intuitively, letting water and pigment find their own path across the page, to capture the feeling of a place rather than exactly how it looks.",
   },
-  // About the artist page: Alexandra's bio. Edit freely.
+  // About the artist page: Alexandra's bio (her own words). Edit freely.
   aboutPage: {
     photo: '/art/alexandra.jpg',
-    // One short bio, a few paragraphs, no headings
     bio: [
-      { fr: "Salut, moi c’est Alexandra, une artiste (presque) autodidacte, née et élevée à North Vancouver, en Colombie-Britannique. Je peins surtout à l’aquarelle, avec parfois de l’encre et des pastels, et j’apprends en chemin.",
-        en: "Hi, I’m Alexandra, a (mostly) self-taught artist, born and raised in North Vancouver, British Columbia. I paint mostly in watercolour, sometimes layering in ink and pastels, and I’m learning as I go." },
-      { fr: "Aujourd’hui, j’ai la chance d’avoir deux chez-moi, dans deux provinces. Mon voyage solo en Colombie n’est pas resté solo bien longtemps (j’y ai rencontré un Québécois), et depuis, je partage ma vie entre Vancouver et Québec.",
-        en: "These days, I’m lucky to call two provinces home. My solo trip to Colombia didn’t stay solo for long (I met a Québécois), and I’ve been splitting my life between Vancouver and Québec City ever since." },
-      { fr: "Chaque endroit a sa propre palette. Sur la côte Ouest, ce sont les sentiers moussus de la forêt pluviale, l’océan gris-bleu et les montagnes qui disparaissent dans les nuages. À Québec, ce sont des saisons franches et intenses : des automnes en feu, des hivers tout blancs et les vieilles rues de pierre qui s’allument à l’heure dorée. Mon travail vit quelque part entre les deux.",
-        en: "Each place has its own palette. On the West Coast, it’s mossy rainforest trails, grey-blue ocean and mountains that disappear into the clouds. In Québec, it’s bold, dramatic seasons: fiery autumns, snow-white winters and old stone streets glowing at golden hour. My work lives somewhere in between." },
-      { fr: "Je peins de façon intuitive, en laissant la couleur et le mouvement guider. Chaque pièce part d’une humeur, d’un moment ou d’un souvenir, souvent ramassé dehors, à courir en sentier dans le bois (beaucoup trop longtemps) ou quelque part dans une montagne.",
-        en: "I paint intuitively, letting colour and movement lead. Each piece starts with a mood, a moment or a memory, often collected outside, trail running through the woods (for far too long) or somewhere up a mountain." },
+      { en: "I’m Alexandra, a watercolour artist inspired by the places that feel like home.",
+        fr: "Je m’appelle Alexandra, une artiste aquarelliste inspirée par les lieux qui me font sentir chez moi." },
+      { en: "I paint intuitively, letting water and pigment find their own path across the page. Rather than recreating a landscape exactly as it appears, I’m interested in capturing the feeling of a place: the hush of a misty forest, the warmth of autumn light, the rhythm of the ocean, or the colour of a memory that lingers long after the moment has passed.",
+        fr: "Je peins de façon intuitive, en laissant l’eau et le pigment trouver leur propre chemin sur la page. Plutôt que de reproduire un paysage tel qu’il est, je cherche à saisir l’émotion d’un lieu : le silence d’une forêt dans la brume, la chaleur de la lumière d’automne, le rythme de l’océan, ou la couleur d’un souvenir qui persiste longtemps après le moment." },
+      { en: "I grew up on the West Coast, surrounded by mountains, rainforest, and ocean. Nature has always been where I feel most grounded. Many of my ideas arrive while running long trails, wandering through forests, or spending time at our family cabin on a small island off the coast of Vancouver.",
+        fr: "J’ai grandi sur la côte Ouest, entourée de montagnes, de forêt pluviale et d’océan. C’est dans la nature que je me sens le plus ancrée. Bien des idées me viennent en courant de longs sentiers, en me promenant en forêt ou en passant du temps au chalet familial, sur une petite île au large de Vancouver." },
+      { en: "Today, I split my time between the West Coast and Québec, drawing inspiration from both landscapes. The mossy greens, endless coastlines, changing seasons, and quiet moments of everyday life all find their way into my work.",
+        fr: "Aujourd’hui, je partage mon temps entre la côte Ouest et le Québec, et je m’inspire des deux paysages. Les verts moussus, les côtes à perte de vue, les saisons qui changent et les petits moments tranquilles du quotidien se retrouvent tous dans mon travail." },
+      { en: "Each piece begins with a feeling, a moment, or a memory. No two are ever quite the same.",
+        fr: "Chaque œuvre commence par une émotion, un moment ou un souvenir. Il n’y en a jamais deux tout à fait pareilles." },
     ],
   },
   // Collections: every piece belongs to one. Add a new entry here to start a new collection.
