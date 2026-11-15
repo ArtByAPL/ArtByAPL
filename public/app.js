@@ -135,7 +135,7 @@ function renderText() {
 function cardSlides(a) {
   const first = a.cardPhoto || a.thumb || a.image;
   const skip = new Set([first && first.split('?')[0], a.art, '/art/collection-grid.jpg']);
-  const rest = (a.gallery || []).map((g) => g.src).filter((src) => !skip.has(src.split('?')[0]));
+  const rest = (a.gallery || []).map((g) => g.src).filter((src) => !skip.has(src.split('?')[0]) && !src.includes('-collection.jpg'));
   return [first, ...rest].filter(Boolean);
 }
 function setupCardSlides() {
@@ -645,6 +645,9 @@ function demoArtworks() {
     { src: `/art/${slug}-matted.jpg?v=5`, fill: true },
   ];
   const isLarge = (slug) => ['sky-ochre', 'moss-rain', 'tide-pool', 'sorbet'].includes(slug);
+  // Pieces that aren't in the original 9-piece grid get their own version, with them in the middle
+  const ownGrid = ['deep-blues', 'autumn-hues-circular', 'violet-green', 'teal-hues', 'blue-hues-circular', 'pink-s', 'blue-gold', 'moss-cobalt', 'earth-blush'];
+  const gridFor = (slug) => (ownGrid.includes(slug) ? `/art/${slug}-collection.jpg` : '/art/collection-grid.jpg');
   const setFor = (slug) => isLarge(slug) ? largeSet(slug) : [
     { src: `/art/${slug}-photo1.jpg?v=8`, fill: true },
     { src: `/art/${slug}-photo3.jpg?v=6`, fill: true },
@@ -654,7 +657,7 @@ function demoArtworks() {
     // Mountain Landscape is a different kind of piece (8×10, no mat): no gallery wall, no collection grid
     ...(['mountain-landscape', 'blue-peak'].includes(slug) ? [] : [
       { src: `/art/${slug}-gallery-wall.jpg`, mock: true, fill: true },
-      { src: '/art/collection-grid.jpg', fill: true },
+      { src: gridFor(slug), fill: true },
     ]),
   ];
   const customGallery = Object.fromEntries(updated.map((slug) => [slug, setFor(slug)]));
@@ -665,7 +668,7 @@ function demoArtworks() {
     // Blues Hues (8×10, painted edge to edge) doesn't belong on the gallery wall / collection grid of small circles
     ...(slug === 'blues-hues' ? [] : [
       { src: `/art/${slug}-gallery-wall.jpg`, mock: true, fill: true },
-      { src: '/art/collection-grid.jpg', fill: true },
+      { src: gridFor(slug), fill: true },
     ]),
     { src: `/art/${slug}-styled.jpg`, fill: true },
   ];
