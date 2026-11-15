@@ -1,12 +1,1 @@
-wm1.jpg 200
-wm2.jpg 200
-wm3.jpg 200
-wm4.jpg 200
-wm5.jpg 200
-wm6.jpg 200
-wm7.jpg 200
-wm8.jpg 200
-wm9.jpg 200
-wm10.jpg 200
-wm11.jpg 200
-wm12.jpg 200
+warm.jpg 200
