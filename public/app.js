@@ -289,7 +289,7 @@ function renderListing() {
         <p class="listing-unique">${a.commission ? t('commissionNote') : a.sold ? t('soldNote') : t('unique')}</p>
         ${a.sold || !a.url ? '' : `<a class="buy" href="${escapeHtml(a.url)}">${t('buy')}</a>`}
         <p class="demo-buy" hidden>${t('demoBuy')}</p>
-        ${a.sold || a.test ? '' : `<button type="button" class="ar-open"><span aria-hidden="true">◳</span> ${t('arBtn')}</button>`}
+        ${a.sold ? '' : `<button type="button" class="ar-open"><span aria-hidden="true">◳</span> ${t('arBtn')}</button>`}
         <div class="listing-desc">${[].concat(localized(a.description) || []).map((p) => `<p>${escapeHtml(p)}</p>`).join('')}</div>
         <h2>${t('details')}</h2>
         <dl class="listing-details">
@@ -704,7 +704,8 @@ function demoArtworks() {
   const gridFor = (slug) => (ownGrid.includes(slug) ? `/art/${slug}-collection.jpg` : '/art/collection-grid.jpg');
   const setFor = (slug) => isSquare(slug) ? squareSet(slug) : isLarge(slug) ? largeSet(slug) : [
     { src: `/art/${slug}-photo1.jpg?v=8`, fill: true },
-    { src: `/art/${slug}-photo3.jpg?v=6`, fill: true },
+    // Deep Blues: the second close-up photo was almost the same as the first, so it's left out
+    ...(slug === 'deep-blues' ? [] : [{ src: `/art/${slug}-photo3.jpg?v=6`, fill: true }]),
     { src: `/art/${slug}.jpg` },
     { src: `/art/${slug}-matted.jpg`, fill: true },
     { src: `/art/${slug}-sideboard.jpg`, mock: true, fill: true },
@@ -848,12 +849,6 @@ function demoArtworks() {
       description: st ? { en: [st[0], lead.en], fr: [st[1], lead.fr] } : null,
     };
   });
-  // TEMPORARY $1 test listing to try the real checkout. Remove this block afterwards (and deactivate its Stripe link).
-  pieces.unshift({ id: 'test', test: true, title: 'Test', collection: 'intuitive-abstracts', currency: 'cad', sold: false,
-    url: 'https://buy.stripe.com/7sYcN76TM5wsfDk5cc8g00I', year: '', price: 100, matted: false, large: false, square: false, commission: false,
-    thumb: '/art/test-sm.jpg', art: '/art/test.jpg', image: '/art/test.jpg', cardPhoto: '/art/test.jpg', gallery: [{ src: '/art/test.jpg', fill: true }],
-    cardSub: { en: 'Test', fr: 'Test' }, medium: { en: 'Test', fr: 'Test' }, dimensions: { en: 'Test', fr: 'Test' },
-    description: { en: ['Test'], fr: ['Test'] } });
   return pieces;
 }
 
