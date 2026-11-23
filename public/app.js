@@ -36,8 +36,8 @@ const CONFIG = {
   collections: [
     { id: 'intuitive-abstracts',
       name: { fr: 'Abstractions intuitives', en: 'Intuitive Abstracts' },
-      blurb: { fr: 'De petits mondes d’eau et de couleur, tenus dans un cercle.',
-               en: 'Small worlds of water and colour, held in a circle.' } },
+      blurb: { fr: 'La couleur, laissée libre, puis doucement rassemblée.',
+               en: 'Colour, set loose and gently gathered.' } },
   ],
   defaultCollection: 'intuitive-abstracts',
   // Big image at the top: one piece, edited and hosted in /art
