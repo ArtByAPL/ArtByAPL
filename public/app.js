@@ -850,7 +850,7 @@ function demoArtworks() {
   });
   // TEMPORARY $1 test listing to try the real checkout. Remove this block afterwards (and deactivate its Stripe link).
   pieces.unshift({ id: 'test', test: true, title: 'Test', collection: 'intuitive-abstracts', currency: 'cad', sold: false,
-    url: 'https://buy.stripe.com/aFa00l0vo4so0Iq0VW8g00H', year: '', price: 100, matted: false, large: false, square: false, commission: false,
+    url: 'https://buy.stripe.com/7sYcN76TM5wsfDk5cc8g00I', year: '', price: 100, matted: false, large: false, square: false, commission: false,
     thumb: '/art/test-sm.jpg', art: '/art/test.jpg', image: '/art/test.jpg', cardPhoto: '/art/test.jpg', gallery: [{ src: '/art/test.jpg', fill: true }],
     cardSub: { en: 'Test', fr: 'Test' }, medium: { en: 'Test', fr: 'Test' }, dimensions: { en: 'Test', fr: 'Test' },
     description: { en: ['Test'], fr: ['Test'] } });
