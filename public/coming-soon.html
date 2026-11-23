@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ArtBy APL — Coming soon</title>
+  <meta name="description" content="Original watercolours by Alexandra Paige. Something exciting is coming.">
+  <meta property="og:title" content="ArtBy APL — Coming soon">
+  <meta property="og:description" content="Original watercolours by Alexandra Paige. Something exciting is coming.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <style>
+    :root { --paper:#f7f2e7; --ink:#2d2a24; --muted:#6f6758; --accent:#1f7a74; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; min-height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      padding: 32px 16px;
+      background: var(--paper) url('/art/coming-soon-bg.jpg?v=1') center / cover no-repeat fixed;
+      color: var(--ink);
+      font-family: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-align: center;
+    }
+    main {
+      width: 100%; max-width: 560px;
+      background: rgba(247, 242, 231, 0.82);
+      -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+      border-radius: 20px;
+      padding: clamp(36px, 7vw, 60px) clamp(22px, 6vw, 56px);
+      box-shadow: 0 20px 60px rgba(45, 42, 36, 0.10);
+    }
+    .logo { width: 96px; height: 96px; margin: 0 auto 18px; border-radius: 50%; }
+    .brand { font-family: 'Instrument Serif', Georgia, serif; font-size: 1.5rem; letter-spacing: 0.01em; margin: 0 0 28px; }
+    .brand em { font-style: italic; }
+    h1 {
+      font-family: 'Instrument Serif', Georgia, serif; font-weight: 400;
+      font-size: clamp(2.2rem, 7vw, 3.4rem); line-height: 1.05; letter-spacing: -0.015em;
+      margin: 0 0 16px;
+    }
+    h1 em { color: var(--accent); }
+    .sub { font-size: 1.05rem; color: var(--muted); margin: 0 0 30px; line-height: 1.55; }
+    .fr { font-size: 0.92rem; color: var(--muted); margin: -18px 0 30px; font-style: italic; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .links a {
+      display: inline-block; padding: 12px 22px; border-radius: 999px;
+      text-decoration: none; font-weight: 500; font-size: 0.98rem;
+    }
+    .primary { background: var(--accent); color: #fff; }
+    .primary:hover { background: #18625d; }
+    .secondary { border: 1px solid rgba(45, 42, 36, 0.25); color: var(--ink); }
+    .secondary:hover { background: rgba(255, 255, 255, 0.5); }
+  </style>
+</head>
+<body>
+  <main>
+    <img class="logo" src="/logo.png" alt="ArtBy APL logo" width="96" height="96">
+    <p class="brand">ArtBy <em>APL</em></p>
+    <h1>Something exciting<br>is <em>coming.</em></h1>
+    <p class="sub">Original watercolours by Alexandra Paige.</p>
+    <p class="fr">Quelque chose de beau s'en vient.</p>
+    <div class="links">
+      <a class="primary" href="https://www.instagram.com/artby_apl/" target="_blank" rel="noopener">Follow on Instagram</a>
+    </div>
+  </main>
+</body>
+</html>
