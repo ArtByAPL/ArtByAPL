@@ -8,7 +8,7 @@ import { handleRates } from './rates.js';
 // "Coming soon" mode: the public addresses show only public/coming-soon.html.
 // Preview URLs (preview-artbyapl…workers.dev) still show the full site.
 // To launch the real site, set COMING_SOON to false (or delete these lines).
-const COMING_SOON = true;
+const COMING_SOON = false;
 const PUBLIC_HOSTS = ['artbyapl.com', 'www.artbyapl.com', 'artbyapl.artbyapl.workers.dev'];
 const SOON_FILES = ['/coming-soon.html', '/logo.png', '/favicon.png', '/apple-touch-icon.png', '/art/coming-soon-bg.jpg'];
 
