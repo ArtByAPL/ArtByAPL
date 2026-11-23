@@ -36,8 +36,8 @@ const CONFIG = {
   collections: [
     { id: 'intuitive-abstracts',
       name: { fr: 'Abstractions intuitives', en: 'Intuitive Abstracts' },
-      blurb: { fr: 'Chaque œuvre commence par une émotion et un pinceau mouillé. La couleur se répand et fleurit là où elle veut, puis viennent les points, les spirales et les petits traits : de petits mondes, la plupart tenus dans un cercle.',
-               en: 'Each piece begins with a feeling and a wet brush. Colour is left to pool and bloom wherever it wants, then layered with dots, swirls and tiny marks: little worlds, most of them held inside a circle.' } },
+      blurb: { fr: 'De petits mondes d’eau et de couleur, tenus dans un cercle.',
+               en: 'Small worlds of water and colour, held in a circle.' } },
   ],
   defaultCollection: 'intuitive-abstracts',
   // Big image at the top: one piece, edited and hosted in /art
