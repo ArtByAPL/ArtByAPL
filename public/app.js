@@ -689,7 +689,7 @@ function demoArtworks() {
   // Pieces with Alexandra's own new photos (colour-corrected, light oak dresser)
   const updated = ['petal-weather', 'rain-garden', 'lilac-tide', 'meadow-light', 'harbour-sun', 'wildflower-shore', 'earth-blush', 'tide-pool', 'sorbet', 'blue-peak', 'sky-ochre', 'moss-rain', 'pink-s', 'sage-clay', 'blue-gold', 'moss-cobalt', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
   const largeSet = (slug) => {
-    const v = slug === 'rain-garden' ? 7 : slug === 'petal-weather' ? 1 : 5;
+    const v = slug === 'rain-garden' ? 7 : slug === 'petal-weather' ? 2 : 5;
     return [
       { src: `/art/${slug}-photo1.jpg?v=${v}`, fill: true },
       { src: `/art/${slug}-room.jpg?v=${v}`, mock: true, fill: true },
@@ -839,20 +839,23 @@ function demoArtworks() {
     const shapeName = { circular: { en: 'circle', fr: 'cercle' }, rectangular: { en: 'edge to edge', fr: 'pleine page' } }[shape];
     return {
       id: slug, title, collection: 'intuitive-abstracts', currency: 'cad', sold: Boolean(extra.sold), url: extra.sold ? null : (BUY[slug] || null), year: '',
-      thumb: `/art/${slug}-sm.jpg${slug === 'rain-garden' ? '?v=2' : ''}`, art: `/art/${slug}.jpg${slug === 'rain-garden' ? '?v=2' : ''}`, image: customGallery[slug] ? customGallery[slug][0].src : `/art/${slug}-styled.jpg`,
+      thumb: `/art/${slug}-sm.jpg${slug === 'rain-garden' ? '?v=2' : slug === 'petal-weather' ? '?v=3' : ''}`, art: `/art/${slug}.jpg${slug === 'rain-garden' ? '?v=2' : slug === 'petal-weather' ? '?v=3' : ''}`, image: customGallery[slug] ? customGallery[slug][0].src : `/art/${slug}-styled.jpg`,
       gallery: listingGallery(slug),
-      price: d.price, matted, large: Boolean(extra.large), cardPhoto: extra.large ? `/art/${slug}-card.jpg?v=${slug === 'rain-garden' ? 7 : 5}` : extra.square ? `/art/${slug}-card.jpg?v=2` : null, square: Boolean(extra.square), commission: Boolean(extra.commission),
+      price: d.price, matted, large: Boolean(extra.large), cardPhoto: extra.large ? `/art/${slug}-card.jpg?v=${slug === 'rain-garden' ? 7 : slug === 'petal-weather' ? 2 : 5}` : extra.square ? `/art/${slug}-card.jpg?v=2` : null, square: Boolean(extra.square), commission: Boolean(extra.commission),
       // Short line under each card in the grid
       cardSub: extra.square
         ? { en: 'Watercolour · commission · 12 × 12 in', fr: 'Aquarelle · commande · 12 × 12 po' }
         : extra.large
-        ? (shape === 'circular' ? { en: 'Watercolour · circle · 15¾ × 19¾ in', fr: 'Aquarelle · cercle · 15¾ × 19¾ po' } : { en: 'Watercolour · edge to edge · 15¾ × 19¾ in', fr: 'Aquarelle · pleine page · 15¾ × 19¾ po' })
+        ? slug === 'petal-weather' ? { en: 'Watercolour · white border · 15¾ × 19¾ in', fr: 'Aquarelle · bordure blanche · 15¾ × 19¾ po' }
+        : (shape === 'circular' ? { en: 'Watercolour · circle · 15¾ × 19¾ in', fr: 'Aquarelle · cercle · 15¾ × 19¾ po' } : { en: 'Watercolour · edge to edge · 15¾ × 19¾ in', fr: 'Aquarelle · pleine page · 15¾ × 19¾ po' })
         : matted
         ? { en: `Watercolour · ${shapeName.en} · 5 × 7 in, matted`, fr: `Aquarelle · ${shapeName.fr} · 5 × 7 po, avec passe-partout` }
         : { en: 'Watercolour · 8 × 10 in', fr: 'Aquarelle · 8 × 10 po' },
       medium,
       dimensions: extra.square
         ? { en: '12 × 12 in (30.5 × 30.5 cm), with a white border of about 1 in (2.5 cm)', fr: '12 × 12 po (30,5 × 30,5 cm), avec une bordure blanche d’environ 1 po (2,5 cm)' }
+        : extra.large && slug === 'petal-weather'
+        ? { en: '15¾ × 19¾ in (40 × 50 cm), with a white border of about 1 in (2.5 cm)', fr: '15¾ × 19¾ po (40 × 50 cm), avec une bordure blanche d’environ 1 po (2,5 cm)' }
         : extra.large
         ? { en: '15¾ × 19¾ in (40 × 50 cm)', fr: '15¾ × 19¾ po (40 × 50 cm)' }
         : matted
