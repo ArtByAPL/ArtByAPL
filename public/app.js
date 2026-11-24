@@ -648,7 +648,7 @@ function demoArtworks() {
     ['deep-blues', 'Deep Blues', 'circular'],
     ['mystic-purple', 'Mystic Purple', 'circular'],
     ['autumn-hues-circular', 'Fallen Leaves', 'circular'],
-    ['mountain-landscape', 'Mountain Landscape', 'landscape', { dimensions: '8×10 in', price: 6700 }],
+    ['mountain-landscape', 'Mountain Landscape', 'landscape', { dimensions: '8×10 in', price: 6700, sold: true }],
     ['soft-pinks', 'Soft Pinks', 'circular'],
     ['violet-green', 'Violet & Jade', 'circular'],
     ['tidal-blues', 'Tidal Blues', 'rectangular'],
