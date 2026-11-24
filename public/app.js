@@ -686,13 +686,18 @@ function demoArtworks() {
   // the collection grid, and Alexandra's own framed photo. Room photos are free Unsplash photos.
   // Pieces with Alexandra's own new photos (colour-corrected, light oak dresser)
   const updated = ['rain-garden', 'lilac-tide', 'meadow-light', 'harbour-sun', 'wildflower-shore', 'earth-blush', 'tide-pool', 'sorbet', 'blue-peak', 'sky-ochre', 'moss-rain', 'pink-s', 'sage-clay', 'blue-gold', 'moss-cobalt', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
-  const largeSet = (slug) => [
-    { src: `/art/${slug}-photo1.jpg?v=5`, fill: true },
-    { src: `/art/${slug}-room.jpg?v=5`, mock: true, fill: true },
-    { src: `/art/${slug}-photo3.jpg?v=5`, fill: true },
-    { src: `/art/${slug}.jpg?v=5` },
-    { src: `/art/${slug}-matted.jpg?v=5`, fill: true },
-  ];
+  const largeSet = (slug) => {
+    const v = slug === 'rain-garden' ? 7 : 5;
+    return [
+      { src: `/art/${slug}-photo1.jpg?v=${v}`, fill: true },
+      { src: `/art/${slug}-room.jpg?v=${v}`, mock: true, fill: true },
+      { src: `/art/${slug}-photo3.jpg?v=${v}`, fill: true },
+      { src: `/art/${slug}.jpg?v=${v}` },
+      { src: `/art/${slug}-matted.jpg?v=${v}`, fill: true },
+      // Rain Garden: also Alexandra's own photo of it in the natural wood frame
+      ...(slug === 'rain-garden' ? [{ src: `/art/${slug}-photo2.jpg?v=${v}`, fill: true }] : []),
+    ];
+  };
   const squareSet = (slug) => [
     { src: `/art/${slug}-photo1.jpg?v=2`, fill: true },
     { src: `/art/${slug}.jpg` },
@@ -829,9 +834,9 @@ function demoArtworks() {
     const shapeName = { circular: { en: 'circle', fr: 'cercle' }, rectangular: { en: 'edge to edge', fr: 'pleine page' } }[shape];
     return {
       id: slug, title, collection: 'intuitive-abstracts', currency: 'cad', sold: Boolean(extra.sold), url: extra.sold ? null : (BUY[slug] || null), year: '',
-      thumb: `/art/${slug}-sm.jpg`, art: `/art/${slug}.jpg`, image: customGallery[slug] ? customGallery[slug][0].src : `/art/${slug}-styled.jpg`,
+      thumb: `/art/${slug}-sm.jpg${slug === 'rain-garden' ? '?v=2' : ''}`, art: `/art/${slug}.jpg${slug === 'rain-garden' ? '?v=2' : ''}`, image: customGallery[slug] ? customGallery[slug][0].src : `/art/${slug}-styled.jpg`,
       gallery: listingGallery(slug),
-      price: d.price, matted, large: Boolean(extra.large), cardPhoto: extra.large ? `/art/${slug}-card.jpg?v=5` : extra.square ? `/art/${slug}-card.jpg?v=2` : null, square: Boolean(extra.square), commission: Boolean(extra.commission),
+      price: d.price, matted, large: Boolean(extra.large), cardPhoto: extra.large ? `/art/${slug}-card.jpg?v=${slug === 'rain-garden' ? 7 : 5}` : extra.square ? `/art/${slug}-card.jpg?v=2` : null, square: Boolean(extra.square), commission: Boolean(extra.commission),
       // Short line under each card in the grid
       cardSub: extra.square
         ? { en: 'Watercolour · commission · 12 × 12 in', fr: 'Aquarelle · commande · 12 × 12 po' }
