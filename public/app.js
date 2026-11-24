@@ -374,6 +374,7 @@ function renderAboutPage() {
 // ── Data ────────────────────────────────────────────────────
 // Stripe Payment Link for each piece (one sale each). Created in Allie's Stripe account.
 const BUY = {
+  'petal-weather': 'https://buy.stripe.com/3cI8wR4LE0c82Qy0VW8g00K',
   'rain-garden': 'https://buy.stripe.com/3cIeVf7XQ3ok3UCbAA8g00J',
   'forest-walk': 'https://buy.stripe.com/aFa3cxa5Y6Aw9eWaww8g00k',
   'deep-blues': 'https://buy.stripe.com/3cI14pfqi0c8cr80VW8g00l',
@@ -672,6 +673,7 @@ function demoArtworks() {
     ['earth-blush', 'Earth & Blush', 'circular', { sold: true }],
     // Large format (40 × 50 cm, for a 50 × 70 cm frame with mat)
     ['rain-garden', 'Rain Garden', 'rectangular', { large: true, price: 8500 }],
+    ['petal-weather', 'Petal Weather', 'rectangular', { large: true, price: 8500 }],
     ['sky-ochre', 'Sky & Ochre', 'circular', { sold: true, large: true, price: 8500 }],
     ['moss-rain', 'Moss & Rain', 'circular', { sold: true, large: true, price: 8500 }],
     ['tide-pool', 'Rock Pool', 'rectangular', { sold: true, large: true, price: 8500 }],
@@ -685,9 +687,9 @@ function demoArtworks() {
   // Listing photo set for every piece: the piece, in its mat, on the sideboard, on the gallery wall,
   // the collection grid, and Alexandra's own framed photo. Room photos are free Unsplash photos.
   // Pieces with Alexandra's own new photos (colour-corrected, light oak dresser)
-  const updated = ['rain-garden', 'lilac-tide', 'meadow-light', 'harbour-sun', 'wildflower-shore', 'earth-blush', 'tide-pool', 'sorbet', 'blue-peak', 'sky-ochre', 'moss-rain', 'pink-s', 'sage-clay', 'blue-gold', 'moss-cobalt', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
+  const updated = ['petal-weather', 'rain-garden', 'lilac-tide', 'meadow-light', 'harbour-sun', 'wildflower-shore', 'earth-blush', 'tide-pool', 'sorbet', 'blue-peak', 'sky-ochre', 'moss-rain', 'pink-s', 'sage-clay', 'blue-gold', 'moss-cobalt', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
   const largeSet = (slug) => {
-    const v = slug === 'rain-garden' ? 7 : 5;
+    const v = slug === 'rain-garden' ? 7 : slug === 'petal-weather' ? 1 : 5;
     return [
       { src: `/art/${slug}-photo1.jpg?v=${v}`, fill: true },
       { src: `/art/${slug}-room.jpg?v=${v}`, mock: true, fill: true },
@@ -696,6 +698,7 @@ function demoArtworks() {
       { src: `/art/${slug}-matted.jpg?v=${v}`, fill: true },
       // Rain Garden: plus a close-up of the paint
       ...(slug === 'rain-garden' ? [{ src: `/art/${slug}-photo2.jpg?v=8`, fill: true }] : []),
+      ...(slug === 'petal-weather' ? [{ src: `/art/${slug}-photo2.jpg?v=1`, fill: true }] : []),
     ];
   };
   const squareSet = (slug) => [
@@ -705,7 +708,7 @@ function demoArtworks() {
     { src: '/art/commission-office.jpg', fill: true },
   ];
   const isSquare = (slug) => ['lilac-tide', 'meadow-light', 'harbour-sun', 'wildflower-shore'].includes(slug);
-  const isLarge = (slug) => ['rain-garden', 'sky-ochre', 'moss-rain', 'tide-pool', 'sorbet'].includes(slug);
+  const isLarge = (slug) => ['petal-weather', 'rain-garden', 'sky-ochre', 'moss-rain', 'tide-pool', 'sorbet'].includes(slug);
   // Pieces that aren't in the original 9-piece grid get their own version, with them in the middle
   const ownGrid = ['deep-blues', 'autumn-hues-circular', 'violet-green', 'teal-hues', 'blue-hues-circular', 'pink-s', 'blue-gold', 'moss-cobalt', 'earth-blush'];
   const gridFor = (slug) => (ownGrid.includes(slug) ? `/art/${slug}-collection.jpg` : '/art/collection-grid.jpg');
@@ -786,6 +789,8 @@ function demoArtworks() {
       'L’outremer, l’ardoise et le bleu ciel doux rencontrent l’ocre chaud et l’or dans un cercle tout en douceur. Lignes cuivrées, points de gouache pâle et rangées de petites marques lui donnent un mouvement tranquille.'],
     'sky-ochre': ['A larger circle of soft cornflower, sky and slate blues, warmed by pools of ochre and honey. White gel-pen raindrops, coral threads and scattered dots drift across it with an airy, unhurried rhythm.',
       'Un plus grand cercle de bleus bleuet, ciel et ardoise, réchauffé de flaques d’ocre et de miel. Gouttes au stylo gel blanc, fils corail et points épars le traversent avec un rythme aérien, sans hâte.'],
+    'petal-weather': ['Bands of magenta, sky blue, sage and warm ochre drift across the page like weather rolling over a field in bloom. Tiny hand-drawn swirls, stitched dashes, ink dots and a scatter of turquoise rain make every corner worth a closer look.',
+      'Des bandes de magenta, de bleu ciel, de sauge et d’ocre chaud dérivent sur la page comme une météo qui passe sur un champ en fleurs. De petites spirales dessinées à la main, des tirets cousus, des points d’encre et une pluie de turquoise rendent chaque coin digne d’un second regard.'],
     'rain-garden': ['A soft rain of cobalt marks falls across the whole page, gathering around a loose ring of sky blue, sage, sand and chocolate washes. Look closer and there are tiny gardens everywhere: crayon scribbles, stitched dotted lines and little clusters of moss-green seeds.',
       'Une douce pluie de marques cobalt tombe sur toute la page et se rassemble autour d’un anneau libre de lavis bleu ciel, sauge, sable et chocolat. De plus près, de petits jardins apparaissent partout : traits de pastel, lignes pointillées cousues et petites grappes de graines vert mousse.'],
     'moss-rain': ['Mint, seafoam and mossy olive washes float over a fine rain of hand-painted cobalt marks, grounded by touches of chocolate brown and deep forest green. Calm, detailed and endlessly layered.',
@@ -819,7 +824,7 @@ function demoArtworks() {
   // Display order: by colour (blues → greens → purples → pinks → reds/oranges → warm), sold pieces mixed in
   const ORDER = ['deep-blues', 'blue-hues-rectangular', 'blues-hues', 'blue-peak', 'rain-garden', 'sky-ochre', 'blue-gold', 'teal-hues', 'blue-hues-circular', 'tide-pool', 'lilac-tide', 'meadow-light', 'harbour-sun', 'wildflower-shore',
     'tidal-blues', 'moss-cobalt', 'moss-rain', 'forest-walk', 'sage-clay', 'violet-green', 'mystic-purple', 'purple-hues-rectangular',
-    'purple-blues', 'violet-hues', 'purple-hues-circular', 'soft-pinks', 'pink-s', 'pink-hues', 'sorbet', 'warm-hues', 'autumn-hues-circular', 'earth-blush',
+    'purple-blues', 'violet-hues', 'purple-hues-circular', 'soft-pinks', 'pink-s', 'pink-hues', 'petal-weather', 'sorbet', 'warm-hues', 'autumn-hues-circular', 'earth-blush',
     'orange-hues', 'autumn-hues-rectangular', 'mountain-landscape'];
   const rank = (slug) => { const i = ORDER.indexOf(slug); return i < 0 ? ORDER.length : i; };
   list.sort((a, b) => rank(a[0]) - rank(b[0]));
