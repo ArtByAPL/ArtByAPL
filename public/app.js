@@ -694,8 +694,8 @@ function demoArtworks() {
       { src: `/art/${slug}-photo3.jpg?v=${v}`, fill: true },
       { src: `/art/${slug}.jpg?v=${v}` },
       { src: `/art/${slug}-matted.jpg?v=${v}`, fill: true },
-      // Rain Garden: also Alexandra's own photo of it in the natural wood frame
-      ...(slug === 'rain-garden' ? [{ src: `/art/${slug}-photo2.jpg?v=${v}`, fill: true }] : []),
+      // Rain Garden: plus a close-up of the paint
+      ...(slug === 'rain-garden' ? [{ src: `/art/${slug}-photo2.jpg?v=8`, fill: true }] : []),
     ];
   };
   const squareSet = (slug) => [
