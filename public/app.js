@@ -689,7 +689,7 @@ function demoArtworks() {
   // Pieces with Alexandra's own new photos (colour-corrected, light oak dresser)
   const updated = ['petal-weather', 'rain-garden', 'lilac-tide', 'meadow-light', 'harbour-sun', 'wildflower-shore', 'earth-blush', 'tide-pool', 'sorbet', 'blue-peak', 'sky-ochre', 'moss-rain', 'pink-s', 'sage-clay', 'blue-gold', 'moss-cobalt', 'purple-hues-circular', 'mountain-landscape', 'warm-hues', 'orange-hues', 'purple-blues', 'forest-walk', 'mystic-purple', 'soft-pinks', 'pink-hues', 'violet-hues', 'autumn-hues-circular', 'teal-hues', 'violet-green', 'blue-hues-circular', 'deep-blues'];
   const largeSet = (slug) => {
-    const v = slug === 'rain-garden' ? 7 : slug === 'petal-weather' ? 2 : 5;
+    const v = slug === 'rain-garden' ? 7 : slug === 'petal-weather' ? 3 : 5;
     return [
       { src: `/art/${slug}-photo1.jpg?v=${v}`, fill: true },
       { src: `/art/${slug}-room.jpg?v=${v}`, mock: true, fill: true },
@@ -841,7 +841,7 @@ function demoArtworks() {
       id: slug, title, collection: 'intuitive-abstracts', currency: 'cad', sold: Boolean(extra.sold), url: extra.sold ? null : (BUY[slug] || null), year: '',
       thumb: `/art/${slug}-sm.jpg${slug === 'rain-garden' ? '?v=2' : slug === 'petal-weather' ? '?v=3' : ''}`, art: `/art/${slug}.jpg${slug === 'rain-garden' ? '?v=2' : slug === 'petal-weather' ? '?v=3' : ''}`, image: customGallery[slug] ? customGallery[slug][0].src : `/art/${slug}-styled.jpg`,
       gallery: listingGallery(slug),
-      price: d.price, matted, large: Boolean(extra.large), cardPhoto: extra.large ? `/art/${slug}-card.jpg?v=${slug === 'rain-garden' ? 7 : slug === 'petal-weather' ? 2 : 5}` : extra.square ? `/art/${slug}-card.jpg?v=2` : null, square: Boolean(extra.square), commission: Boolean(extra.commission),
+      price: d.price, matted, large: Boolean(extra.large), cardPhoto: extra.large ? `/art/${slug}-card.jpg?v=${slug === 'rain-garden' ? 7 : slug === 'petal-weather' ? 3 : 5}` : extra.square ? `/art/${slug}-card.jpg?v=2` : null, square: Boolean(extra.square), commission: Boolean(extra.commission),
       // Short line under each card in the grid
       cardSub: extra.square
         ? { en: 'Watercolour · commission · 12 × 12 in', fr: 'Aquarelle · commande · 12 × 12 po' }
