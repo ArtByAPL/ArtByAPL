@@ -13,9 +13,10 @@
   --body: 'Instrument Sans', system-ui, -apple-system, sans-serif;
   --gutter: clamp(16px, 4vw, 48px);
 }
-/* Title font: still deciding between DM Serif Display and Fraunces (preview switcher) */
+/* Title font: DM Serif Display */
 :root { --c1: var(--accent); --c2: var(--accent); --c3: var(--accent);
-  --dw: 400; --em: italic; --ls: -0.015em; --h1: clamp(2.2rem, 5vw, 3.9rem); --fv: normal; }
+  --display: 'DM Serif Display', Georgia, serif;
+  --dw: 400; --em: italic; --ls: -0.01em; --h1: clamp(2.1rem, 4.8vw, 3.6rem); --fv: normal; }
 :root[data-font="fraunces"]  { --display: 'Fraunces', Georgia, serif; --dw: 450; --ls: -0.02em; --h1: clamp(2.1rem, 4.8vw, 3.6rem); --fv: 'SOFT' 100, 'WONK' 1; }
 :root[data-font="dmserif"]   { --display: 'DM Serif Display', Georgia, serif; --ls: -0.01em; --h1: clamp(2.1rem, 4.8vw, 3.6rem); }
 .wordmark, .hero h1, h2, .card-title, .piece-title, .about-text { font-weight: var(--dw) !important; font-variation-settings: var(--fv); }

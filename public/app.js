@@ -911,5 +911,4 @@ function fontSwitcher() {
 renderText();
 renderHero();
 if ($('.about-page')) renderAboutPage();
-fontSwitcher();
 load();
