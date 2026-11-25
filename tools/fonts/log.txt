@@ -1,2 +1,2 @@
-tulips.jpg 200
-dresser.jpg 200
+woodwall.jpg 401
+peachwall.jpg 401
