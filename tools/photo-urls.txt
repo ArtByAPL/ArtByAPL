@@ -1,2 +1,2 @@
-tulips.jpg https://images.unsplash.com/photo-1680354361550-49602823ddd7?w=2400&q=90
-dresser.jpg https://images.unsplash.com/photo-1653971858526-97f2ba1914c4?w=2400&q=90
+woodwall.jpg https://unsplash.com/photos/0_LbF5fT7FU/download?force=true
+peachwall.jpg https://unsplash.com/photos/dYMte2Q-qbQ/download?force=true
