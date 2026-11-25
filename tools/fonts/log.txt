@@ -1,2 +1,2 @@
-woodwall.jpg 401
-peachwall.jpg 401
+woodwall.jpg 200
+peachwall.jpg 200
