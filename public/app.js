@@ -38,6 +38,12 @@ const CONFIG = {
       name: { fr: 'Abstractions intuitives', en: 'Intuitive Abstracts' },
       blurb: { fr: 'La couleur, laissée libre, puis doucement rassemblée.',
                en: 'Colour, set loose and gently gathered.' } },
+    // Second collection, not launched yet: hidden on artbyapl.com, visible on the preview link only.
+    // To launch: delete "hidden: true".
+    { id: 'zodiac', hidden: true,
+      name: { fr: 'Le zodiaque', en: 'The Zodiac' },
+      blurb: { fr: 'Un petit monde de couleur pour chaque signe.',
+               en: 'A small world of colour for every sign.' } },
   ],
   defaultCollection: 'intuitive-abstracts',
   // Big image at the top: one piece, edited and hosted in /art
@@ -374,6 +380,15 @@ function renderAboutPage() {
 // ── Data ────────────────────────────────────────────────────
 // Stripe Payment Link for each piece (one sale each). Created in Allie's Stripe account.
 const BUY = {
+  'zodiac-cancer': 'https://buy.stripe.com/00weVfeme0c8bn42008g00L',
+  'zodiac-aquarius': 'https://buy.stripe.com/eVqeVfemecYU76Oaww8g00M',
+  'zodiac-pisces': 'https://buy.stripe.com/4gMfZjdiacYU4YG0VW8g00N',
+  'zodiac-taurus': 'https://buy.stripe.com/4gMdRbfqif7262KeMM8g00O',
+  'zodiac-aries': 'https://buy.stripe.com/4gM9AV7XQf72aj05cc8g00P',
+  'zodiac-leo': 'https://buy.stripe.com/00w14p91U4so76OdII8g00Q',
+  'zodiac-virgo': 'https://buy.stripe.com/6oUbJ34LEf72fDk0VW8g00R',
+  'zodiac-scorpio': 'https://buy.stripe.com/5kQeVf6TM0c862KcEE8g00S',
+  'zodiac-capricorn': 'https://buy.stripe.com/fZueVfgum4sobn4fQQ8g00T',
   'petal-weather': 'https://buy.stripe.com/3cI8wR4LE0c82Qy0VW8g00K',
   'rain-garden': 'https://buy.stripe.com/3cIeVf7XQ3ok3UCbAA8g00J',
   'forest-walk': 'https://buy.stripe.com/aFa3cxa5Y6Aw9eWaww8g00k',
@@ -866,7 +881,68 @@ function demoArtworks() {
       description: st ? { en: [st[0], lead.en], fr: [st[1], lead.fr] } : null,
     };
   });
-  return pieces;
+  return pieces.concat(zodiacArtworks()).filter((a) => {
+    const c = CONFIG.collections.find((x) => x.id === a.collection);
+    return !(c && c.hidden) || SHOW_HIDDEN;
+  });
+}
+
+// Hidden collections show only on the preview link (and locally), never on artbyapl.com
+const SHOW_HIDDEN = /^preview-|^localhost$|^127\./.test(location.hostname);
+
+// The Zodiac collection: one piece per sign. Two small 5×7 pieces (matted to 8×10), the rest 8×10 unmatted.
+function zodiacArtworks() {
+  const signs = [
+    // [sign, French name, small?, English story, French story]
+    ['aries', 'Bélier', false, 'Fiery reds, coral and warm tangerine burn bright, with a glow of orange at the edge and a cluster of little white teardrops at its heart. Bold and full of energy, like the first spark of spring.',
+      'Des rouges ardents, du corail et un mandarine chaleureux brûlent avec éclat, une lueur orangée sur le bord et un petit groupe de gouttes blanches en son cœur. Audacieuse et pleine d’énergie, comme la première étincelle du printemps.'],
+    ['taurus', 'Taureau', false, 'Earthy greens, soft brown and slate grey gather like stones in a garden, with deep green-black ovals, mossy dots and fine pencil lines. Grounded, calm and steady.',
+      'Des verts terreux, un brun doux et un gris ardoise se rassemblent comme des pierres dans un jardin, avec des ovales vert profond, des points mousse et de fins traits de crayon. Ancrée, calme et posée.'],
+    ['cancer', 'Cancer', true, 'Cobalt, sea green and soft butter yellow pool together in a circle set on warm kraft card, with raindrop dashes and a hand-lettered “Cancer” beneath. Gentle and watery, like the tide coming in.',
+      'Le cobalt, le vert océan et un jaune beurre tout doux se rassemblent dans un cercle posé sur un carton kraft chaleureux, avec des traits en forme de gouttes et le mot « Cancer » écrit à la main. Douce et aquatique, comme la marée qui monte.'],
+    ['leo', 'Lion', false, 'Blush pink, apricot and golden ochre melt into one another, with a trail of raspberry marks running down the middle and white teardrops scattered through. Warm, glowing and sunny.',
+      'Le rose poudré, l’abricot et l’ocre doré se fondent les uns dans les autres, avec une traînée de marques framboise au centre et des gouttes blanches éparpillées. Chaleureuse, lumineuse et ensoleillée.'],
+    ['virgo', 'Vierge', false, 'Soft sage and seafoam meet gentle taupe, with light brown dots on one side and leafy green dots on the other. Quiet, balanced and thoughtfully put together.',
+      'La sauge douce et le vert d’écume rencontrent un taupe délicat, avec des points brun clair d’un côté et des points vert feuille de l’autre. Calme, équilibrée et pensée dans le moindre détail.'],
+    ['scorpio', 'Scorpion', false, 'Deep magenta, orchid and violet swirl around a bold splash of midnight blue dotted with white. Rich, intense and a little mysterious.',
+      'Le magenta profond, l’orchidée et le violet tourbillonnent autour d’une éclaboussure de bleu nuit ponctuée de blanc. Riche, intense et un brin mystérieuse.'],
+    ['capricorn', 'Capricorne', false, 'Slate grey, forest green and deep charcoal are crossed by two long, flowing strokes and a path of cobalt marks. Strong, structured and quietly determined.',
+      'Le gris ardoise, le vert forêt et un charbon profond sont traversés par deux longs traits fluides et un sentier de marques cobalt. Forte, structurée et tranquillement déterminée.'],
+    ['aquarius', 'Verseau', true, 'Electric blue, violet and hot pink bloom inside a circle set against a hand-painted sky-blue background, covered in little white raindrops. Playful, original and full of movement.',
+      'Le bleu électrique, le violet et le rose vif s’épanouissent dans un cercle posé sur un fond bleu ciel peint à la main, couvert de petites gouttes blanches. Ludique, originale et pleine de mouvement.'],
+    ['pisces', 'Poissons', false, 'Soft pinks, periwinkle and lavender blue drift together with touches of butter yellow and dusky mauve. Dreamy and gentle, like light on water.',
+      'Des roses tendres, la pervenche et le bleu lavande dérivent ensemble avec des touches de jaune beurre et de mauve. Rêveuse et douce, comme la lumière sur l’eau.'],
+  ];
+  const lead = { en: 'Part of the Zodiac collection: one small world of colour for each sign, painted intuitively, layer by layer, so no two are ever alike.',
+    fr: 'Fait partie de la collection Zodiaque : un petit monde de couleur pour chaque signe, peint de façon intuitive, couche par couche : il n’y en a jamais deux pareilles.' };
+  return signs.map(([sign, fr, small, en1, fr1]) => {
+    const slug = `zodiac-${sign}`;
+    const title = sign[0].toUpperCase() + sign.slice(1);
+    const gallery = small ? [
+      { src: `/art/${slug}-photo1.jpg`, fill: true },
+      { src: `/art/${slug}.jpg` },
+      { src: `/art/${slug}-matted.jpg`, fill: true },
+      { src: `/art/${slug}-sideboard.jpg`, mock: true, fill: true },
+    ] : [
+      { src: `/art/${slug}-photo1.jpg`, fill: true },
+      { src: `/art/${slug}.jpg` },
+      { src: `/art/${slug}-sideboard.jpg`, mock: true, fill: true },
+      { src: `/art/${slug}-detail.jpg`, fill: true },
+    ];
+    return {
+      id: slug, title, titleFr: fr, collection: 'zodiac', currency: 'cad', sold: false, url: BUY[slug] || null, year: '',
+      thumb: `/art/${slug}-sm.jpg`, art: `/art/${slug}.jpg`, image: gallery[0].src, gallery,
+      price: small ? 5200 : 6700, matted: small, large: false, square: false, commission: false, cardPhoto: `/art/${slug}-card.jpg`,
+      cardSub: small
+        ? { en: 'Watercolour · circle · 5 × 7 in, matted', fr: 'Aquarelle · cercle · 5 × 7 po, avec passe-partout' }
+        : { en: 'Watercolour · circle · 8 × 10 in', fr: 'Aquarelle · cercle · 8 × 10 po' },
+      medium: { en: 'Watercolour and mixed media', fr: 'Aquarelle et techniques mixtes' },
+      dimensions: small
+        ? { en: '5 × 7 in (12.7 × 17.8 cm), matted to 8 × 10 in (20.3 × 25.4 cm)', fr: '5 × 7 po (12,7 × 17,8 cm), passe-partout de 8 × 10 po (20,3 × 25,4 cm)' }
+        : { en: '8 × 10 in (20.3 × 25.4 cm), unmatted', fr: '8 × 10 po (20,3 × 25,4 cm), sans passe-partout' },
+      description: { en: [en1, lead.en], fr: [fr1, lead.fr] },
+    };
+  });
 }
 
 // Hero image: the piece chosen in CONFIG.hero
