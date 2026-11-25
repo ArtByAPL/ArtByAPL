@@ -1,2 +1,2 @@
-woodwall.jpg https://unsplash.com/photos/0_LbF5fT7FU/download?force=true
-peachwall.jpg https://unsplash.com/photos/dYMte2Q-qbQ/download?force=true
+woodwall.jpg https://images.unsplash.com/photo-1783949247715-dfe7db87665e?w=2400&q=90
+peachwall.jpg https://images.unsplash.com/photo-1680507500073-320536d4faf7?w=2400&q=90
