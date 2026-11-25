@@ -1,2 +1,6 @@
-woodwall.jpg 200
-peachwall.jpg 200
+s1.jpg 200
+s2.jpg 200
+s3.jpg 200
+s4.jpg 200
+s5.jpg 200
+s6.jpg 200
