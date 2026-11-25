@@ -927,6 +927,7 @@ function zodiacArtworks() {
       { src: `/art/${slug}-photo1.jpg`, fill: true },
       { src: `/art/${slug}.jpg` },
       { src: `/art/${slug}-sideboard.jpg`, mock: true, fill: true },
+      { src: `/art/${slug}-gallery-wall.jpg`, mock: true, fill: true },
       { src: `/art/${slug}-detail.jpg`, fill: true },
     ];
     return {
