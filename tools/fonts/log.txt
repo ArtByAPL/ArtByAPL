@@ -1,6 +1,5 @@
-s1.jpg 200
-s2.jpg 200
-s3.jpg 200
-s4.jpg 200
-s5.jpg 200
-s6.jpg 200
+st1.jpg 200
+st2.jpg 200
+st3.jpg 200
+st4.jpg 200
+st5.jpg 200
