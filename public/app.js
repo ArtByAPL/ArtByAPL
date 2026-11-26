@@ -36,12 +36,14 @@ const CONFIG = {
   collections: [
     { id: 'intuitive-abstracts',
       name: { fr: 'Abstractions intuitives', en: 'Intuitive Abstracts' },
+      cover: '/art/collection-grid.jpg',
       blurb: { fr: 'La couleur, laissée libre, puis doucement rassemblée.',
                en: 'Colour, set loose and gently gathered.' } },
     // Second collection, not launched yet: hidden on artbyapl.com, visible on the preview link only.
     // To launch: delete "hidden: true".
     { id: 'zodiac', hidden: true,
       name: { fr: 'Le zodiaque', en: 'The Zodiac' },
+      cover: '/art/zodiac-collection-grid.jpg',
       blurb: { fr: 'Un petit monde de couleur pour chaque signe.',
                en: 'A small world of colour for every sign.' } },
   ],
@@ -66,7 +68,7 @@ const TEXT = {
     soldNote: 'Cette œuvre a trouvé sa maison. Écrivez-moi si ce style vous plaît.',
     shippingTitle: 'Livraison',
     prev: 'Photo précédente', next: 'Photo suivante',
-    collection: 'Collection', aboutRead: 'Lire mon histoire →', aboutTitle: 'À propos de l’artiste', aboutCta: 'Voir les œuvres',
+    collection: 'Collection', pieces: (n) => `${n} œuvre${n > 1 ? 's' : ''}`, aboutRead: 'Lire mon histoire →', aboutTitle: 'À propos de l’artiste', aboutCta: 'Voir les œuvres',
     originalLabel: 'Œuvre', originalVal: 'Peinture originale (pas une reproduction)', paperLabel: 'Papier', paperVal: 'Papier aquarelle épais à grain fin (pressé à froid), 140 lb / 300 g/m²', signedLabel: 'Signature', signedVal: 'Signée par l’artiste au verso', presLabel: 'Présentation', presMatted: 'Non encadrée. Livrée dans un passe-partout de 8 × 10 po (20,3 × 25,4 cm), prête à glisser dans un cadre standard.', presUnmatted: 'Non encadrée, sans passe-partout. Entre dans un cadre standard de 8 × 10 po (20,3 × 25,4 cm).', presLarge: 'Non encadrée. Format pensé pour un cadre de 19¾ × 27½ po (50 × 70 cm) avec passe-partout à ouverture de 15¾ × 19¾ po (40 × 50 cm) (montrée dans un cadre IKEA RÖDALM).', shipTitle: 'Livraison et emballage', shipPack: 'Expédiée à plat, dans une pochette protectrice en cellophane.', shipNote: 'Chaque œuvre est accompagnée d’un mot de remerciement écrit à la main par l’artiste.', shipMade: 'Peinte à la main au Québec, Canada.', careTitle: 'Entretien', careText: 'Pour garder les couleurs vives, exposez l’œuvre à l’abri du soleil direct et de l’humidité, idéalement encadrée sous verre. Manipulez-la par les bords, les mains propres et sèches.',
     commission: 'Commande', presSquare: 'Non encadrée, sans passe-partout. Fait partie d’une série de quatre œuvres carrées peintes sur commande, conçues pour des cadres de 12 × 12 po (30,5 × 30,5 cm).', commissionNote: 'Cette œuvre fait partie d’une commande privée de quatre pièces. Vous aimeriez une série pensée pour votre espace? Écrivez-moi.',
     fxNote: 'Prix approximatif. Le paiement se fait en dollars canadiens ({p}).',
@@ -88,7 +90,7 @@ const TEXT = {
     soldNote: 'This piece has found its home. Write to me if you like this style.',
     shippingTitle: 'Shipping',
     prev: 'Previous photo', next: 'Next photo',
-    collection: 'Collection', aboutRead: 'Read my story →', aboutTitle: 'About the artist', aboutCta: 'See the work',
+    collection: 'Collection', pieces: (n) => `${n} piece${n > 1 ? 's' : ''}`, aboutRead: 'Read my story →', aboutTitle: 'About the artist', aboutCta: 'See the work',
     originalLabel: 'Artwork', originalVal: 'Original painting (not a print)', paperLabel: 'Paper', paperVal: 'Heavyweight cold-pressed watercolour paper, 140 lb / 300 gsm', signedLabel: 'Signature', signedVal: 'Signed by the artist on the back', presLabel: 'Presentation', presMatted: 'Unframed. Arrives in an 8 × 10 in (20.3 × 25.4 cm) mat, ready to slip into a standard frame.', presUnmatted: 'Unframed, no mat. Fits a standard 8 × 10 in (20.3 × 25.4 cm) frame.', presLarge: 'Unframed. Sized for a 19¾ × 27½ in (50 × 70 cm) frame with a 15¾ × 19¾ in (40 × 50 cm) mat opening (shown in an IKEA RÖDALM).', shipTitle: 'Shipping & packaging', shipPack: 'Ships flat in a protective cellophane sleeve.', shipNote: 'Every piece comes with a handwritten thank-you note from the artist.', shipMade: 'Hand-painted in Québec, Canada.', careTitle: 'Care', careText: 'To keep the colours vivid, display away from direct sunlight and humidity, ideally framed behind glass. Handle by the edges with clean, dry hands.',
     commission: 'Commission', presSquare: 'Unframed, no mat. Part of a set of four square pieces painted on commission, sized for 12 × 12 in (30.5 × 30.5 cm) frames.', commissionNote: 'This piece was part of a private commission of four. Would you like a set made for your own space? Get in touch.',
     fxNote: 'Approximate price. You’ll be charged in Canadian dollars ({p}).',
@@ -245,7 +247,21 @@ function renderGrid() {
   const groups = CONFIG.collections
     .map((c) => ({ c, items: list.filter((a) => (a.collection || CONFIG.defaultCollection) === c.id) }))
     .filter((g) => g.items.length);
-  $('.collections').innerHTML = groups.map(({ c, items }) => `
+  // More than one collection: a picker of clickable collections, and only the chosen one's pieces below
+  const ids = groups.map((g) => g.c.id);
+  const fromHash = location.hash.slice(1);
+  if (ids.includes(fromHash)) state.collection = fromHash;
+  if (!ids.includes(state.collection)) state.collection = ids[0];
+  const picker = groups.length > 1 ? `
+    <div class="coll-picker">${groups.map(({ c, items }) => `
+      <a class="coll-tile${c.id === state.collection ? ' is-active' : ''}" href="#${escapeHtml(c.id)}" data-coll="${escapeHtml(c.id)}">
+        <span class="coll-img">${c.cover ? `<img src="${escapeHtml(c.cover)}" alt="" loading="lazy">` : ''}</span>
+        <span class="coll-name">${escapeHtml(localized(c.name))}</span>
+        <span class="coll-count">${t('pieces')(items.length)}</span>
+      </a>`).join('')}
+    </div>` : '';
+  const shown = groups.length > 1 ? groups.filter((g) => g.c.id === state.collection) : groups;
+  $('.collections').innerHTML = picker + shown.map(({ c, items }) => `
     <section class="collection" id="${escapeHtml(c.id)}">
       <div class="collection-head">
         <p class="collection-label">${t('collection')}</p>
@@ -255,6 +271,12 @@ function renderGrid() {
       <div class="grid">${items.map(card).join('')}</div>
     </section>`).join('');
   setupCardSlides();
+  document.querySelectorAll('.coll-tile').forEach((el) => el.addEventListener('click', (e) => {
+    e.preventDefault();
+    state.collection = el.dataset.coll;
+    history.replaceState(null, '', `#${el.dataset.coll}`);
+    renderGrid();
+  }));
   document.querySelectorAll('.filters button').forEach((b) => b.classList.toggle('is-active', b.dataset.filter === state.filter));
 }
 

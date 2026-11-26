@@ -413,3 +413,15 @@ a.card { text-decoration: none; color: inherit; }
 .listing-fx { font-size: 0.85rem; color: var(--muted); margin: 0 0 14px; }
 @media (max-width: 560px) { .currency-select { margin-left: 4px; margin-right: 4px; padding: 4px 18px 4px 8px; background-position: calc(100% - 9px) 52%, calc(100% - 5px) 52%; } .site-header nav { gap: 10px; } .wordmark { font-size: 1.35rem; } }
 .card.is-sold .card-price.is-commission { text-decoration: none; font-size: 0.85rem; }
+
+/* ── Collection picker (shown when there's more than one collection) ── */
+.coll-picker { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 2.5vw, 28px); margin: 0 0 56px; max-width: 760px; }
+.coll-tile { display: flex; flex-direction: column; gap: 4px; text-decoration: none; color: var(--ink); cursor: pointer; }
+.coll-img { display: block; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 10px; background: var(--line); outline: 2px solid transparent; outline-offset: 3px; transition: outline-color .2s; }
+.coll-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+.coll-tile:hover .coll-img img { transform: scale(1.03); }
+.coll-name { font-family: var(--display); font-size: clamp(1.15rem, 2.2vw, 1.45rem); margin-top: 8px; }
+.coll-count { font-size: .85rem; color: var(--muted); }
+.coll-tile:not(.is-active) .coll-img { opacity: .72; }
+.coll-tile.is-active .coll-img { outline-color: var(--accent); }
+.coll-tile.is-active .coll-name { color: var(--accent); }
