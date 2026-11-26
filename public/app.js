@@ -182,7 +182,9 @@ function renderText() {
 // Photos you can flip through right on a card (no need to open the listing)
 function cardSlides(a) {
   const first = a.cardPhoto || a.thumb || a.image;
-  const skip = new Set([first && first.split('?')[0], a.art, '/art/collection-grid.jpg']);
+  // The card photo is a crop of the piece's first room photo, so that photo is left out (it would look like a repeat)
+  const cardSrc = a.cardPhoto && a.cardPhoto.split('?')[0];
+  const skip = new Set([first && first.split('?')[0], a.art, '/art/collection-grid.jpg', cardSrc && cardSrc.replace('-card.jpg', '-photo1.jpg')]);
   const rest = (a.gallery || []).map((g) => g.src).filter((src) => !skip.has(src.split('?')[0]) && !src.includes('-collection.jpg'));
   return [first, ...rest].filter(Boolean);
 }
