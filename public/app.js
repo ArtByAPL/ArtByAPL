@@ -199,13 +199,32 @@ function setupCardSlides() {
     card.dataset.slide = i;
     const frame = $('.card-frame', card), img = $('img', frame);
     if (!frame.dataset.cls) frame.dataset.cls = frame.className;
-    frame.className = i === 0 ? frame.dataset.cls : 'card-frame show-photo';
-    img.className = i === 0 && frame.dataset.cls.includes('has-print') ? 'print' : '';
-    img.loading = 'eager'; img.src = slides[i];
     frame.querySelectorAll('.cs-dots i').forEach((d, k) => d.classList.toggle('on', k === i));
-    // warm the next photo so flipping feels instant
-    const nx = new Image(); nx.src = slides[(i + 1) % n];
+    // Load the new picture first, then swap it in, so a slow phone never shows the old picture under the new dot
+    const token = String(Date.now() + Math.random()); frame.dataset.token = token;
+    const show = () => {
+      if (frame.dataset.token !== token) return;
+      frame.className = i === 0 ? frame.dataset.cls : 'card-frame show-photo';
+      img.className = i === 0 && frame.dataset.cls.includes('has-print') ? 'print' : '';
+      img.loading = 'eager'; img.src = slides[i];
+      frame.classList.remove('is-loading');
+      // warm the next photo so flipping feels instant
+      const nx = new Image(); nx.src = slides[(i + 1) % n];
+    };
+    const pre = new Image(); pre.src = slides[i];
+    if (pre.complete && pre.naturalWidth) show();
+    else { frame.classList.add('is-loading'); pre.onload = show; pre.onerror = show; }
   };
+  // Warm each card's second picture as it scrolls into view, so the first click is instant too
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      io.unobserve(en.target);
+      const a = state.artworks.find((x) => x.id === en.target.dataset.id); if (!a) return;
+      const sl = cardSlides(a); if (sl[1]) { const w = new Image(); w.src = sl[1]; }
+    }), { rootMargin: '200px' });
+    state.watchCards = () => root.querySelectorAll('.card').forEach((c) => io.observe(c));
+  }
   root.addEventListener('click', (e) => {
     const b = e.target.closest('.cs-nav'); if (!b) return;
     e.preventDefault(); e.stopPropagation();
@@ -258,6 +277,7 @@ function renderGrid() {
       <div class="grid">${items.map(card).join('')}</div>
     </section>`).join('');
   setupCardSlides();
+  if (state.watchCards) state.watchCards();
   document.querySelectorAll('.filters button').forEach((b) => b.classList.toggle('is-active', b.dataset.filter === state.filter));
 }
 

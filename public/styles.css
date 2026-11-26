@@ -434,3 +434,5 @@ a.card { text-decoration: none; color: inherit; }
   .nav-works > a { border-top: 0 !important; flex: 1 1 auto; }
   .works-menu { left: 0; transform: none; }
 }
+
+.card-frame.is-loading img { opacity: .55; transition: opacity .15s; }
