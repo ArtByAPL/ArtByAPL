@@ -184,7 +184,8 @@ function cardSlides(a) {
   const first = a.cardPhoto || a.thumb || a.image;
   // The card photo is a crop of the piece's first room photo, so that photo is left out (it would look like a repeat)
   const cardSrc = a.cardPhoto && a.cardPhoto.split('?')[0];
-  const skip = new Set([first && first.split('?')[0], a.art, '/art/collection-grid.jpg', cardSrc && cardSrc.replace('-card.jpg', '-photo1.jpg')]);
+  // When the card shows the flat scan (thumb), the full scan is left out too; when it shows a photo, the scan stays in
+  const skip = new Set([first && first.split('?')[0], cardSrc ? null : a.art, '/art/collection-grid.jpg', cardSrc && cardSrc.replace('-card.jpg', '-photo1.jpg')]);
   const rest = (a.gallery || []).map((g) => g.src).filter((src) => !skip.has(src.split('?')[0]) && !src.includes('-collection.jpg'));
   return [first, ...rest].filter(Boolean);
 }
