@@ -415,14 +415,22 @@ a.card { text-decoration: none; color: inherit; }
 .card.is-sold .card-price.is-commission { text-decoration: none; font-size: 0.85rem; }
 
 
-/* ── Collection jump dropdown (shown when there's more than one collection) ── */
+
+/* ── Header "Works" menu (shown when there's more than one collection) ── */
 .collection { scroll-margin-top: 90px; }
-.coll-jump {
-  font: 500 0.9rem var(--body); color: var(--ink); background: transparent;
-  border: 1px solid var(--line); border-radius: 999px; padding: 6px 30px 6px 14px; cursor: pointer;
-  appearance: none; -webkit-appearance: none; margin-left: auto;
-  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
-  background-position: calc(100% - 16px) 55%, calc(100% - 11px) 55%; background-size: 5px 5px; background-repeat: no-repeat;
+.nav-works { position: relative; display: flex; }
+.nav-works > a::after { content: ''; display: inline-block; width: 5px; height: 5px; margin-left: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-3px) rotate(45deg); }
+.works-menu {
+  position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); z-index: 50;
+  background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 6px;
+  box-shadow: 0 12px 30px rgba(36, 33, 43, .12); min-width: 200px; display: flex; flex-direction: column;
 }
-.coll-jump:hover { border-color: var(--ink); }
-@media (max-width: 700px) { .collection { scroll-margin-top: 130px; } }
+.works-menu[hidden] { display: none; }
+.site-header nav .works-menu a { padding: 9px 12px; border-radius: 8px; color: var(--ink); white-space: nowrap; border: 0; text-align: left; font-size: .95rem; }
+.site-header nav .works-menu a:hover { background: var(--line); }
+@media (max-width: 560px) {
+  .collection { scroll-margin-top: 130px; }
+  .nav-works { order: 3; flex: 1 1 0; justify-content: center; border-top: 1px solid var(--line); }
+  .nav-works > a { border-top: 0 !important; flex: 1 1 auto; }
+  .works-menu { left: 0; transform: none; }
+}

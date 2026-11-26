@@ -66,7 +66,7 @@ const TEXT = {
     soldNote: 'Cette œuvre a trouvé sa maison. Écrivez-moi si ce style vous plaît.',
     shippingTitle: 'Livraison',
     prev: 'Photo précédente', next: 'Photo suivante',
-    collection: 'Collection', collections: 'Collections', aboutRead: 'Lire mon histoire →', aboutTitle: 'À propos de l’artiste', aboutCta: 'Voir les œuvres',
+    collection: 'Collection', allWorks: 'Toutes les œuvres', aboutRead: 'Lire mon histoire →', aboutTitle: 'À propos de l’artiste', aboutCta: 'Voir les œuvres',
     originalLabel: 'Œuvre', originalVal: 'Peinture originale (pas une reproduction)', paperLabel: 'Papier', paperVal: 'Papier aquarelle épais à grain fin (pressé à froid), 140 lb / 300 g/m²', signedLabel: 'Signature', signedVal: 'Signée par l’artiste au verso', presLabel: 'Présentation', presMatted: 'Non encadrée. Livrée dans un passe-partout de 8 × 10 po (20,3 × 25,4 cm), prête à glisser dans un cadre standard.', presUnmatted: 'Non encadrée, sans passe-partout. Entre dans un cadre standard de 8 × 10 po (20,3 × 25,4 cm).', presLarge: 'Non encadrée. Format pensé pour un cadre de 19¾ × 27½ po (50 × 70 cm) avec passe-partout à ouverture de 15¾ × 19¾ po (40 × 50 cm) (montrée dans un cadre IKEA RÖDALM).', shipTitle: 'Livraison et emballage', shipPack: 'Expédiée à plat, dans une pochette protectrice en cellophane.', shipNote: 'Chaque œuvre est accompagnée d’un mot de remerciement écrit à la main par l’artiste.', shipMade: 'Peinte à la main au Québec, Canada.', careTitle: 'Entretien', careText: 'Pour garder les couleurs vives, exposez l’œuvre à l’abri du soleil direct et de l’humidité, idéalement encadrée sous verre. Manipulez-la par les bords, les mains propres et sèches.',
     commission: 'Commande', presSquare: 'Non encadrée, sans passe-partout. Fait partie d’une série de quatre œuvres carrées peintes sur commande, conçues pour des cadres de 12 × 12 po (30,5 × 30,5 cm).', commissionNote: 'Cette œuvre fait partie d’une commande privée de quatre pièces. Vous aimeriez une série pensée pour votre espace? Écrivez-moi.',
     fxNote: 'Prix approximatif. Le paiement se fait en dollars canadiens ({p}).',
@@ -88,7 +88,7 @@ const TEXT = {
     soldNote: 'This piece has found its home. Write to me if you like this style.',
     shippingTitle: 'Shipping',
     prev: 'Previous photo', next: 'Next photo',
-    collection: 'Collection', collections: 'Collections', aboutRead: 'Read my story →', aboutTitle: 'About the artist', aboutCta: 'See the work',
+    collection: 'Collection', allWorks: 'All works', aboutRead: 'Read my story →', aboutTitle: 'About the artist', aboutCta: 'See the work',
     originalLabel: 'Artwork', originalVal: 'Original painting (not a print)', paperLabel: 'Paper', paperVal: 'Heavyweight cold-pressed watercolour paper, 140 lb / 300 gsm', signedLabel: 'Signature', signedVal: 'Signed by the artist on the back', presLabel: 'Presentation', presMatted: 'Unframed. Arrives in an 8 × 10 in (20.3 × 25.4 cm) mat, ready to slip into a standard frame.', presUnmatted: 'Unframed, no mat. Fits a standard 8 × 10 in (20.3 × 25.4 cm) frame.', presLarge: 'Unframed. Sized for a 19¾ × 27½ in (50 × 70 cm) frame with a 15¾ × 19¾ in (40 × 50 cm) mat opening (shown in an IKEA RÖDALM).', shipTitle: 'Shipping & packaging', shipPack: 'Ships flat in a protective cellophane sleeve.', shipNote: 'Every piece comes with a handwritten thank-you note from the artist.', shipMade: 'Hand-painted in Québec, Canada.', careTitle: 'Care', careText: 'To keep the colours vivid, display away from direct sunlight and humidity, ideally framed behind glass. Handle by the edges with clean, dry hands.',
     commission: 'Commission', presSquare: 'Unframed, no mat. Part of a set of four square pieces painted on commission, sized for 12 × 12 in (30.5 × 30.5 cm) frames.', commissionNote: 'This piece was part of a private commission of four. Would you like a set made for your own space? Get in touch.',
     fxNote: 'Approximate price. You’ll be charged in Canadian dollars ({p}).',
@@ -167,6 +167,7 @@ function escapeHtml(s) {
 function renderText() {
   document.documentElement.lang = state.lang;
   document.querySelectorAll('[data-i18n]').forEach((el) => { el.innerHTML = t(el.dataset.i18n); });
+  setupWorksMenu();
   const set = (sel, prop, val) => { const el = $(sel); if (el) el[prop] = val; };
   set('.lang-toggle', 'textContent', t('lang'));
   set('.about-text', 'textContent', CONFIG.about[state.lang]);
@@ -245,19 +246,6 @@ function renderGrid() {
   const groups = CONFIG.collections
     .map((c) => ({ c, items: list.filter((a) => (a.collection || CONFIG.defaultCollection) === c.id) }))
     .filter((g) => g.items.length);
-  // More than one collection: a small dropdown in the Works bar that jumps to each one
-  const bar = $('.works-bar');
-  let jump = $('.coll-jump');
-  if (groups.length > 1 && bar) {
-    if (!jump) { jump = document.createElement('select'); jump.className = 'coll-jump'; bar.insertBefore(jump, $('.filters')); }
-    jump.setAttribute('aria-label', t('collections'));
-    jump.innerHTML = `<option value="">${t('collections')}</option>` + groups.map(({ c }) => `<option value="${escapeHtml(c.id)}">${escapeHtml(localized(c.name))}</option>`).join('');
-    jump.onchange = () => {
-      const el = document.getElementById(jump.value);
-      if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); history.replaceState(null, '', `#${jump.value}`); }
-      jump.value = '';
-    };
-  } else if (jump) jump.remove();
   $('.collections').innerHTML = groups.map(({ c, items }) => `
     <section class="collection" id="${escapeHtml(c.id)}">
       <div class="collection-head">
@@ -969,6 +957,28 @@ function renderHero() {
       ? `<div class="hero-photo"><img src="${escapeHtml(h.image)}" alt="${escapeHtml(h.title)}"></div>`
       : `<div class="hero-crop"><img class="print" src="${escapeHtml(h.image)}" alt="${escapeHtml(h.title)}"></div>`)
     : `<img src="${watercolour(7, ['#d93a6a', '#1d8a85', '#f2a03d', '#5b2a86', '#2fb39e'], { w: 600, h: 600, paper: 'transparent' })}" alt="">`;
+}
+
+// Header "Works" link: when there's more than one collection, it opens a small menu to jump to each one
+function setupWorksMenu() {
+  const link = document.querySelector('.site-header nav a[data-i18n="navWorks"]');
+  if (!link) return;
+  const cols = CONFIG.collections.filter((c) => !c.hidden || SHOW_HIDDEN);
+  let wrap = link.closest('.nav-works');
+  if (cols.length < 2) return;
+  const base = $('.collections') ? '' : '/';
+  if (!wrap) {
+    wrap = document.createElement('div'); wrap.className = 'nav-works';
+    link.parentNode.insertBefore(wrap, link); wrap.appendChild(link);
+    const menu = document.createElement('div'); menu.className = 'works-menu'; menu.hidden = true; wrap.appendChild(menu);
+    link.setAttribute('aria-haspopup', 'true');
+    link.addEventListener('click', (e) => { e.preventDefault(); menu.hidden = !menu.hidden; link.setAttribute('aria-expanded', String(!menu.hidden)); });
+    document.addEventListener('click', (e) => { if (!wrap.contains(e.target)) { menu.hidden = true; link.setAttribute('aria-expanded', 'false'); } });
+    menu.addEventListener('click', (e) => { if (e.target.closest('a')) menu.hidden = true; });
+  }
+  wrap.querySelector('.works-menu').innerHTML =
+    `<a href="${base}#oeuvres">${escapeHtml(t('allWorks'))}</a>` +
+    cols.map((c) => `<a href="${base}#${escapeHtml(c.id)}">${escapeHtml(localized(c.name))}</a>`).join('');
 }
 
 setupCurrency();
