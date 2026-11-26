@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ArtBy APL — Alexandra Paige, aquarelles abstraites</title>
+  <meta name="description" content="Aquarelles abstraites originales par Alexandra Paige. Original abstract watercolours by Alexandra Paige — one of each.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..600,0..100,0..1;1,9..144,400..600,0..100,0..1&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=1795707444">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#top"><img class="logo" src="/logo.png" alt="" width="40" height="40"><span>ArtBy <strong>APL</strong></span></a>
+    <nav>
+      <a href="#oeuvres" data-i18n="navWorks"></a>
+      <a href="/about.html" data-i18n="navAbout"></a>
+      <a href="#contact" data-i18n="navContact"></a>
+      <button class="lang-toggle" type="button" aria-label="Language"></button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-text">
+        <h1 data-i18n="heroTitle"></h1>
+        <p data-i18n="heroSub"></p>
+        <a class="hero-cta" href="#oeuvres" data-i18n="seeWorks"></a>
+      </div>
+      <div class="hero-art" aria-hidden="true"></div>
+    </section>
+
+    <section id="oeuvres" class="works">
+      <div class="works-bar">
+        <h2 data-i18n="navWorks"></h2>
+        <div class="filters" role="tablist">
+          <button type="button" data-filter="available" data-i18n="filterAvailable"></button>
+          <button type="button" data-filter="all" class="is-active" data-i18n="filterAll"></button>
+        </div>
+      </div>
+      <p class="demo-note" hidden data-i18n="demo"></p>
+      <div class="collections" aria-live="polite"></div>
+      <p class="empty" hidden data-i18n="empty"></p>
+    </section>
+
+    <section id="apropos" class="about">
+      <h2 data-i18n="navAbout"></h2>
+      <p class="about-text"></p>
+      <p><a class="about-more" href="/about.html" data-i18n="aboutRead"></a></p>
+      <h3 data-i18n="shippingTitle"></h3>
+      <p class="shipping-text"></p>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2 data-i18n="navContact"></h2>
+      <p data-i18n="contactText"></p>
+      <p class="contact-links"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span class="year"></span> Alexandra Paige · ArtBy APL</span>
+    <span data-i18n="secure"></span>
+  </footer>
+
+
+  <script src="app.js?v=1795707602"></script>
+</body>
+</html>
