@@ -36,8 +36,8 @@ const CONFIG = {
   collections: [
     { id: 'intuitive-abstracts',
       name: { fr: 'Abstractions intuitives', en: 'Intuitive Abstracts' },
-      blurb: { fr: 'La couleur, laissée libre, puis doucement rassemblée.',
-               en: 'Colour, set loose and gently gathered.' } },
+      blurb: { fr: 'Des moments, des humeurs et des souvenirs en couleur.',
+               en: 'Moments, moods and memories in colour.' } },
     // Second collection, not launched yet: hidden on artbyapl.com, visible on the preview link only.
     // To launch: delete "hidden: true".
     { id: 'zodiac', hidden: true,
@@ -56,8 +56,8 @@ const CONFIG = {
 
 const TEXT = {
   fr: {
-    navWorks: 'Œuvres', navAbout: 'À propos', navContact: 'Contact',
-    heroTitle: 'Des moments, des humeurs<br>et des souvenirs <em>en couleur.</em>',
+    navWorks: 'Collections', navAbout: 'À propos', navContact: 'Contact',
+    heroTitle: 'La couleur, laissée libre,<br>puis <em>doucement rassemblée.</em>',
     heroSub: 'Aquarelles originales d’Alexandra Paige.',
     filterAvailable: 'Disponibles', filterAll: 'Toutes',
     demo: 'Aperçu — œuvres de la boutique Etsy, paiement pas encore actif',
@@ -78,8 +78,8 @@ const TEXT = {
     seeWorks: 'Voir les œuvres', close: 'Fermer', arPhoto: 'Essayer avec une photo de mon mur', arTake: 'Prendre une photo', arPick: 'Choisir dans mes photos', arPhotoHelp: 'Glissez l’œuvre pour la placer. Pincez (ou utilisez le curseur) pour ajuster la grandeur, et tournez deux doigts pour l’incliner.', arSize: 'Grandeur', arChange: 'Changer de photo', arSave: 'Enregistrer l’image', arBack: 'Vue 3D', lang: 'EN',
   },
   en: {
-    navWorks: 'Works', navAbout: 'About', navContact: 'Contact',
-    heroTitle: 'Moments, moods<br>and memories <em>in colour.</em>',
+    navWorks: 'Collections', navAbout: 'About', navContact: 'Contact',
+    heroTitle: 'Colour, set loose<br>and <em>gently gathered.</em>',
     heroSub: 'Original watercolours by Alexandra Paige.',
     filterAvailable: 'Available', filterAll: 'All',
     demo: 'Preview — pieces from the Etsy shop, checkout not live yet',
